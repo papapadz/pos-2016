@@ -1,0 +1,20 @@
+if(is_null($custSel))
+         {
+             $credits = Customer::join('sales', 'customer.cust_id', '=', 'sales.cust_id')
+                ->where('sales.sales_type', 2)
+                ->where('sales.status', 0)
+                ->orderby('sales.salesdate', 'desc')
+                ->paginate(25);
+         }
+         else
+         {
+            $credits = Customer::join('sales', 'customer.cust_id', '=', 'sales.cust_id')
+                ->where('sales.sales_type', 2)
+                ->where('sales.status', 0)
+                ->where('sales.totalsales', 0)
+                ->where('sales.discount', 0)
+                ->where('sales.fixedAmtDiscount', 0)
+                ->orderby('sales.salesdate', 'desc')
+                ->orwhere('customer.cust_type', $custSel)
+                ->paginate(25);
+         }

@@ -1,0 +1,51 @@
+$agents = ['1'=>'Chabby', '2'=>'Darren', '3'=>'Gerry', '4'=>'Michael'];
+        foreach($agents as $agent)
+        {
+            if($agent == 1)
+            {
+                 $customers = Customer::where('cust_type', 1)->orderby('lastname', 'asc')->get();
+            }
+            else if($agent == 2)
+            {
+                $customers = Customer::where('cust_type', 2)->orderby('lastname', 'asc')->get();
+            }
+            else if($agent == 3)
+            {
+                $customers = Customer::where('cust_type', 3)->orderby('lastname', 'asc')->get();
+            }
+            else if($agent == 4)
+            {
+                $customers = Customer::where('cust_type', 4)->orderby('lastname', 'asc')->get();
+            }
+        }
+
+            if(is_null($customers))
+            {
+                $reports = Customer::orderby('lastname', 'asc')->get();
+            }
+            else
+            {
+                $reports = Customer::where('cust_type', $customers)->orderby('lastname', 'asc')->get();
+            }  
+            dd($customers);
+
+        $customerType = ['0'=>'--Select Agent--', '1'=>'Chabby', '2'=>'Darren', '3'=>'Gerry', '4'=>'Michael',]; 
+
+        /* $dateToFormat = date('Y-m-d');
+
+        $custSel = ($request->customer == 0) ? null : $request->customer;
+
+        if(is_null($custSel))
+        {
+            $reports = Customer::orderby('lastname', 'asc')->get();
+            #$expenses =
+        }
+        else
+        {
+            $reports = Customer::where('cust_type', $custSel)->orderby('lastname', 'asc')->get();
+        }
+
+       
+
+        $customerType = ['0'=>'--Select Agent--', '1'=>'Chabby', '2'=>'Darren', '3'=>'Gerry', '4'=>'Michael',]; #+ Customer::orderby('cust_type', 'asc')->lists('cust_type', 'cust_id')->all();
+     */
