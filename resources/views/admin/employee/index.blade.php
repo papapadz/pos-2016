@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div style="background-color: #e2e2e2; padding: 8px;">
+    <div style="background-color: #ffa200; padding: 8px;">
         <div style="background-color: #FFF; padding: 3px;">
 
             <div class="uk-grid">
@@ -26,7 +26,7 @@
                                     <th style="background-color: #ffa200; color: #fff;">Address</th>
                                     <th style="background-color: #ffa200; color: #fff;">Contact Number</th>
                                     <th style="background-color: #ffa200; color: #fff;">Email Address</th>
-                                    <th style="background-color: #ffa200; color: #fff;">&nbsp;</th>
+                                    {{-- <th style="background-color: #ffa200; color: #fff;">&nbsp;</th> --}}
                                 </tr>
                                 </thead>
 
@@ -50,14 +50,14 @@
                                             <td>{{ $employee->address }}</td>
                                             <td>{{ $employee->contactno }}</td>
                                             <td>{{ $employee->email }}</td>
-                                            <td>
+                                            {{-- <td>
                                                 @if($employee->employee_id == Auth::user()->employee_id)
                                                     <a href="{{ route('employeeEdit', ['id'=>$employee->employee_id]) }}"><i class="uk-icon-pencil"></i></a>
                                                 @else
                                                     <a href="{{ route('employeeEdit', ['id'=>$employee->employee_id]) }}"><i class="uk-icon-pencil"></i></a>
                                                     <a href="{{ route('employeeDestroy', ['id'=>$employee->employee_id]) }}" class="uk-text-danger del-rec"><i class="uk-icon-times"></i></a>
                                                 @endif
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                     @endforeach
                                     </tbody>

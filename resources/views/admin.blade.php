@@ -23,19 +23,17 @@
 
 <div class="uk-container uk-container-center">
 
-    {{-- <div style="padding: 8px; background-color: ffa200; color: #fff1f0;">
+    <div style="padding: 8px; background-color: ffa200; color: #fff1f0;">
 
-        <div class="uk-grid">
-            <div class="uk-width-1-2" style="display: inline;">
-                <img src="/img/green-icon.png" alt="" width="50" style="margin-left: 30px;">
-            </div>
-            <div class="uk-width-1-2" style="padding-top: 4px;">
+        {{-- <div class="uk-grid" style="padding: 8px; background-color: ffa200;">
+            
+             <div class="uk-width-1-2" style="padding-top: 4px;">
                 <div style="color: #fff1f0; font-size: x-large;" class="uk-text-right" id="clock"></div>
                 <div style="color: #fff1f0;" class="uk-text-right uk-text-small"><i>{{ strtoupper(date('d F Y')) }}</i></div>
             </div>
-        </div>
+        </div> --}}
 
-    </div> --}}
+    </div>
 
     <div style="margin-top:10px; border-top: solid 1px #c1c1c1; border-bottom: solid 1px ffa200; background-color: #ffa200; color: #fff1f0; ">
         <div class="uk-grid">

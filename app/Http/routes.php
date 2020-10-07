@@ -65,7 +65,7 @@ Route::get('/',
 // Home
 Route::get('/admin',
     function(){
-        return view('admin.home');
+        return redirect()->route('salesIndex');
     });
 
 
