@@ -2,16 +2,13 @@
 
 @section('content')
 
-    <div style="background-color: #e2e2e2; padding: 8px;">
+    <div style="background-color: #ffa200; padding: 8px;">
         <div style="background-color: #FFF; padding: 3px;">
 
             <div class="uk-grid">
                 <div class="uk-width-1-1">
 
                     <div style="margin-top:15px;">
-
-                        <h2>Category List</h2>
-
                         <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-text-right" style="background-color: #e5e4e4;">
                             {!! Form::open(['method'=>'get', 'class'=>'uk-form']) !!}
                             {!! Form::text('skey', $skey) !!}
@@ -25,10 +22,10 @@
                             <table class="uk-table uk-table-hover uk-table-striped">
                                 <thead>
                                 <tr>
-                                    <th style="background-color: #464646; color: #fff;">&nbsp;</th>
-                                    <th style="background-color: #464646; color: #fff;">Category Name</th>
-                                    <th style="background-color: #464646; color: #fff;">Description</th>
-                                    <th style="background-color: #464646; color: #fff;" width="65">&nbsp;</th>
+                                    <th style="background-color: #ffa200; color: #fff;">&nbsp;</th>
+                                    <th style="background-color: #ffa200; color: #fff;">Category Name</th>
+                                    <th style="background-color: #ffa200; color: #fff;">Description</th>
+                                    <th style="background-color: #ffa200; color: #fff;" width="65">&nbsp;</th>
                                 </tr>
                                 </thead>
 

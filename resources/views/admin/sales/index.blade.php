@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div style="background-color: #e2e2e2; padding: 8px;">
+    <div style="background-color: #ffa200; padding: 8px;">
         <div style="background-color: #FFF; padding: 3px;">
 
             <div class="uk-grid uk-grid-collapse">
@@ -10,7 +10,6 @@
                 <div class="uk-width-4-10" style="padding-right: 5px;">
 
                     <div class="uk-panel uk-panel-box uk-panel-box-secondary" style="background-color: #ffa200; color: #fff;">
-                        <div class="uk-text-bold">Sales Management</div>
                         <div class="uk-text-bold  uk-text-right">
                             <a href="{{ route('productsIndex')}}" class="uk-button"><i class="uk-icon-shopping-cart"></i></a></div>
                         <hr>
@@ -94,7 +93,7 @@
 
                 <div class="uk-width-6-10">
 
-                    <div class="uk-panel uk-panel-box uk-panel-box-secondary" style="background-color: #e5e4e4;">
+                    <div class="uk-panel uk-panel-box uk-panel-box-secondary" style="display: none" >
                         <div class="uk-grid">
                             <div class="uk-width-1-1" style="margin-left: 20px;">
                                 <div> 

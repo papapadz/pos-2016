@@ -6,11 +6,6 @@
    <!-- {!! Html::style('/css/uikit.gradient.css')!!}-->
     <script src="{{ asset('jquery.js') }}"></script>
     <script src="{{ asset('js/uikit.min.js') }}"></script>
-    <style>
-        html{
-            background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.dreamstime.com%2Fstock-illustration-bee-hive-background-yellow-texture-image95147943&psig=AOvVaw2Q75ym3E4optsi5E1Hwj6B&ust=1599125784123000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKDzovSVyusCFQAAAAAdAAAAABAT');
-        }
-    </style>
     @yield('css')
 </head>
 <body>
@@ -28,7 +23,7 @@
 
 <div class="uk-container uk-container-center">
 
-    <div style="padding: 8px; background-color: ffa200; color: #fff1f0;">
+    {{-- <div style="padding: 8px; background-color: ffa200; color: #fff1f0;">
 
         <div class="uk-grid">
             <div class="uk-width-1-2" style="display: inline;">
@@ -40,9 +35,9 @@
             </div>
         </div>
 
-    </div>
+    </div> --}}
 
-    <div style="border-top: solid 1px #c1c1c1; border-bottom: solid 1px ffa200; background-color: #a9a9a9; color: #fff1f0; ">
+    <div style="margin-top:10px; border-top: solid 1px #c1c1c1; border-bottom: solid 1px ffa200; background-color: #ffa200; color: #fff1f0; ">
         <div class="uk-grid">
             <div class="uk-width-1-1">
                 <div style="padding: 5px;">
@@ -50,26 +45,25 @@
                     <nav class="uk-navbar">
 
                         <ul class="uk-navbar-nav">
-                            <li data-uk-dropdown="" class="uk-parent" aria-haspopup="true" aria-expanded="false">
+                            {{-- <li data-uk-dropdown="" class="uk-parent" aria-haspopup="true" aria-expanded="false">
                                 <a href=""><i class="uk-icon-exchange"></i> Transactions</a>
 
                                 <div class="uk-dropdown uk-dropdown-navbar uk-dropdown-bottom" style="top: 40px; left: 0px;">
                                     <ul class="uk-nav uk-nav-navbar">
                                         <li><a href="{{ route('salesIndex') }}"><i class="uk-icon-money"></i> Sales</a></li>
-                                        
-                                        
-                                        <li><a href="{{ route('expensesIndex') }}"><i class="uk-icon-list"></i> Expenses</a></li>
+                                        {{-- <li><a href="{{ route('expensesIndex') }}"><i class="uk-icon-list"></i> Expenses</a></li>
                                         <li><a href="{{ route('deliveryIndex') }}"><i class="uk-icon-car"></i> Deliveries</a></li>
                                     </ul>
                                 </div>
-                            </li>
+                            </li> --}}
+                            <li><a href="{{ route('salesIndex') }}"><i class="uk-icon-exchange"></i> Transactions</a></li>
                             <li data-uk-dropdown="" class="uk-parent" aria-haspopup="true" aria-expanded="false">
-                                <a href=""><i class="uk-icon-folder"></i> Files</a>
+                                <a href=""><i class="uk-icon-folder"></i> Products</a>
 
                                 <div class="uk-dropdown uk-dropdown-navbar uk-dropdown-bottom" style="top: 40px; left: 0px;">
                                     <ul class="uk-nav uk-nav-navbar">
-                                        <li><a href="{{ route('customerIndex') }}"><i class="uk-icon-users"></i> Customers</a></li>
-                                        <li><a href="{{ route('supplierIndex') }}"><i class="uk-icon-refresh"></i> Suppliers</a></li>
+                                        {{-- <li><a href="{{ route('customerIndex') }}"><i class="uk-icon-users"></i> Customers</a></li>
+                                        <li><a href="{{ route('supplierIndex') }}"><i class="uk-icon-refresh"></i> Suppliers</a></li> --}}
                                         <li><a href="{{ route('productsIndex') }}"><i class="uk-icon-shopping-cart"></i> Products</a></li>
                                         <li><a href="{{ route('categoryIndex') }}"><i class="uk-icon-list-alt"></i> Categories</a></li>
                                     </ul>
@@ -81,16 +75,16 @@
                                     <ul class="uk-nav uk-nav-navbar">
                                         <li><a href="{{ route('reportIndex') }}"><i class="uk-icon-line-chart"></i> Sales Reports</a></li>
                                         <li><a href="{{ route('reportInventory') }}"><i class="uk-icon-cubes"></i> Inventory Reports</a></li>
-                                        <li><a href="{{ route('reportReorderIndex') }}"><i class="uk-icon-history"></i> Reorder Report</a></li>
+                                        {{-- <li><a href="{{ route('reportReorderIndex') }}"><i class="uk-icon-history"></i> Reorder Report</a></li>
                                         <li><a href="{{ route('reportDeliveryIndex') }}"><i class="uk-icon-truck"></i> Delivery Reports</a></li>
                                         <li><a href="{{ route('reportStatIndex') }}"><i class="uk-icon-bar-chart"></i> Statistical Reports</a></li>
                                         <li><a href="{{ route('reportPaymentIndex') }}"><i class="uk-icon-money"></i> Report of Payments</a></li>
-                                        <li><a href="{{ route('reportIncomeStatementIndex') }}"><i class="uk-icon-list"></i> Income Statement</a></li>  
+                                        <li><a href="{{ route('reportIncomeStatementIndex') }}"><i class="uk-icon-list"></i> Income Statement</a></li>   --}}
                                     </ul>
                                 </div>
                             </li> 
 
-                           <li data-uk-dropdown="" class="uk-parent" aria-haspopup="true" aria-expanded="false">
+                           {{-- <li data-uk-dropdown="" class="uk-parent" aria-haspopup="true" aria-expanded="false">
                                 <a href="#"><i class="uk-icon-credit-card"></i> Credits</a>
                                 <div class="uk-dropdown uk-dropdown-navbar uk-dropdown-bottom" style="top: 40px; left: 0px;">
                                     <ul class="uk-nav uk-nav-navbar">
@@ -100,7 +94,7 @@
                                         <li><a href="{{ route('reportCustAgentIndex') }}"><i class="uk-icon-money"></i> Cagayan</a></li> 
                                     </ul>
                                 </div>
-                            </li>
+                            </li> --}}
 
 
                            <li><a href="{{ route('employeeIndex') }}"><i class="uk-icon-user"></i> Employees</a></li>
@@ -132,7 +126,7 @@
 
 @yield('js')
 
-<script>
+{{-- <script>
 
     function updateClock ( )
     {
@@ -167,7 +161,7 @@
     $(function(){
         setInterval('updateClock()', 1000);
     })
-</script>
+</script> --}}
 
 </body>
 </html>

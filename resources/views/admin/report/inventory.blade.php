@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div style="background-color: #e2e2e2; padding: 8px;">
+    <div style="background-color: #ffa200; padding: 8px;">
         <div style="background-color: #FFF; padding: 3px;">
 
             <div class="uk-grid">
@@ -16,7 +16,7 @@
                             {!! Form::open(['route'=>'reportInventory', 'method'=>'get', 'class'=>'uk-form']) !!}
                             {!! Form::select('category', $categories, $catSel) !!}
                             {!! Form::button('Generate', ['id'=>'btn-generate', 'type'=>'submit', 'class'=>'uk-button uk-button-primary']) !!}
-                            <a href="{{ route('reportInventoryPrint', ['category'=>is_null($catSel) || $catSel == '' ? 0 : $catSel]) }}" target="_blank" class="uk-button uk-button-success">Print Report</a>
+                            {{-- <a href="{{ route('reportInventoryPrint', ['category'=>is_null($catSel) || $catSel == '' ? 0 : $catSel]) }}" target="_blank" class="uk-button uk-button-success">Print Report</a> --}}
                             {!! Form::close() !!}
                         </div>
 
@@ -24,15 +24,15 @@
                             <table class="uk-table uk-table-hover uk-table-striped">
                                 <thead>
                                 <tr>
-                                    <th style="background-color: #464646; color: #fff;">&nbsp;</th>
-                                    <th style="background-color: #464646; color: #fff;">Size</th>
-                                    <th style="background-color: #464646; color: #fff;">Pattern</th>
-                                    <th style="background-color: #464646; color: #fff;">Product Description</th>
-                                    <th style="background-color: #464646; color: #fff; text-align: center;">Stock on Hand</th>
-                                    <th style="background-color: #464646; color: #fff; text-align: right;">Unit Cost</th>
-                                    <th style="background-color: #464646; color: #fff; text-align: right;">Inventory Value</th>
-                                    <th style="background-color: #464646; color: #fff;">&nbsp;</th>
-                                    <th style="background-color: #464646; color: #fff;">&nbsp;</th>
+                                    <th style="background-color: #ffa200; color: #fff;">&nbsp;</th>
+                                    <th style="background-color: #ffa200; color: #fff;">Size</th>
+                                    <th style="background-color: #ffa200; color: #fff;">Remarks</th>
+                                    <th style="background-color: #ffa200; color: #fff;">Product Code</th>
+                                    <th style="background-color: #ffa200; color: #fff; text-align: center;">Stock on Hand</th>
+                                    <th style="background-color: #ffa200; color: #fff; text-align: right;">Unit Cost</th>
+                                    <th style="background-color: #ffa200; color: #fff; text-align: right;">Inventory Value</th>
+                                    <th style="background-color: #ffa200; color: #fff;">&nbsp;</th>
+                                    <th style="background-color: #ffa200; color: #fff;">&nbsp;</th>
                                 </tr>
                                 </thead>
                                 <tbody>

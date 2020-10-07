@@ -21,20 +21,6 @@
                                     <td>Address: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>{{ $customer->address }}  {{ $customer->city }}</strong></td>
                                     <td>Invoice Number: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>{{ $sales->invoicenumber }}</strong></td>
                                 </tr>
-                                <tr>
-                                    <td>Contact Number: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>{{ $customer->contactno }}</strong></td>
-                                    <td>Agent Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>
-                                            @if($customer->cust_type == 1)
-                                                 Chabby
-                                            @elseif($customer->cust_type == 2)
-                                                 Darren
-                                             @elseif($customer->cust_type == 3)
-                                                Gerry
-                                            @elseif($customer->cust_type == 4)
-                                                 Michael
-                                            @endif</strong>
-                                        </td>  
-                                </tr>
                             </table>
                         </div>
 

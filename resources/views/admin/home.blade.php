@@ -2,9 +2,7 @@
 
 @section('content')
 
-<script>UIkit.modal.alert('Welcome Maehem!');</script> 
-
-<div class="uk-slidenav-position" data-uk-slider>
+{{-- <div class="uk-slidenav-position" data-uk-slider>
     <div style="background-color: #e2e2e2; padding: 8px;">
         <div style="background-color: #FFF; padding: 3px;">
            <div class="uk-panel uk-panel-box" style="padding: 20px; margin-top: 15px; margin-bottom: 15px;">
@@ -28,7 +26,7 @@
             
         </div>
     </div>
-</div>
+</div> --}}
 
 
 @stop

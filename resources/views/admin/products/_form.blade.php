@@ -10,30 +10,32 @@
 </div>
 <div class="uk-form-row">
     <div class="uk-form-controls">
-        {!! Form::text('productname', null, ['class'=>'uk-width-1-2', 'placeholder'=>'Size']) !!}
+        {!! Form::text('productcode', null, ['class'=>'uk-width-1-2', 'placeholder'=>'Product Code']) !!}
+        @if($errors->has('productcode')) <span class="uk-form-help-inline uk-text-danger"><i><small>{{ $errors->first('productcode') }}</small></i></span> @endif
+    </div>
+</div>
+<div class="uk-form-row">
+    <div class="uk-form-controls">
+        {!! Form::text('productname', null, ['class'=>'uk-width-1-2', 'placeholder'=>'Product Name']) !!}
         @if($errors->has('productname')) <span class="uk-form-help-inline uk-text-danger"><i><small>{{ $errors->first('productname') }}</small></i></span> @endif
     </div>
 </div>
 <div class="uk-form-row">
     <div class="uk-form-controls">
-        {!! Form::text('pattern', null, ['class'=>'uk-width-1-2', 'placeholder'=>'Pattern']) !!}
+        {!! Form::text('pattern', null, ['class'=>'uk-width-1-2', 'placeholder'=>'Remarks']) !!}
         @if($errors->has('pattern')) <span class="uk-form-help-inline uk-text-danger"><i><small>{{ $errors->first('pattern') }}</small></i></span> @endif
     </div>
 </div>
 <div class="uk-form-row">
     <div class="uk-form-controls">
-        {!! Form::text('productcode', null, ['class'=>'uk-width-1-2', 'placeholder'=>'Product Code']) !!}
-        @if($errors->has('productcode')) <span class="uk-form-help-inline uk-text-danger"><i><small>{{ $errors->first('productcode') }}</small></i></span> @endif
+        {!! Form::text('unitcost', null, ['class'=>'uk-width-1-2', 'placeholder'=>'Acquisition Cost']) !!}
+        {{-- {!! Form::select('percentage', $percentage, null, ['class'=>'uk-width-1-10']) !!} --}}
+        @if($errors->has('unitcost')) <span class="uk-form-help-inline uk-text-danger"><i><small>{{ $errors->first('unitcost') }}</small></i></span> @endif
     </div>
 </div>
-
-
 <div class="uk-form-row">
     <div class="uk-form-controls">
-        {!! Form::text('unitcost', null, ['class'=>'uk-width-1-10', 'placeholder'=>'Unit Cost']) !!}
-        {!! Form::text('unitprice', null, ['class'=>'uk-width-1-10', 'placeholder'=>'Unit Price']) !!}
-        {!! Form::select('percentage', $percentage, null, ['class'=>'uk-width-1-10']) !!}
-        @if($errors->has('unitcost')) <span class="uk-form-help-inline uk-text-danger"><i><small>{{ $errors->first('unitcost') }}</small></i></span> @endif
+        {!! Form::text('unitprice', null, ['class'=>'uk-width-1-2', 'placeholder'=>'Selling Price']) !!}
         @if($errors->has('unitprice')) <span class="uk-form-help-inline uk-text-danger"><i><small>{{ $errors->first('unitprice') }}</small></i></span> @endif
     </div>
 </div>

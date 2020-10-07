@@ -2,9 +2,9 @@
 
    <div class="uk-container uk-container-center">
         <div class="uk-width-1-1" >
-            <div style="text-align: center;"><h2><strong><img src="/img/jc.gif" alt="" width="55">Joshua & Caleb Gen. Merchandise</strong></h2></div>
-            <div style="text-align: center;"> 2nd Floor Chua Bldg., M.V. Fariñas St., Laoag City</div>
-            <div style="text-align: center;"> Contact No. 09178153892 / Tel No. 676- 0025 </div>
+            <div style="text-align: center;"><h2><strong><img src="/assets/ico/bb.jpg" alt="" width="55">Testing General Merchandise</strong></h2></div>
+            <div style="text-align: center;"> Barangay 11, Paoay, Ilocos Norte</div>
+            <div style="text-align: center;"> Contact No. 0912345678 / Tel No. 077-123-4567 </div>
             <div style="text-align: center; margin-bottom: 3px;"><h2><strong>&nbsp;&nbsp;{{ ($sales->sales_type == 1 ? 'Customer Sales Invoice' : 'Customer Charge Invoice') }}</strong></h2></div>
         </div>      
     </div>
@@ -34,9 +34,9 @@
         <tr>
             <th style="background-color: #464646; color: #fff;">&nbsp;</th>
             <th style="background-color: #464646; color: #fff;">&nbsp;</th>
-            <th style="background-color: #464646; color: #fff; text-align: left;" width="40%">Product Name</th>
+            <th style="background-color: #464646; color: #fff; text-align: left;" width="40%">Item</th>
             <th style="background-color: #464646; color: #fff; text-align: left;" width="20%">Quantity</th>
-            <th style="background-color: #464646; color: #fff; text-align: right;" width="20%">SalesPrice</th>
+            <th style="background-color: #464646; color: #fff; text-align: right;" width="20%">Unit Price</th>
             <th style="background-color: #464646; color: #fff; text-align: right;" width="20%">Total</th>
             <th style="background-color: #464646; color: #fff;">&nbsp;</th>
             <th style="background-color: #464646; color: #fff;">&nbsp;</th>
@@ -94,5 +94,4 @@
 
 <script type="text/javascript">
     window.print();
-    window.close();
 </script>

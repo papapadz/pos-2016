@@ -15,9 +15,10 @@
                        <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-text-right" style="background-color: #e5e4e4;">
                             {!! Form::open(['route'=>'reportIndex', 'method'=>'get', 'class'=>'uk-form']) !!}
                             {!! Form::select('option', ['1'=>'Daily Report', '2'=>'Monthly Report'], $option, ['id'=>'report-option']) !!}
-                            {!! Form::text('daily', $daySel, ['id'=>'daily', "data-uk-datepicker"=>"{format:'YYYY-MM-DD'}"]) !!}
+                            {!! Form::text('daily', Carbon\Carbon::now()->toDateString(), ['id'=>'daily', "data-uk-datepicker"=>"{format:'YYYY-MM-DD'}"]) !!}
                             {!! Form::select('monthly', $months, $monthSel, ['id'=>'monthly', 'disabled']) !!}
-                            {!! Form::select('year', $years, $yearSel, ['id'=>'year', 'disabled']) !!}
+                            {{-- {!! Form::select('year', $years, $yearSel, ['id'=>'year', 'disabled']) !!} --}}
+                            {!! Form::select('year', ['2020','2021','2022'], ['id'=>'year', 'disabled']) !!}
                             {!! Form::button('Generate', ['id'=>'btn-generate', 'type'=>'submit', 'class'=>'uk-button uk-button-primary']) !!}
                             <a href="{{ route('reportPrint', ['option'=>$option, 'day'=>$daySel, 'month'=>$monthSel]) }}" target="_blank" class="uk-button uk-button-success">Print Report</a>
                             {!! Form::close() !!}
@@ -27,15 +28,15 @@
                             <table class="uk-table uk-table-hover uk-table-striped">
                                 <thead>
                                 <tr>
-                                    <th style="background-color: #464646; color: #fff;">&nbsp;</th>
-                                    <th style="background-color: #464646; color: #fff;">Invoice Number</th>
-                                    <th style="background-color: #464646; color: #fff;">Customer Name</th>
-                                    <th style="background-color: #464646; color: #fff;">Agent</th>
-                                    <th style="background-color: #464646; color: #fff;">Sales Type</th>
-                                    <th style="background-color: #464646; color: #fff;">Sales Status</th>
-                                    <th style="background-color: #464646; color: #fff; text-align: right;">Sales Amount</th>
-                                    <th style="background-color: #464646; color: #fff; text-align: right;">Balance Due</th>
-                                    <th style="background-color: #464646; color: #fff;">&nbsp;</th>
+                                    <th style="background-color: #ffa200; color: #fff;">&nbsp;</th>
+                                    <th style="background-color: #ffa200; color: #fff;">Invoice Number</th>
+                                    <th style="background-color: #ffa200; color: #fff;">Customer Name</th>
+                                    {{-- <th style="background-color: #464646; color: #fff;">Agent</th> --}}
+                                    <th style="background-color: #ffa200; color: #fff;">Sales Type</th>
+                                    <th style="background-color: #ffa200; color: #fff;">Sales Status</th>
+                                    <th style="background-color: #ffa200; color: #fff; text-align: right;">Sales Amount</th>
+                                    <th style="background-color: #ffa200; color: #fff; text-align: right;">Balance Due</th>
+                                    <th style="background-color: #ffa200; color: #fff;">&nbsp;</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -49,7 +50,7 @@
                                             <td>&nbsp;</td>
                                             <td><a href="{{ route('salesSummary', $report->sales_id) }}">{{ $report->invoicenumber }}</td>
                                             <td>{{ $report->myCustomer->lastname }}, {{ $report->myCustomer->firstname }}</td>
-                                            <td>
+                                            {{-- <td>
                                                 @if($report->myCustomer->cust_type == 1)
                                                     Chabby
                                                 @elseif($report->myCustomer->cust_type == 2)
@@ -59,7 +60,7 @@
                                                 @elseif($report->myCustomer->cust_type == 4)
                                                     Michael
                                                 @endif
-                                            </td>
+                                            </td> --}}
                                             <td>{{ $report->sales_type == 1 ? 'Cash' : 'Credit'}}</td>
                                             <td>{{ $report->status == 0 ? 'Unpaid' : 'Paid'}}</td>
                                             <td style="text-align: right;">{{ number_format($report->totalsales, 2) }}</td>
@@ -85,7 +86,7 @@
                                         <td width="135" style="text-align: right;"><strong>{{ number_format($sumSales, 2) }}</strong></td>
                                         <td>&nbsp;</td>
                                     </tr>
-                                    <tr class="uk-text-large">
+                                    {{-- <tr class="uk-text-large">
                                         <td colspan="3" class="uk-text-right"><strong>Accounts Receivables:</strong></td>
                                         <td width="135" style="text-align: right;"><strong>{{ number_format($sumCredit, 2) }}</strong></td>
                                         <td>&nbsp;</td>
@@ -94,7 +95,7 @@
                                         <td colspan="3" class="uk-text-right"><strong>Total Cash:</strong></td>
                                         <td width="135" style="text-align: right;"><strong>{{ number_format($sumSales - $sumCredit, 2) }}</strong></td>
                                         <td>&nbsp;</td>
-                                    </tr>
+                                    </tr> --}}
                                 </table>
                             </div>
 

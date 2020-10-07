@@ -71,7 +71,7 @@
 
                 <div class="uk-width-6-10">
 
-                    <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-text-right" style="background-color: #e5e4e4;">
+                    {{-- <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-text-right" style="background-color: #e5e4e4;">
                         <div class="uk-grid">
                             <div class="uk-width-3-4">
                                 <div class="uk-text-success uk-text-bold uk-text-left" style="margin-left: 20px;">
@@ -79,14 +79,14 @@
                                     {!! Form::open(['route'=>'deliveryStore', 'id'=>'frm-process-deliveries', 'class'=>'uk-form']) !!}
                                     {!! Form::text('deliverydate', date('Y-m-d'), ['class'=>'uk-width-1-4', 'id'=>'deliverydate', "data-uk-datepicker"=>"{format:'YYYY-MM-DD'}"]) !!}
                                     {!! Form::text('order_number', null, ['placeholder'=>'Order Number', 'class'=>'uk-width-1-3']) !!}
-                                    
+                                     
                                 </div>
                                 <div class="uk-text-success uk-text-bold uk-text-left" style="margin-left: 20px;">
                                     <a href="#supplier-modal" data-uk-modal class="uk-button"><span id="supplier-name">Supplier</span></a>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     @if (Session::has('code'))
                         @if(Session::get('code') == 1)
@@ -97,7 +97,7 @@
                     <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-margin-small-top uk-margin-small-bottom" style="min-height: 250px; background-color: #fafafa;">
                         <table class="uk-table uk-table-hover uk-table-condensed">
                             <thead>
-                            <tr style="background-color: #4E5255; color: #fff;">
+                            <tr style="background-color: #ffa200; color: #fff;">
                                 <th>&nbsp;</th>
                                 <th>Category</th>
                                 <th>Size</th>
@@ -151,10 +151,10 @@
 
                     <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-margin-bottom uk-text-right">
                         {!! Form::open(['route'=>'deliveryStore', 'id'=>'frm-process-deliveries', 'class'=>'uk-form']) !!}
-                        {!! Form::hidden('supplier_id', null, ['id'=>'supplier_id', 'readonly']) !!}
+                        {{-- {!! Form::hidden('supplier_id', null, ['id'=>'supplier_id', 'readonly']) !!} --}}
                         @if(count($deliverysets) > 0)
                             <div class="uk-text-right">
-                                {!! Form::text('date_received', date('Y-m-d'), ['class'=>'uk-width-1-4', 'id'=>'date_received', "data-uk-datepicker"=>"{format:'YYYY-MM-DD'}"]) !!}
+                                {{-- {!! Form::text('date_received', date('Y-m-d'), ['class'=>'uk-width-1-4', 'id'=>'date_received', "data-uk-datepicker"=>"{format:'YYYY-MM-DD'}"]) !!} --}}
                                 {!! Form::button('Process Deliveries', ['id'=>'btn-process-deliveries', 'class'=>'uk-button uk-button-primary']) !!}
                             </div>
                         @endif
@@ -167,7 +167,7 @@
         </div>
     </div>
 
-    <div class="uk-grid">
+    {{-- <div class="uk-grid">
         <div class="uk-width-1-1">
 
             <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-text-right uk-margin-small-top">
@@ -197,7 +197,7 @@
                         @foreach($deliveries as $delivery)
                             <tr>
                                 <td>&nbsp;</td>
-                                <td><a href="{{ route('deliveryDetailsShow', $delivery->delivery_id) }}"</a>{{ substr($delivery->deliverydate, 0, 10) }}</td>
+                                <td><a href="{{ route('deliveryDetailsShow', $delivery->delivery_id) }}">{{ substr($delivery->deliverydate, 0, 10) }}</a></td>
                                 <td>{{ substr($delivery->date_received, 0, 10) }}</td>
                                 <td>{{ $delivery->order_number }}</td>
                                 <td>{{ $delivery->mySupplier->companyname }}</td>
@@ -227,9 +227,9 @@
 
 
         </div>
-    </div>
+    </div> --}}
 
-    <div class="uk-modal" id="supplier-modal">
+    {{-- <div class="uk-modal" id="supplier-modal">
         <div class="uk-modal-dialog">
             <div class="uk-modal-header"><h2>Select Supplier</h2></div>
             <div>
@@ -249,7 +249,7 @@
                 <a href="#" class="uk-button uk-button-danger uk-modal-close">Cancel</a>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="uk-modal" id="update-cost-modal">
         <div class="uk-modal-dialog uk-width-1-2">
@@ -472,16 +472,17 @@
             });
 
             $('#btn-process-deliveries').click(function(){
-                var supplier = $('#supplier_id').val();
-                if(supplier == '' || supplier == null)
-                {
-                    alert('Please select supplier first!');
-                    return false;
-                }
-                else
-                {
-                    $('#frm-process-deliveries').submit();
-                }
+                $('#frm-process-deliveries').submit();
+                // var supplier = $('#supplier_id').val();
+                // if(supplier == '' || supplier == null)
+                // {
+                //     alert('Please select supplier first!');
+                //     return false;
+                // }
+                // else
+                // {
+                //     $('#frm-process-deliveries').submit();
+                // }
             });
 
             $('#btn-update-cost').click(function(){

@@ -4,7 +4,7 @@
 
     <div class="uk-vertical-align-middle" style="width:400px;">
 
-        <h1 style="color:#ddd;">Point of Sale System</h1>
+        <h1>Point of Sale System</h1>
         <form class="uk-panel uk-panel-box uk-panel-box-primary uk-panel-box-primary-hover uk-form" method="post" action="/auth/login">
             {!! csrf_field() !!}
             <div class="uk-form-row">

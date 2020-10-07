@@ -91,8 +91,8 @@ class ProductsController extends Controller
         $product->unitcost = $request->unitcost;
         $product->status = $request->status;
         $product->save();
-
-        return redirect()->route('supervisorProductsIndex');
+        
+        //return redirect()->route('supervisorProductsIndex');
     }
 
     /**

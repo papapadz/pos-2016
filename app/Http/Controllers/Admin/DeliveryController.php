@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use Carbon\Carbon;
 
 use App\Delivery;
 use App\DeliveryDetails;
@@ -84,13 +85,14 @@ class DeliveryController extends Controller
     {
 
         $deliverySet = DeliverySet::where('employee_id', Auth::user()->employee_id)->get();
+        $order_number = Carbon::parse($request->deliverydate)->timestamp;
 
         $deliveryRecord = new Delivery();
-        $deliveryRecord->supplier_id = $request->supplier_id;
-        $deliveryRecord->order_number = $request->order_number;
+        $deliveryRecord->supplier_id = Supplier::first()->supplier_id;
+        $deliveryRecord->order_number = $order_number;
         $deliveryRecord->totalcost = $deliverySet->sum('deliverycost');
-        $deliveryRecord->deliverydate = $request->deliverydate;
-        $deliveryRecord->date_received = $request->date_received;
+        $deliveryRecord->deliverydate = Carbon::now()->toDateString();
+        $deliveryRecord->date_received = Carbon::now()->toDateString();
         $deliveryRecord->save();
 
         foreach($deliverySet as $delivery)
@@ -109,20 +111,6 @@ class DeliveryController extends Controller
         }
 
         DeliverySet::truncate();
-
-        /*
-        $delivery = new Delivery();
-        $delivery->supplier_id = $request->supplier_id;
-        $delivery->deliverydate = $request->deliverydate;
-        $delivery->save();
-
-        $deliveryDetails = new DeliveryDetails();
-        $deliveryDetails->delivery_id = $delivery->delivery_id;
-        $deliveryDetails->product_id = $request->product_id;
-        $deliveryDetails->qty = $request->qty;
-        $deliveryDetails->unitcost = $request->unitcost;
-        $deliveryDetails->save();
-        */
 
         return redirect()->back()->with(['code'=>'1']);
     }
@@ -178,13 +166,14 @@ class DeliveryController extends Controller
     public function restock(Request $request)
     {
         $product = Product::where('product_id', $request->product_id)->first();
+        $order_number = Carbon::now()->timestamp;
 
         $delivery = new Delivery();
-        $delivery->supplier_id = $product->supplier_id;
-        $delivery->order_number = $request->order_number;
+        $delivery->supplier_id = Supplier::first()->supplier_id;
+        $delivery->order_number = $order_number;
         $delivery->totalcost = $product->unitcost * $request->qty;
-        $delivery->deliverydate = $request->deliverydate;
-        $delivery->deliverydate = $request->date_received;
+        $delivery->deliverydate = Carbon::now()->toDateString();
+        $delivery->deliverydate = Carbon::now()->toDateString();
         $delivery->save();
 
         $deliveryDetails = new DeliveryDetails();

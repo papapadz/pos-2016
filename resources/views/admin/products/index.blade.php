@@ -2,16 +2,13 @@
 
 @section('content')
 
-    <div style="background-color: #e2e2e2; padding: 8px;">
+    <div style="background-color: #ffa200; padding: 8px;">
         <div style="background-color: #FFF; padding: 3px;">
 
             <div class="uk-grid">
                 <div class="uk-width-1-1">
 
                     <div style="margin-top:15px;">
-
-                        <h2>Product List</h2>
-
                         <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-text-right" style="background-color: #e5e4e4;">
                             {!! Form::open(['method'=>'get', 'class'=>'uk-form']) !!}
                             {!! Form::text('skey', $skey) !!}
@@ -28,13 +25,13 @@
 
                             <table class="uk-table uk-table-hover uk-table-striped">
                                 <thead>
-                                <tr style="background-color: #464646; color: #fff;">
+                                <tr style="background-color: #ffa200; color: #fff;">
                                     <th>&nbsp;</th>
                                     <th>Category</th>
-                                    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Size</th>
-                                    <th>Pattern</th>
-                                    <th style="text-align: center;">SRP</th>
-                                    <th style="text-align: right;">Unitcost</th>
+                                    <th>Item</th>
+                                    <th>Remarks</th>
+                                    <th style="text-align: center;">Selling Price</th>
+                                    {{-- <th style="text-align: right;">Acqusition Cost</th> --}}
                                     <th style="text-align: center;" width="150">Stock on Hand</th>
                                     <th width="130" class="uk-text-center">Action</th>
                                 </tr>
@@ -51,15 +48,14 @@
                                             <td>{{ $product->productname }}</td>
                                             <td>{{ $product->pattern }}</td>
                                             <td style="text-align: center;">{{ number_format($product->unitprice, 2) }}</td>
-                                            <td style="text-align: right;">{{ number_format($product->unitcost, 2) }}</td>
+                                            {{-- <td style="text-align: right;">{{ number_format($product->unitcost, 2) }}</td> --}}
                                             <td style="text-align: center;">{{ $product->stock }}</td>
                                             <td class="uk-text-right">
-                                            @if($product->status == 0)
+                                            {{-- @if($product->status == 0)
                                                 <a href="{{ route('productStatus', ['id'=>$product->product_id]) }}" class="uk-button uk-button-mini"><i class="uk-icon-mail-forward"></i></a>
                                             @else
                                                  <a href="{{ route('productStatus', ['id'=>$product->product_id]) }}" class="uk-button uk-button-mini"><i class="uk-icon-mail-reply"></i></a>
-                                            @endif
-
+                                            @endif --}}
                                                 <a href="#reorder-modal" id="{{ $product->product_id }}" data-uk-modal class="uk-button uk-button-primary uk-button-mini reorder-product"><i class="uk-icon-refresh"></i></a>
                                                 <a href="{{ route('productsEdit', ['id'=>$product->product_id]) }}" class="uk-button uk-button-mini"><i class="uk-icon-pencil"></i></a>
                                                 <button class="uk-button uk-button-danger uk-button-mini del-rec" id="{{ $product->product_id }}"><i class="uk-icon-times"></i></button>

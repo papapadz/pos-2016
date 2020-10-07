@@ -10,23 +10,23 @@
 
                     <div style="margin-top:15px;">
 
-                        <h2>Employee List</h2>
+                        {{-- <h2>Employee List</h2>
 
                         <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-text-right" style="background-color: #e5e4e4;">
                             <a href="{{ route('employeeCreate') }}" class="uk-button uk-button-primary"><i class="uk-icon-plus"></i> Create Employee</a>
-                        </div>
+                        </div> --}}
 
                         <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-margin-small-top">
                             <table class="uk-table uk-table-hover uk-table-striped">
                                 <thead>
                                 <tr>
-                                    <th style="background-color: #464646; color: #fff;">&nbsp;</th>
-                                    <th style="background-color: #464646; color: #fff;">Employee Name</th>
-                                    <th style="background-color: #464646; color: #fff;">Position</th>
-                                    <th style="background-color: #464646; color: #fff;">Address</th>
-                                    <th style="background-color: #464646; color: #fff;">Contact Number</th>
-                                    <th style="background-color: #464646; color: #fff;">Email Address</th>
-                                    <th style="background-color: #464646; color: #fff;">&nbsp;</th>
+                                    <th style="background-color: #ffa200; color: #fff;">&nbsp;</th>
+                                    <th style="background-color: #ffa200; color: #fff;">Employee Name</th>
+                                    <th style="background-color: #ffa200; color: #fff;">Position</th>
+                                    <th style="background-color: #ffa200; color: #fff;">Address</th>
+                                    <th style="background-color: #ffa200; color: #fff;">Contact Number</th>
+                                    <th style="background-color: #ffa200; color: #fff;">Email Address</th>
+                                    <th style="background-color: #ffa200; color: #fff;">&nbsp;</th>
                                 </tr>
                                 </thead>
 

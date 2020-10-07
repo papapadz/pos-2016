@@ -1,9 +1,9 @@
-<div class="uk-form-row">
+{{-- <div class="uk-form-row">
     <div class="uk-form-controls">
         {!! Form::select('position', $employeeType, null, []) !!}
         @if($errors->has('position')) <span class="uk-form-help-inline uk-text-danger"><i><small>{{ $errors->first('position') }}</small></i></span> @endif
     </div>
-</div>
+</div> --}}
 <div class="uk-form-row">
     <div class="uk-form-controls">
         {!! Form::text('employeename', null, ['class'=>'uk-width-1-2', 'placeholder'=>'Employee Name']) !!}

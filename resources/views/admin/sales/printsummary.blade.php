@@ -3,10 +3,10 @@
    <div class="uk-container uk-container-center">
         <div class="uk-width-1-1" >
             
-           <div style="text-align: center; margin-bottom: -10px;"><h2><strong>C.A. Chabby Enterprises</strong></h2></div>
-           <div style="text-align: center"> &nbsp;&nbsp;Brgy. 7-B 56 p. Gomez St., Laoag City</div>
-           <div style="text-align: center; margin-bottom: -5px;"> &nbsp;&nbsp;Contact Nos: 09399231048 / 09176283784 / 09255762377</div>
-           <div style="text-align: center; margin-bottom: -5px;"> Proprietor - Engr. Robert R. Alog</div>
+           <div style="text-align: center; margin-bottom: -10px;"><h2><strong>Binary Bee IT Solutions</strong></h2></div>
+           <div style="text-align: center"> &nbsp;&nbsp;Brgy. 11 Cabang-aran, Paoay, Ilocos Norte</div>
+           <div style="text-align: center; margin-bottom: -5px;"> &nbsp;&nbsp;Contact Nos: 09123456789</div>
+           <div style="text-align: center; margin-bottom: -5px;"> Proprietor - Admin Admin</div>
            <div style="text-align: center; margin-bottom: 13px;"><h2><strong>&nbsp;&nbsp;{{ ($sales->sales_type == 1 ? 'Customer Sales Invoice' : 'Customer Charge Invoice') }}</strong></h2></div>
         </div>      
     </div>
@@ -24,10 +24,6 @@
             <td valign="top">{{ $customer->address }}</td>
             <td valign="top"><strong>Invoice No.</strong></td>
             <td valign="top">{{ $sales->invoicenumber }}</td>
-        </tr>
-        <tr>
-            <td valign="top"><strong>Contact No.</strong></td>
-            <td valign="top">{{ $customer->contactno }}</td>
         </tr>
     </table>
 
@@ -117,5 +113,4 @@
 
 <script type="text/javascript">
     window.print();
-    window.close();
 </script>

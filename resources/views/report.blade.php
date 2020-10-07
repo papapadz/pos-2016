@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>POS System for J&C</title>
+    <title>Point of Sale</title>
     <link rel="stylesheet" href="/css/uikit.gradient.css" />
 </head>
 <body>

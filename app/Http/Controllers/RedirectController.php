@@ -22,7 +22,7 @@ class RedirectController extends Controller
             elseif(Auth::user()->position == 2)
             {
                 // Supervisor
-                return redirect('/supervisor');
+                return redirect('/supervisor/sales');
             }
             elseif(Auth::user()->position == 3)
             {
