@@ -39,17 +39,17 @@
         @if($errors->has('unitprice')) <span class="uk-form-help-inline uk-text-danger"><i><small>{{ $errors->first('unitprice') }}</small></i></span> @endif
     </div>
 </div>
-<div class="uk-form-row">
+{{-- <div class="uk-form-row">
     <div class="uk-form-controls">
         {!! Form::select('reorderlimit', $reorderlimit, null, ['class'=>'uk-width-1-10']) !!}
     </div>
-</div>
+</div> --}}
 
-<div class="uk-form-row">
+{{-- <div class="uk-form-row">
     <div class="uk-form-controls">
         {!! Form::select('supplier_id', $suppliers, null, ['class'=>'uk-width-2-4']) !!}
     </div>
-</div>
+</div> --}}
 
 <hr>
 

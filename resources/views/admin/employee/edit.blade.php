@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div style="background-color: #e2e2e2; padding: 8px;">
+    <div style="background-color: #ffa200; padding: 8px;">
         <div style="background-color: #FFF; padding: 3px;">
 
             <div class="uk-grid">

@@ -91,7 +91,7 @@ class ProductsController extends Controller
         $product->productname = $request->productname;
         $product->pattern = $request->pattern;  //new
         $product->unitprice = $request->unitprice;  // $product->unitprice = $unitprice;
-        $product->reorderlimit = $request->reorderlimit;
+        $product->reorderlimit = 100;
         $product->category_id = $request->category_id;
         $product->supplier_id = $request->supplier_id;
         $product->unitcost = $request->unitcost;
@@ -153,7 +153,7 @@ class ProductsController extends Controller
         $product->productname = $request->productname;
         $product->pattern = $request->pattern;  //new
         $product->unitprice = $request->unitprice;  // $product->unitprice = $unitprice;
-        $product->reorderlimit = $request->reorderlimit;
+        //$product->reorderlimit = 10;
         $product->category_id = $request->category_id;
         $product->supplier_id = $request->supplier_id;
         $product->unitcost = $request->unitcost;
