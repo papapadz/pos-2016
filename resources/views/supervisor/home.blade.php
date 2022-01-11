@@ -14,15 +14,13 @@
                 <div data-uk-slider>
                     <div class="uk-slider-container">
                         <ul class="uk-slider uk-grid uk-grid-collapse uk-grid-width-medium-1-4">
-                            <li><img src="/img/pp1.jpg"></li>
-                            <li><img src="/img/pp2.jpg"></li>
-                            <li><img src="/img/pp3.jpg"></li>
-                            <li><img src="/img/pp4.jpg"></li>
-                            <li><img src="/img/pp5.jpg"></li>
-                            <li><img src="/img/pp6.jpg"></li>
-                            <li><img src="/img/pp7.jpg"></li>
-                            <li><img src="/img/pp8.jpg"></li>
-                            <li><img src="/img/pp9.jpg"></li>
+                            <li><img src="https://lopezvillagemarket.com/images/deptpics/general.jpg"></li>
+                            <li><img src="https://assets.siccode.com/i-s-b/sic-code-539-merchandise-stores.jpg"></li>
+                            <li><img src="https://lirp.cdn-website.com/46efd549da324132add2690c6cbfaffc/dms3rep/multi/opt/IMG_1339-480w.JPG"></li>
+                            <li><img src="https://c8.alamy.com/comp/FR133J/floridasouthflnew-port-richeywalmart-big-boxdiscount-department-store-FR133J.jpg"></li>
+                            <li><img src="https://c8.alamy.com/comp/M5NFNK/cancun-mexicomexicanyucatn-peninsulaquintana-rooavenida-xcaretwalmart-M5NFNK.jpg"></li>
+                            <li><img src="https://previews.agefotostock.com/previewimage/medibigoff/251bce5726f386a5e1d962cd38db18a1/g14-1405010.jpg"></li>
+                            <li><img src="https://c8.alamy.com/comp/EPXDYK/the-interior-of-burlingames-general-merchandise-store-in-froelich-EPXDYK.jpg"></li>
                         </ul>
                     </div>
                 </div>

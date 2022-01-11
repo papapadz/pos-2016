@@ -42,25 +42,26 @@
                                 @if(count($products) > 0)
                                     <tbody>
 
-                                    @foreach($products as $product)
+                                        @foreach($products as $product)
 
-                                        <tr style="{{ ($product->stock <= $product->reorderlimit) ? 'background-color: #ffaaaa;' : '' }}">
-                                            <td>&nbsp;</td>
-                                            <td>{{ $product->productname }}</td>
-                                            <td>{{ $product->myCategory->categoryname }}</td>
-                                            <td style="text-align: right;">{{ number_format($product->unitprice, 2) }}</td>
-                                            <td style="text-align: center;">{{ $product->stock }}</td>
-                                            <td>{{ $product->mySupplier->companyname }}</td>
-                                            @if($product->status == 0)
-                                                <a href="{{ route('supervisorProductStatus', ['id'=>$product->product_id]) }}" class="uk-button uk-button-mini"><i class="uk-icon-mail-forward"></i></a>
-                                            @else
-                                                 <a href="{{ route('supervisorProductStatus', ['id'=>$product->product_id]) }}" class="uk-button uk-button-mini"><i class="uk-icon-mail-reply"></i></a>
-                                            @endif
-                                                <a href="{{ route('supervisorProductsEdit', ['id'=>$product->product_id]) }}" class="uk-button uk-button-mini"><i class="uk-icon-pencil"></i></a>
-                                            </td>
-                                        </tr>
+                                            <tr style="{{ ($product->stock <= $product->reorderlimit) ? 'background-color: #ffaaaa;' : '' }}">
+                                                <td>&nbsp;</td>
+                                                <td>{{ $product->productname }}</td>
+                                                <td>{{ $product->myCategory->categoryname }}</td>
+                                                <td style="text-align: right;">{{ number_format($product->unitprice, 2) }}</td>
+                                                <td style="text-align: center;">{{ $product->stock }}</td>
+                                                <td>{{ $product->mySupplier->companyname }}</td>
+                                                <td>
+                                                @if($product->status == 0)
+                                                    <a href="{{ route('supervisorProductStatus', ['id'=>$product->product_id]) }}" class="uk-button uk-button-mini"><i class="uk-icon-mail-forward"></i></a>
+                                                @else
+                                                    <a href="{{ route('supervisorProductStatus', ['id'=>$product->product_id]) }}" class="uk-button uk-button-mini"><i class="uk-icon-mail-reply"></i></a>
+                                                @endif
+                                                    <a href="{{ route('supervisorProductsEdit', ['id'=>$product->product_id]) }}" class="uk-button uk-button-mini"><i class="uk-icon-pencil"></i></a>
+                                                </td>
+                                            </tr>
 
-                                    @endforeach
+                                        @endforeach
 
                                     </tbody>
 
