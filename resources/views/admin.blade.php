@@ -3,46 +3,35 @@
 <head>
     <title>POS System - @yield('location')</title>
     <link rel="stylesheet" href="{{ asset('css/uikit.gradient.css') }}" />
+
    <!-- {!! Html::style('/css/uikit.gradient.css')!!}-->
     <script src="{{ asset('jquery.js') }}"></script>
     <script src="{{ asset('js/uikit.min.js') }}"></script>
     <style>
-        html{
-            background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.dreamstime.com%2Fstock-illustration-bee-hive-background-yellow-texture-image95147943&psig=AOvVaw2Q75ym3E4optsi5E1Hwj6B&ust=1599125784123000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKDzovSVyusCFQAAAAAdAAAAABAT');
+        #banner {
+            background-image: url("{{asset('img/banner-sales.jpg')}}");
+            padding: 8px;
+            height: 100px;
         }
     </style>
     @yield('css')
 </head>
 <body>
 
-<nav class="uk-navbar uk-navbar-attached" style="display: none;">
-
-    <a href="/" class="uk-navbar-brand">Point of Sale</a>
-
-    <div class="uk-navbar-content uk-navbar-flip  uk-hidden-small">
-        Welcome <strong>{{ Auth::user()->employeename }}</strong>!
-        <a href="/auth/logout" class="uk-button uk-button-primary"><i class="uk-icon-sign-out"></i> Logout</a>
-    </div>
-
-</nav>
-
 <div class="uk-container uk-container-center">
-
-    <div style="padding: 8px; background-color: ffa200; color: #fff1f0;">
-
+    <div id="banner">
         <div class="uk-grid">
             <div class="uk-width-1-2" style="display: inline;">
-                <img src="/img/green-icon.png" alt="" width="50" style="margin-left: 30px;">
+                <img src="{{ asset('img/logo.png') }}" alt="" width="80" style="margin-left: 30px;"><span style="font-style: strong; font-size:32px">My E-Inventory</span>
             </div>
             <div class="uk-width-1-2" style="padding-top: 4px;">
-                <div style="color: #fff1f0; font-size: x-large;" class="uk-text-right" id="clock"></div>
-                <div style="color: #fff1f0;" class="uk-text-right uk-text-small"><i>{{ strtoupper(date('d F Y')) }}</i></div>
+                <div style="font-size: x-large;" class="uk-text-right" id="clock"></div>
+                <div class="uk-text-right uk-text-small"><i>{{ strtoupper(date('d F Y')) }}</i></div>
             </div>
         </div>
 
     </div>
-
-    <div style="border-top: solid 1px #c1c1c1; border-bottom: solid 1px ffa200; background-color: #a9a9a9; color: #fff1f0; ">
+    <div style="background: gainsboro">
         <div class="uk-grid">
             <div class="uk-width-1-1">
                 <div style="padding: 5px;">
@@ -50,7 +39,21 @@
                     <nav class="uk-navbar">
 
                         <ul class="uk-navbar-nav">
+                            <li><a href="{{ route('salesIndex') }}"><i class="uk-icon-money"></i> Sales</a></li>
+                            <li><a href="{{ route('deliveryIndex') }}"><i class="uk-icon-car"></i> Deliveries</a></li>
                             <li data-uk-dropdown="" class="uk-parent" aria-haspopup="true" aria-expanded="false">
+                                <a href="#"><i class="uk-icon-folder"></i> Items</a>
+                                <div class="uk-dropdown uk-dropdown-navbar uk-dropdown-bottom" style="top: 40px; left: 0px;">
+                                    <ul class="uk-nav uk-nav-navbar">
+                                        <li><a href="{{ route('categoryIndex') }}"><i class="uk-icon-list-alt"></i> Categories</a></li>
+                                        <li><a href="{{ route('supplierIndex') }}"><i class="uk-icon-refresh"></i> Suppliers</a></li>
+                                        <li><a href="{{ route('productsIndex') }}"><i class="uk-icon-shopping-cart"></i> Products</a></li>
+                                        <li><a href="{{ route('employeeIndex') }}"><i class="uk-icon-user"></i> Employees</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            {{-- <li data-uk-dropdown="" class="uk-parent" aria-haspopup="true" aria-expanded="false">
                                 <a href=""><i class="uk-icon-exchange"></i> Transactions</a>
 
                                 <div class="uk-dropdown uk-dropdown-navbar uk-dropdown-bottom" style="top: 40px; left: 0px;">
@@ -58,7 +61,7 @@
                                         <li><a href="{{ route('salesIndex') }}"><i class="uk-icon-money"></i> Sales</a></li>
                                         
                                         
-                                        <li><a href="{{ route('expensesIndex') }}"><i class="uk-icon-list"></i> Expenses</a></li>
+                                        <li><a href="{{ route('expensesIndex') }}"><i class="uk-icon-list"></i> Expenses</a></li> 
                                         <li><a href="{{ route('deliveryIndex') }}"><i class="uk-icon-car"></i> Deliveries</a></li>
                                     </ul>
                                 </div>
@@ -68,13 +71,13 @@
 
                                 <div class="uk-dropdown uk-dropdown-navbar uk-dropdown-bottom" style="top: 40px; left: 0px;">
                                     <ul class="uk-nav uk-nav-navbar">
-                                        <li><a href="{{ route('customerIndex') }}"><i class="uk-icon-users"></i> Customers</a></li>
+                                        <li><a href="{{ route('customerIndex') }}"><i class="uk-icon-users"></i> Customers</a></li
                                         <li><a href="{{ route('supplierIndex') }}"><i class="uk-icon-refresh"></i> Suppliers</a></li>
                                         <li><a href="{{ route('productsIndex') }}"><i class="uk-icon-shopping-cart"></i> Products</a></li>
                                         <li><a href="{{ route('categoryIndex') }}"><i class="uk-icon-list-alt"></i> Categories</a></li>
                                     </ul>
                                 </div>
-                            </li>
+                            </li>--}}
                             <li data-uk-dropdown="" class="uk-parent" aria-haspopup="true" aria-expanded="false">
                                 <a href="#"><i class="uk-icon-bars"></i> Reports</a>
                                 <div class="uk-dropdown uk-dropdown-navbar uk-dropdown-bottom" style="top: 40px; left: 0px;">
@@ -90,7 +93,7 @@
                                 </div>
                             </li> 
 
-                           <li data-uk-dropdown="" class="uk-parent" aria-haspopup="true" aria-expanded="false">
+                           {{-- <li data-uk-dropdown="" class="uk-parent" aria-haspopup="true" aria-expanded="false">
                                 <a href="#"><i class="uk-icon-credit-card"></i> Credits</a>
                                 <div class="uk-dropdown uk-dropdown-navbar uk-dropdown-bottom" style="top: 40px; left: 0px;">
                                     <ul class="uk-nav uk-nav-navbar">
@@ -100,25 +103,26 @@
                                         <li><a href="{{ route('reportCustAgentIndex') }}"><i class="uk-icon-money"></i> Cagayan</a></li> 
                                     </ul>
                                 </div>
+                            </li> --}}
+
+                            <li data-uk-dropdown="" class="uk-parent" aria-haspopup="true" aria-expanded="false">
+                                <a href="#"><i class="uk-icon-user"></i> Hi, {{ Auth::user()->employeename }}</a>
+                                <div class="uk-dropdown uk-dropdown-navbar uk-dropdown-bottom" style="top: 40px; left: 0px;">
+                                    <ul class="uk-nav uk-nav-navbar">
+                                        <li><a href="{{ route('employeeIndex') }}"><i class="uk-icon-user"></i> My Profile</a></li>
+                                        <li><a href="/auth/logout" class="uk-text-danger">Logout <i class="uk-icon-sign-out"></i></a></li>
+                                    </ul>
+                                </div>
                             </li>
-
-
-                           <li><a href="{{ route('employeeIndex') }}"><i class="uk-icon-user"></i> Employees</a></li>
+                           
                         </ul>
-                        <div class="uk-navbar-content uk-navbar-flip  uk-hidden-small">
-                            <div class="uk-button-group">
-                                <a href="#" class="uk-button uk-button-success">{{ Auth::user()->employeename }}</a>
-                                <a class="uk-button uk-button-danger" href="/auth/logout">Logout <i class="uk-icon-sign-out"></i></a>
-                            </div>
-                        </div>
-
                     </nav>
                 </div>
             </div>
         </div>
     </div>
 
-    <div style="border-top: solid 1px #c1c1c1;">
+    <div>
         @yield('content')
     </div>
 

@@ -48,7 +48,7 @@ class OrdersController extends Controller
         #$order = Orders::where('employee_id', Auth::user()->employee_id)->where('product_id', $product->product_id)->where('category_id', $category->category_id)->first();
         
         if(!is_null($order))
-        {dd($order);
+        {
             $order->qty = $order->qty + $request->qty;
             $order->salesprice = $order->unitprice;
             $order->orderprice = $order->orderprice + $request->orderprice;

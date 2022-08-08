@@ -2,24 +2,30 @@
 
 @section('content')
 
-    <div style="background-color: #e2e2e2; padding: 8px;">
+    @if(Session::has('success'))
+    <div class="uk-alert-success" uk-alert>
+        <a class="uk-alert-close" uk-close></a>
+        <p>{{ Session::get('success')}}</p>
+    </div>
+    @endif
+    <div style="padding: 5px; background:gainsboro">
         <div style="background-color: #FFF; padding: 3px;">
 
             <div class="uk-grid uk-grid-collapse">
 
                 <div class="uk-width-4-10" style="padding-right: 5px;">
 
-                    <div class="uk-panel uk-panel-box uk-panel-box-secondary" style="background-color: #ffa200; color: #fff;">
-                        <div class="uk-text-bold">Sales Management</div>
-                        <div class="uk-text-bold  uk-text-right">
+                    <div class="uk-panel uk-panel-box uk-panel-box-secondary">
+                        {{-- <div class="uk-text-bold  uk-text-right">
                             <a href="{{ route('productsIndex')}}" class="uk-button"><i class="uk-icon-shopping-cart"></i></a></div>
-                        <hr>
+                        <hr> --}}
                         <div>
 
                             {!! Form::open(['route'=>'ordersCreate', 'class'=>'uk-form']) !!}
                             <div class="uk-form-row">
                                 <div class="uk-form-controls">
-                                    {!! Form::text('key', null, ['id'=>'key', 'class'=>'uk-width-1-1', 'placeholder'=>'Search key']) !!}
+                                    <label>Search Item</label>
+                                    {!! Form::text('key', null, ['id'=>'key', 'class'=>'uk-width-1-1', 'placeholder'=>'ex. Biscuit']) !!}
                                 </div>
                             </div>
                             <div class="uk-form-row">
@@ -39,16 +45,18 @@
                                     {!! Form::select('product_id', ['0'=>'----'], 0, ['class'=>'uk-width-1-1','id'=>'product', 'disabled']) !!}
                                 </div>
                             </div>
+                            <input type="number" value="1" name="qty" hidden>
                             <div class="uk-form-row">
                                 <div class="uk-form-controls">
                                     <div class="uk-grid">
-                                        <div class="uk-width-1-4" style="padding-top: 5px;">On-Hand</div>
+                                        <div class="uk-width-1-4" style="padding-top: 5px;"><i class="uk-icon-shopping-cart"></i> Stock</div>
                                         <div class="uk-width-3-4" style="padding-top: 5px;">
                                             <label id="onhand">----</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            {{-- 
                             <div class="uk-form-row">
                                 <div class="uk-form-controls">
                                     <div class="uk-grid">
@@ -58,18 +66,18 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="uk-form-row">
+                            </div>  --}}
+                            <div class="uk-form-row" hidden>
                                 <div class="uk-form-controls">
                                     <div class="uk-grid">
                                         <div class="uk-width-1-4" style="padding-top: 5px;">Unit Price</div>
                                         <div class="uk-width-3-4">
-                                            {!! Form::text('unitprice', null, ['id'=>'unitprice', 'placeholder'=>'Price', 'disabled']) !!}
+                                            {!! Form::text('unitprice', 'null', ['id'=>'unitprice', 'placeholder'=>'Price', 'disabled']) !!}
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="uk-form-row">
+                            </div> 
+                            <div class="uk-form-row" hidden>
                                 <div class="uk-form-controls">
                                     <div class="uk-grid">
                                         <div class="uk-width-1-4" style="padding-top: 5px;">Total Price</div>
@@ -94,7 +102,7 @@
 
                 <div class="uk-width-6-10">
 
-                    <div class="uk-panel uk-panel-box uk-panel-box-secondary" style="background-color: #e5e4e4;">
+                    <div class="uk-panel uk-panel-box uk-panel-box-secondary" style="background-color: #e5e4e4;display: none;">
                         <div class="uk-grid">
                             <div class="uk-width-1-1" style="margin-left: 20px;">
                                 <div> 
@@ -121,15 +129,15 @@
                     <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-margin-small-top uk-margin-small-bottom" style="min-height: 250px; background-color: #fafafa;">
                         <table class="uk-table uk-table-hover uk-table-condensed">
                             <thead>
-                            <tr style="background-color: #ffa200; color: #fff;">
+                            <tr>
                                 <th>&nbsp;</th>
-                                <th>Category</th>
+                                
                                 <th>Item</th>
                                 <th style="text-align: right" width="120px;">Quantity</th>
                                 <th>&nbsp;</th>
-                                <th style="text-align: right">Unitprice</th>
+                                <th style="text-align: right">Unit Price</th>
                                 
-                                <th style="text-align: right">Total <i class="uk-icon-rub uk-text-small"></i></th>
+                                <th style="text-align: right">Total</th>
                                 <th>&nbsp;</th>
                                 <th>&nbsp;</th>
                             </tr>
@@ -139,11 +147,6 @@
                                 @foreach($orders as $order)
                                     <tr>
                                         <td>&nbsp;</td>
-                                        <td>
-                                        @if(!is_null($order->category))
-                                            {{ $order->category->categoryname }}
-                                        @endif
-                                        </td>
                                         <td>{{ $order->myProduct->productname }}</td>
                                         <td style="text-align: right" width="120px;">
                                             <input type="text" value="{{ $order->qty }}" class="uk-width-3-10 order-qty" id="{{ $order->order_id }}">
@@ -160,7 +163,7 @@
                                 <tr>
                                     <td>&nbsp;</td>
                                 </tr>
-                                <tr style="background-color: #F0F0F0;">
+                                {{-- <tr style="background-color: #F0F0F0;">
                                     <td>&nbsp;</td>
                                     <td colspan="5" class="uk-text-right"><i>VATable Sales</i></td>
                                     <td style="text-align: right"><i>{{ number_format($vatSales, 2) }}</i></td>
@@ -171,7 +174,7 @@
                                     <td colspan="5" class="uk-text-right"><i>VAT</i></td>
                                     <td style="text-align: right"><i>{{ number_format($vat, 2) }}</i></td>
                                     <td>&nbsp;</td>
-                                </tr>
+                                </tr> --}}
                                 <tr style="background-color: #F0F0F0;">
                                     <td>&nbsp;</td>
                                     <td colspan="5" class="uk-text-right"><strong>Total</strong></td>
@@ -203,7 +206,7 @@
                                 </tr>
                             @else
                                 <tr>
-                                    <td class="uk-text-small" colspan="7"><i>Ready...</i></td>
+                                    <td class="uk-text-small uk-text-danger" colspan="8"><i class="uk-icon-info"></i> No items yet</td>
                                 </tr>
                             @endif
                             </tbody>
