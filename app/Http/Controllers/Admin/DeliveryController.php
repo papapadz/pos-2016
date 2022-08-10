@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class DeliveryController extends Controller
 {
@@ -70,8 +71,10 @@ class DeliveryController extends Controller
 
         $suppliers = ['0'=>'Select Supplier'] + Supplier::orderby('companyname', 'asc')->lists('companyname', 'supplier_id')->all();
         $products = ['0'=>'Select Product'];
+        $categories = ['0'=>'Category'] + Category::orderby('categoryname', 'asc')->lists('categoryname', 'category_id')->all();
+        $deliverysets = DeliverySet::where('employee_id', Auth::user()->employee_id)->get();
 
-        return view('admin.delivery.create', compact('suppliers', 'products'));
+        return view('admin.delivery.create', compact('suppliers', 'products','categories','deliverysets'));
     }
 
     /**
@@ -82,15 +85,24 @@ class DeliveryController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->order_number==null)
+            $orderNumber = Carbon::now()->timestamp;
+        else
+            $orderNumber = $request->order_number;
+
+        if($request->has('date_received'))
+            $dateReceived = $request->date_received;
+        else
+            $dateReceived = Carbon::now();
 
         $deliverySet = DeliverySet::where('employee_id', Auth::user()->employee_id)->get();
 
         $deliveryRecord = new Delivery();
         $deliveryRecord->supplier_id = $request->supplier_id;
-        $deliveryRecord->order_number = $request->order_number;
+        $deliveryRecord->order_number = $orderNumber;
         $deliveryRecord->totalcost = $deliverySet->sum('deliverycost');
         $deliveryRecord->deliverydate = $request->deliverydate;
-        $deliveryRecord->date_received = $request->date_received;
+        $deliveryRecord->date_received = $dateReceived;
         $deliveryRecord->save();
 
         foreach($deliverySet as $delivery)

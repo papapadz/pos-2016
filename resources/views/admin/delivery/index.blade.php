@@ -4,8 +4,72 @@
 
     <div style="background-color: #e2e2e2; padding: 8px;">
         <div style="background-color: #FFF; padding: 3px;">
-
-            <div class="uk-grid uk-grid-collapse">
+            <div class="uk-grid">
+                <div class="uk-width-1-1">
+        
+                    <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-text-right uk-margin-small-top">
+                        {!! Form::open(['method'=>'get', 'class'=>'uk-form']) !!}
+                        Date
+                        {!! Form::text('deliverydate', $selDate, ["data-uk-datepicker"=>"{format:'YYYY-MM-DD'}"]) !!}
+                        {!! Form::select('supplier_id', [''=>'--Suppliers--'] + $suppliers, $selSupplier) !!}
+                        {!! Form::button('Filter', ['type'=>'submit', 'class'=>'uk-button uk-button-primary']) !!}
+                        |
+                        <a class="uk-button uk-button-success" href="{{ url('admin/delivery/create') }}">Add</a>
+                        {!! Form::close() !!}
+                    </div>
+        
+                    <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-margin-small-top">
+                        <table class="uk-table uk-table-hover uk-table-striped">
+                            <thead>
+                                <tr style="background-color: #464646; color: #fff;">
+                                    <th width="50">&nbsp;</th>
+                                    <th width="200">Date of Delivery</th>
+                                    <th width="200">Date Received</th>
+                                    <th width="200">Order Number</th>
+                                    <th>Supplier</th>
+                                    <th style="text-align: center">Total Cost</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+        
+                            @if(count($deliveries) > 0)
+                                <tbody>
+                                @foreach($deliveries as $delivery)
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td><a href="{{ route('deliveryDetailsShow', $delivery->delivery_id) }}">{{ substr($delivery->deliverydate, 0, 10) }}</a></td>
+                                        <td>{{ substr($delivery->date_received, 0, 10) }}</td>
+                                        <td>{{ $delivery->order_number }}</td>
+                                        <td>{{ $delivery->mySupplier->companyname }}</td>
+                                        <td style="text-align: center">{{ number_format($delivery->totalcost, 2) }}</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="8"><i>{{ count($deliveries) }} - Delivery record found</i></td>
+                                    </tr>
+                                </tfoot>
+                            @else
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="8"><i>No records found</i></td>
+                                    </tr>
+                                </tfoot>
+                            @endif
+        
+                        </table>
+                    </div>
+                    <div>
+                        @include('paginator', ['paginator' => $deliveries])
+                    </div>
+        
+        
+                </div>
+            </div>
+            
+            {{-- <div class="uk-grid uk-grid-collapse">
 
                 <div class="uk-width-4-10" style="padding-left: 5px;">
 
@@ -146,7 +210,6 @@
                                     </tbody>
                                 @endif
                         </table>
-
                     </div>
 
                     <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-margin-bottom uk-text-right">
@@ -162,69 +225,7 @@
                     </div>
 
                 </div>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="uk-grid">
-        <div class="uk-width-1-1">
-
-            <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-text-right uk-margin-small-top">
-                {!! Form::open(['method'=>'get', 'class'=>'uk-form']) !!}
-                {!! Form::text('deliverydate', $selDate, ["data-uk-datepicker"=>"{format:'YYYY-MM-DD'}"]) !!}
-                {!! Form::select('supplier_id', [''=>'--Suppliers--'] + $suppliers, $selSupplier) !!}
-                {!! Form::button('Filter', ['type'=>'submit', 'class'=>'uk-button uk-button-primary']) !!}
-                {!! Form::close() !!}
-            </div>
-
-            <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-margin-small-top">
-                <table class="uk-table uk-table-hover uk-table-striped">
-                    <thead>
-                        <tr style="background-color: #464646; color: #fff;">
-                            <th width="50">&nbsp;</th>
-                            <th width="200">Date of Delivery</th>
-                            <th width="200">Date Received</th>
-                            <th width="200">Order Number</th>
-                            <th>Supplier</th>
-                            <th style="text-align: center">Total Cost</th>
-                            <th>&nbsp;</th>
-                        </tr>"
-                    </thead>
-
-                    @if(count($deliveries) > 0)
-                        <tbody>
-                        @foreach($deliveries as $delivery)
-                            <tr>
-                                <td>&nbsp;</td>
-                                <td><a href="{{ route('deliveryDetailsShow', $delivery->delivery_id) }}"</a>{{ substr($delivery->deliverydate, 0, 10) }}</td>
-                                <td>{{ substr($delivery->date_received, 0, 10) }}</td>
-                                <td>{{ $delivery->order_number }}</td>
-                                <td>{{ $delivery->mySupplier->companyname }}</td>
-                                <td style="text-align: center">{{ number_format($delivery->totalcost, 2) }}</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="8"><i>{{ count($deliveries) }} - Delivery record found</i></td>
-                            </tr>
-                        </tfoot>
-                    @else
-                        <tfoot>
-                            <tr>
-                                <td colspan="8"><i>No records found</i></td>
-                            </tr>
-                        </tfoot>
-                    @endif
-
-                </table>
-            </div>
-            <div>
-                @include('paginator', ['paginator' => $deliveries])
-            </div>
-
+            </div> --}}
 
         </div>
     </div>
