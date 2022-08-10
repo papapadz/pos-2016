@@ -14,13 +14,22 @@
                             {!! Form::open(['route'=>'deliverySetStore', 'class'=>'uk-form']) !!}
                             <div class="uk-form-row">
                                 <div class="uk-form-controls">
-                                    <label>Search Item</label>
-                                    {!! Form::text('searchProducts', null, ['id'=>'search-products', 'class'=>'uk-width-1-1', 'placeholder'=>'ex. Biscuit']) !!}
+                                    <div class="uk-grid">
+                                        <div class="uk-width-1-4" style="padding-top: 5px;">Search</div>
+                                        <div class="uk-width-3-4" style="padding-top: 5px;">
+                                            {!! Form::text('searchProducts', null, ['id'=>'search-products', 'class'=>'uk-width-1-1', 'placeholder'=>'ex. Biscuit']) !!}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="uk-form-row">
                                 <div class="uk-form-controls">
-                                    {!! Form::select('category_id', $categories, null, ['id'=>'category', 'class'=>'uk-width-1-1']) !!}
+                                    <div class="uk-grid">
+                                        <div class="uk-width-1-4" style="padding-top: 5px;">Category</div>
+                                        <div class="uk-width-3-4" style="padding-top: 5px;">
+                                            {!! Form::select('category_id', $categories, null, ['id'=>'category', 'class'=>'uk-width-1-1']) !!}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="uk-form-row">
@@ -35,15 +44,10 @@
                             </div>
                             <div class="uk-form-row">
                                 <div class="uk-form-controls">
-                                    {!! Form::select('suppliers-list', $suppliers, null, ['id'=>'suppliers-list', 'class'=>'uk-width-1-1']) !!}
-                                </div>
-                            </div>
-                            <div class="uk-form-row">
-                                <div class="uk-form-controls">
                                     <div class="uk-grid">
-                                        <div class="uk-width-1-4" style="padding-top: 5px;">Quantity</div>
+                                        <div class="uk-width-1-4" style="padding-top: 5px;">Supplier</div>
                                         <div class="uk-width-3-4" style="padding-top: 5px;">
-                                            {!! Form::text('qty', null, ['id'=>'qty', 'class'=>'uk-width-1-2', 'placeholder'=>'Quantity', 'disabled']) !!}
+                                            {!! Form::select('suppliers-list', $suppliers, null, ['id'=>'suppliers-list', 'class'=>'uk-width-1-1']) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -51,10 +55,29 @@
                             <div class="uk-form-row">
                                 <div class="uk-form-controls">
                                     <div class="uk-grid">
-                                        <div class="uk-width-1-4" style="padding-top: 5px;">Unit Cost</div>
+                                        <div class="uk-width-1-4" style="padding-top: 5px;">Unit Price</div>
+                                        <div class="uk-width-3-4" style="padding-top: 5px;">
+                                            {!! Form::text('unitprice', null, ['id'=>'unitprice', 'class'=>'uk-width-1-2', 'disabled']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-form-row">
+                                <div class="uk-form-controls">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-1-4" style="padding-top: 5px;">Quantity</div>
+                                        <div class="uk-width-3-4" style="padding-top: 5px;">
+                                            {!! Form::text('qty', null, ['id'=>'qty', 'class'=>'uk-width-1-2', 'placeholder'=>'Quantity', 'disabled','min'=>1]) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-form-row">
+                                <div class="uk-form-controls">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-1-4" style="padding-top: 5px;">Sub Total</div>
                                         <div class="uk-width-3-4" style="padding-top: 5px;">
                                             {!! Form::text('deliveryprice', null, ['id'=>'deliveryprice', 'class'=>'uk-width-1-2', 'placeholder'=>'Unit Cost', 'disabled']) !!}
-                                            {!! Form::button('Update Cost', ['data-uk-modal'=>"{target:'#update-cost-modal'}", 'id'=>'btn-cost', 'class'=>'uk-button uk-button-primary', 'disabled']) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -315,14 +338,13 @@
                     }
                 }).success(function(r){
                     $('#deliveryprice').val(r);
-
-                    $('#qty, #deliveryprice, #btn-add, #btn-cost, #product').prop('disabled', false);
+                    $('#qty, #deliveryprice, #btn-add, #btn-cost, #product, #unitprice').prop('disabled', false);
                     $('#qty').val('1');
                 });
             });
 
             $('#products-list').change(function(){
-                $('#qty, #deliveryprice, #btn-add, #btn-cost, #product').prop('disabled', true);
+                $('#qty, #deliveryprice, #btn-add, #btn-cost, #product, #unitprice').prop('disabled', true);
 
                 var productlist = $('#products-list option:selected').text();
 
@@ -351,6 +373,7 @@
                     }).success(function(r){
                         $('#deliveryprice').val(r);
 
+                        $('#unitprice').val(r);
                         $('#qty, #deliveryprice, #btn-add, #btn-cost, #product').prop('disabled', false);
                         $('#qty').val('1');
                     });
@@ -371,6 +394,7 @@
                    if(r)
                    {
                        $('#products-list').empty().html(r);
+                       $('#products-list').empty().html(r).prop('disabled', false);
                    }
                });
             });
