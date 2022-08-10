@@ -8,13 +8,14 @@
 
                 <div class="uk-width-4-10" style="padding-left: 5px;">
 
-                    <div class="uk-panel uk-panel-box uk-panel-box-secondary" style="background-color: #4E5255; color: #fff;">
+                    <div class="uk-panel uk-panel-box uk-panel-box-secondary">
                         <div>
 
                             {!! Form::open(['route'=>'deliverySetStore', 'class'=>'uk-form']) !!}
                             <div class="uk-form-row">
-                                <div class="uk-form-controls uk-text-right">
-                                    {!! Form::text('searchProducts', null, ['id'=>'search-products', 'class'=>'uk-width-1-1', 'placeholder'=>'Searh key']) !!}
+                                <div class="uk-form-controls">
+                                    <label>Search Item</label>
+                                    {!! Form::text('searchProducts', null, ['id'=>'search-products', 'class'=>'uk-width-1-1', 'placeholder'=>'ex. Biscuit']) !!}
                                 </div>
                             </div>
                             <div class="uk-form-row">
@@ -27,9 +28,14 @@
                                     {!! Form::select('products-list', $products, null, ['id'=>'products-list', 'class'=>'uk-width-1-1', 'multiple', 'size'=>'10']) !!}
                                 </div>
                             </div>
-                            <div class="uk-form-row">
+                            <div class="uk-form-row" hidden>
                                 <div class="uk-form-controls">
                                     {!! Form::select('product_id', ['0'=>'----'], null, ['id'=>'product', 'class'=>'uk-width-1-1', 'disabled']) !!}
+                                </div>
+                            </div>
+                            <div class="uk-form-row">
+                                <div class="uk-form-controls">
+                                    {!! Form::select('suppliers-list', $suppliers, null, ['id'=>'suppliers-list', 'class'=>'uk-width-1-1']) !!}
                                 </div>
                             </div>
                             <div class="uk-form-row">
@@ -68,36 +74,19 @@
 
                 <div class="uk-width-6-10">
 
-                    <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-text-right" style="background-color: #e5e4e4;">
-                        <div class="uk-grid">
-                            <div class="uk-width-3-4">
-                                <div class="uk-text-success uk-text-bold uk-text-left" style="margin-left: 20px;">
-                                    
-                                    {!! Form::open(['route'=>'deliveryStore', 'id'=>'frm-process-deliveries', 'class'=>'uk-form']) !!}
-                                    {!! Form::text('deliverydate', date('Y-m-d'), ['class'=>'uk-width-1-4', 'id'=>'deliverydate', "data-uk-datepicker"=>"{format:'YYYY-MM-DD'}"]) !!}
-                                    {!! Form::text('order_number', null, ['placeholder'=>'Order Number', 'class'=>'uk-width-1-3']) !!}
-                                    
-                                </div>
-                                <div class="uk-text-success uk-text-bold uk-text-left" style="margin-left: 20px;">
-                                    <a href="#supplier-modal" data-uk-modal class="uk-button"><span id="supplier-name">Supplier</span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     @if (Session::has('code'))
                         @if(Session::get('code') == 1)
-                            <div class="uk-alert uk-alert-success uk-animation-slide-top">Delivery Transaction Complete!</div>
+                            <div class="uk-alert uk-alert-success uk-animation-slide-top">Record has been saved!</div>
                         @endif
                     @endif
 
-                    <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-margin-small-top uk-margin-small-bottom" style="min-height: 250px; background-color: #fafafa;">
+                    <div class="uk-panel uk-margin-small-top uk-margin-small-bottom" style="min-height: 250px; background-color: #fafafa; padding-left:10px;">
                         <table class="uk-table uk-table-hover uk-table-condensed">
                             <thead>
                             <tr style="background-color: #4E5255; color: #fff;">
-                                <th>&nbsp;</th>
+                                <th>Supplier</th>
                                 <th>Category</th>
-                                <th>Size</th>
+                                <th>Product</th>
                                 <th>Quantity</th>
                                 <th style="text-align: right">Unitcost</th>
                                 <th style="text-align: right" width="70">Subtotal <i class="uk-icon-rub uk-text-small"></i></th>
@@ -111,7 +100,7 @@
                                     <tbody>
                                         @foreach($deliverysets as $deliveryset)
                                             <tr>
-                                                <td>&nbsp;</td>
+                                                <td></td>
                                                 <td>{{ $deliveryset->myProduct->myCategory->categoryname }}</td>
                                                 <td>{{ $deliveryset->myProduct->productname }}</td>
                                                 <td>{{ $deliveryset->qty }}</td>
@@ -124,10 +113,8 @@
                                             </tr>
 
                                         @endforeach
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                            </tr>
                                             <tr style="background-color: #F0F0F0;">
+                                                <td>&nbsp;</td>
                                                 <td>&nbsp;</td>
                                                 <td>&nbsp;</td>
                                                 <td>&nbsp;</td>
@@ -136,7 +123,7 @@
                                                 <td>&nbsp;</td>
                                                 <td>&nbsp;</td>
                                             </tr>
-                                        @else
+                                @else
                                             <tr style="background-color: #F0F0F0;">
                                                 <td colspan="8"><i class="uk-text-small">Ready...</i></td>
                                             </tr>
@@ -481,7 +468,7 @@
 
             })
 
-            $('#qty').keyup(function(){
+            $('#qty').change(function(){
                 $('#qty, #deliveryprice, #btn-add, #btn-cost').prop('disabled', true);
 
                 var newQty = $(this).val();

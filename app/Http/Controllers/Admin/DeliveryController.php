@@ -73,8 +73,11 @@ class DeliveryController extends Controller
         $products = ['0'=>'Select Product'];
         $categories = ['0'=>'Category'] + Category::orderby('categoryname', 'asc')->lists('categoryname', 'category_id')->all();
         $deliverysets = DeliverySet::where('employee_id', Auth::user()->employee_id)->get();
+        $totDeliveryCost = $deliverysets->sum('deliverycost');
 
-        return view('admin.delivery.create', compact('suppliers', 'products','categories','deliverysets'));
+        //dd($deliverysets);
+
+        return view('admin.delivery.create', compact('suppliers', 'products','categories','deliverysets','totDeliveryCost'));
     }
 
     /**
