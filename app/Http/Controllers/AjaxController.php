@@ -8,6 +8,7 @@ use App\Product;
 use App\Sales;
 use App\Payment;
 use App\Supplier;
+use App\PriceHistory;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -34,7 +35,7 @@ class AjaxController extends Controller
 
     public function getCategoryProducts(Request $request)
     {
-        $products = Product::where('category_id', $request->category)->groupby('productname')->where('status', 0)->get();
+        $products = Product::where('category_id', $request->category)->where('status', 0)->get();
 
         if(!is_null($products))
         {
@@ -158,8 +159,18 @@ class AjaxController extends Controller
     public function updateProductUnitCost(Request $request)
     {
         $product = Product::where('product_id', $request->product)->first();
-        $product->unitcost = $request->newUnitCost;
-        $product->unitprice = ($request->newUnitCost * ($product->markup / 100)) + $request->newUnitCost;
+
+        if($request->newUnitCost!=$product->unitprice) {
+            $priceHistory = new PriceHistory;
+            $priceHistory->product = $product->product_id;
+            $priceHistory->price = $request->newUnitCost;
+            $priceHistory->employee_id =  Auth::user()->employee_id;
+            $priceHistory->save();
+        }
+        
+        //$product->unitcost = $request->newUnitCost;
+        //$product->unitprice = ($request->newUnitCost * ($product->markup / 100)) + $request->newUnitCost;
+        $product->unitprice = $request->newUnitCost;
         $product->update();
 
         return 1;
@@ -169,14 +180,15 @@ class AjaxController extends Controller
     {
         $productOld = Product::where('product_id', $request->product)->first();
         $productName = $productOld->productname;
-        $unitCost = $request->cost;
-        $unitPrice = ($request->cost * ($productOld->markup / 100)) + $request->cost;
+        //$unitCost = $request->cost;
+        //$unitPrice = ($request->cost * ($productOld->markup / 100)) + $request->cost;
+        $unitPrice = $request->cost;
 
         $productNew = new Product();
         $productNew->productname = $productName;
         $productNew->unitprice = $unitPrice;
-        $productNew->unitcost = $unitCost;
-        $productNew->markup = $productOld->markup;
+        //$productNew->unitcost = $unitCost;
+        //$productNew->markup = $productOld->markup;
         $productNew->reorderlimit = $productOld->reorderlimit;
         $productNew->category_id = $productOld->category_id;
         $productNew->supplier_id = $productOld->supplier_id;
@@ -189,7 +201,7 @@ class AjaxController extends Controller
     {
         $product = Product::where('product_id', $request->product)->first();
 
-        return $product->unitcost;
+        return $product->unitprice;
     }
 
     public function getDeliveryProducts(Request $request)

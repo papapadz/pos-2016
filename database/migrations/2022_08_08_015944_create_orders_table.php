@@ -16,7 +16,7 @@ class CreateOrdersTable extends Migration
             $table->increments('order_id');
             $table->integer('product_id');
             $table->integer('qty')->default(1);
-            $table->float('salesprice',10,2);
+            //$table->float('salesprice',10,2);
             $table->float('orderprice',10,2);
             $table->float('markup',10,2);
             $table->integer('employee_id');

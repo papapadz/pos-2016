@@ -42,22 +42,23 @@
                                     {!! Form::select('product_id', ['0'=>'----'], null, ['id'=>'product', 'class'=>'uk-width-1-1', 'disabled']) !!}
                                 </div>
                             </div>
-                            <div class="uk-form-row">
+                            <div class="uk-form-row uk-background-muted">
                                 <div class="uk-form-controls">
                                     <div class="uk-grid">
-                                        <div class="uk-width-1-4" style="padding-top: 5px;">Supplier</div>
+                                        <div class="uk-width-1-4" style="padding-top: 5px;">SRP (PHP)</div>
                                         <div class="uk-width-3-4" style="padding-top: 5px;">
-                                            {!! Form::select('suppliers-list', $suppliers, null, ['id'=>'suppliers-list', 'class'=>'uk-width-1-1']) !!}
+                                            {!! Form::text('unitprice', null, ['id'=>'unitprice', 'class'=>'uk-width-1-2', 'disabled']) !!}
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <hr>
                             <div class="uk-form-row">
                                 <div class="uk-form-controls">
                                     <div class="uk-grid">
-                                        <div class="uk-width-1-4" style="padding-top: 5px;">Unit Price</div>
+                                        <div class="uk-width-1-4" style="padding-top: 5px;">Delivery Price (PHP)</div>
                                         <div class="uk-width-3-4" style="padding-top: 5px;">
-                                            {!! Form::text('unitprice', null, ['id'=>'unitprice', 'class'=>'uk-width-1-2', 'disabled']) !!}
+                                            {!! Form::text('deliveryunitprice', '0.00', ['id'=>'deliveryunitprice', 'class'=>'uk-width-1-2 uk-form-danger', 'disabled']) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -75,7 +76,7 @@
                             <div class="uk-form-row">
                                 <div class="uk-form-controls">
                                     <div class="uk-grid">
-                                        <div class="uk-width-1-4" style="padding-top: 5px;">Sub Total</div>
+                                        <div class="uk-width-1-4" style="padding-top: 5px;">Sub Total (PHP)</div>
                                         <div class="uk-width-3-4" style="padding-top: 5px;">
                                             {!! Form::text('deliveryprice', null, ['id'=>'deliveryprice', 'class'=>'uk-width-1-2', 'placeholder'=>'Unit Cost', 'disabled']) !!}
                                         </div>
@@ -85,7 +86,7 @@
                             <hr>
                             <div class="uk-form-row">
                                 <div class="uk-form-controls">
-                                    {!! Form::button('Add Item Delivery', ['type'=>'submit', 'id'=>'btn-add', 'class'=>'uk-button uk-button-primary uk-width-1-1 uk-button-large uk-text-bold', 'disabled']) !!}
+                                    {!! Form::button('Add', ['type'=>'submit', 'id'=>'btn-add', 'class'=>'uk-button uk-button-primary uk-width-1-1 uk-button-large uk-text-bold', 'disabled']) !!}
                                 </div>
                             </div>
                             {!! Form::close() !!}
@@ -103,17 +104,31 @@
                         @endif
                     @endif
 
+                    {!! Form::open(['route'=>'deliveryStore', 'id'=>'frm-process-deliveries', 'class'=>'uk-form']) !!}
+                    @if(count($deliverysets) > 0)
+                    <div style="padding-left:10px;" class="uk-form-row">
+                        <div class="uk-form-controls">
+                            <div class="uk-grid">
+                                <div>Delivery Date: {!! Form::text('deliverydate', date('Y-m-d'), ['id'=>'deliverydate', "data-uk-datepicker"=>"{format:'YYYY-MM-DD'}"]) !!}</div>
+                                <div>
+                                    Supplier: {!! Form::select('suppliers-list', $suppliers, null, ['id'=>'suppliers-list', 'required']) !!}
+                                    {!! Form::text('supplier_id',null,['id'=>'supplier_id','hidden']) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+                    
                     <div class="uk-panel uk-margin-small-top uk-margin-small-bottom" style="min-height: 250px; background-color: #fafafa; padding-left:10px;">
                         <table class="uk-table uk-table-hover uk-table-condensed">
                             <thead>
                             <tr style="background-color: #4E5255; color: #fff;">
-                                <th>Supplier</th>
+                                <th>&nbsp;</th>
                                 <th>Category</th>
                                 <th>Product</th>
                                 <th>Quantity</th>
-                                <th style="text-align: right">Unitcost</th>
-                                <th style="text-align: right" width="70">Subtotal <i class="uk-icon-rub uk-text-small"></i></th>
-                                <th>&nbsp;</th>
+                                <th style="text-align: right">Delivery Price</th>
+                                <th style="text-align: right" width="70">Subtotal</th>
                                 <th>&nbsp;</th>
                             </tr>
                             </thead>
@@ -123,14 +138,13 @@
                                     <tbody>
                                         @foreach($deliverysets as $deliveryset)
                                             <tr>
-                                                <td></td>
+                                                <td>&nbsp;</td>
                                                 <td>{{ $deliveryset->myProduct->myCategory->categoryname }}</td>
                                                 <td>{{ $deliveryset->myProduct->productname }}</td>
                                                 <td>{{ $deliveryset->qty }}</td>
                                                 <td style="text-align: right">{{ number_format($deliveryset->unitcost, 2) }}</td>
                                                 <td style="text-align: right">{{ number_format($deliveryset->deliverycost, 2) }}</td>
-                                                <td>&nbsp;</td>
-                                                <td width="10">
+                                                <td>
                                                     <a href="{{ route('destroyDelivery-set', ['id'=>$deliveryset->deliveryset_id]) }}" class="uk-button uk-button-danger uk-button-mini del-rec"><i class="uk-icon-times"></i></a>
                                                 </td>
                                             </tr>
@@ -140,15 +154,13 @@
                                                 <td>&nbsp;</td>
                                                 <td>&nbsp;</td>
                                                 <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td colspan="2" class="uk-text-right"><strong>Total Amount</strong></td>
+                                                <td colspan="2" class="uk-text-right"><strong>Total Amount (PHP)</strong></td>
                                                 <td style="text-align: right">{{ number_format($totDeliveryCost, 2) }}</td>
-                                                <td>&nbsp;</td>
                                                 <td>&nbsp;</td>
                                             </tr>
                                 @else
                                             <tr style="background-color: #F0F0F0;">
-                                                <td colspan="8"><i class="uk-text-small">Ready...</i></td>
+                                                <td colspan="7" class="uk-text-small uk-text-danger"><i class="uk-icon-info"></i> No items yet</td>
                                             </tr>
                                     </tbody>
                                 @endif
@@ -156,24 +168,21 @@
                     </div>
 
                     <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-margin-bottom uk-text-right">
-                        {!! Form::open(['route'=>'deliveryStore', 'id'=>'frm-process-deliveries', 'class'=>'uk-form']) !!}
-                        {!! Form::hidden('supplier_id', null, ['id'=>'supplier_id', 'readonly']) !!}
                         @if(count($deliverysets) > 0)
                             <div class="uk-text-right">
-                                {!! Form::text('date_received', date('Y-m-d'), ['class'=>'uk-width-1-4', 'id'=>'date_received', "data-uk-datepicker"=>"{format:'YYYY-MM-DD'}"]) !!}
+                                
                                 {!! Form::button('Process Deliveries', ['id'=>'btn-process-deliveries', 'class'=>'uk-button uk-button-primary']) !!}
                             </div>
                         @endif
-                        {!! Form::close() !!}
                     </div>
-
+                    {!! Form::close() !!}
                 </div>
             </div>
 
         </div>
     </div>
 
-    <div class="uk-modal" id="supplier-modal">
+    {{-- <div class="uk-modal" id="supplier-modal">
         <div class="uk-modal-dialog">
             <div class="uk-modal-header"><h2>Select Supplier</h2></div>
             <div>
@@ -218,7 +227,7 @@
                 <a href="#" class="uk-button uk-button-danger uk-modal-close">Cancel</a>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 @stop
 
@@ -285,23 +294,23 @@
                 }
             });
 
-            $('#supplier').change(function(){
-                var supplier = $(this).val();
-                $.ajax({
-                    url: '/ajax/fetch/products',
-                    method: 'get',
-                    async: false,
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        supplier: supplier
-                    }
-                }).success(function(r){
-                    if(r)
-                    {
-                        $('#products').empty().html(r).prop('disabled', false);
-                    }
-                });
-            });
+            // $('#supplier').change(function(){
+            //     var supplier = $(this).val();
+            //     $.ajax({
+            //         url: '/ajax/fetch/products',
+            //         method: 'get',
+            //         async: false,
+            //         data: {
+            //             _token: '{{ csrf_token() }}',
+            //             supplier: supplier
+            //         }
+            //     }).success(function(r){
+            //         if(r)
+            //         {
+            //             $('#products').empty().html(r).prop('disabled', false);
+            //         }
+            //     });
+            // });
 
             $('#category').change(function(){
                 var category = $(this).val();
@@ -337,14 +346,14 @@
                         product: product
                     }
                 }).success(function(r){
-                    $('#deliveryprice').val(r);
-                    $('#qty, #deliveryprice, #btn-add, #btn-cost, #product, #unitprice').prop('disabled', false);
+                    $('#deliveryprice').val(parseFloat(r).toFixed(2));
+                    $('#qty, #deliveryprice, #btn-cost, #product, #unitprice, #deliveryunitprice').prop('disabled', false);
                     $('#qty').val('1');
                 });
             });
 
             $('#products-list').change(function(){
-                $('#qty, #deliveryprice, #btn-add, #btn-cost, #product, #unitprice').prop('disabled', true);
+                $('#qty, #deliveryprice, #btn-add, #btn-cost, #product, #unitprice, #deliveryunitprice').prop('disabled', true);
 
                 var productlist = $('#products-list option:selected').text();
 
@@ -371,10 +380,10 @@
                             product: product
                         }
                     }).success(function(r){
-                        $('#deliveryprice').val(r);
+                        $('#deliveryprice').val(parseFloat(r).toFixed(2));
 
                         $('#unitprice').val(r);
-                        $('#qty, #deliveryprice, #btn-add, #btn-cost, #product').prop('disabled', false);
+                        $('#qty, #deliveryprice, #btn-cost, #product, #unitprice, #deliveryunitprice').prop('disabled', false);
                         $('#qty').val('1');
                     });
                 });
@@ -399,22 +408,22 @@
                });
             });
 
-            $('#btn-update-supplier').click(function(){
-                var selectedSupplier = $('#suppliers-list').val();
-                $('#supplier_id').val(selectedSupplier);
+            // $('#btn-update-supplier').click(function(){
+            //     var selectedSupplier = $('#suppliers-list').val();
+            //     $('#supplier_id').val(selectedSupplier);
 
-                $.ajax({
-                    url: '/ajax/fetch/key/supplier',
-                    method: 'get',
-                    async: false,
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        supplier: selectedSupplier
-                    }
-                }).success(function(r){
-                    $('#supplier-name').empty().html(r);
-                });
-            });
+            //     $.ajax({
+            //         url: '/ajax/fetch/key/supplier',
+            //         method: 'get',
+            //         async: false,
+            //         data: {
+            //             _token: '{{ csrf_token() }}',
+            //             supplier: selectedSupplier
+            //         }
+            //     }).success(function(r){
+            //         $('#supplier-name').empty().html(r);
+            //     });
+            // });
 
             $('#btn-process-deliveries').click(function(){
                 var supplier = $('#supplier_id').val();
@@ -429,99 +438,133 @@
                 }
             });
 
-            $('#btn-update-cost').click(function(){
-                var product = $('#product').val();
-                var newUnitCost = $('#new-unit-cost').val();
-                var option = $('#update-cost-option').val();
+            // $('#btn-update-cost').click(function(){
+            //     var product = $('#product').val();
+            //     var newUnitCost = $('#new-unit-cost').val();
+            //     var option = $('#update-cost-option').val();
 
-                if(option == 1)
-                {
-                    // update
-                    $.ajax({
-                        url: '/ajax/update/product/unitcost',
-                        method: 'get',
-                        async: false,
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                            product: product,
-                            newUnitCost: newUnitCost
-                        }
-                    }).success(function(r){
-                        if(r == 1)
-                        {
-                            $('#qty, #deliveryprice, #btn-add, #btn-cost, #product').prop('disabled', true);
-                            $('#deliveryprice').val('');
-                            $('#qty').val('');
-                            $('#products-list').val('');
-                            window.location.reload();
-                        }
-                        else
-                        {
-                            return false;
-                        }
-                    });
-                }
-                else
-                {
-                    // create new
-                    $.ajax({
-                        url: '/ajax/store/product/unitcost',
-                        method: 'get',
-                        async: false,
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                            product: product,
-                            cost: newUnitCost
+            //     if(option == 1)
+            //     {
+            //         // update
+            //         $.ajax({
+            //             url: '/ajax/update/product/unitcost',
+            //             method: 'get',
+            //             async: false,
+            //             data: {
+            //                 _token: '{{ csrf_token() }}',
+            //                 product: product,
+            //                 newUnitCost: newUnitCost
+            //             }
+            //         }).success(function(r){
+            //             if(r == 1)
+            //             {
+            //                 $('#qty, #deliveryprice, #btn-add, #btn-cost, #product').prop('disabled', true);
+            //                 $('#deliveryprice').val('');
+            //                 $('#qty').val('');
+            //                 $('#products-list').val('');
+            //                 window.location.reload();
+            //             }
+            //             else
+            //             {
+            //                 return false;
+            //             }
+            //         });
+            //     }
+            //     else
+            //     {
+            //         // create new
+            //         $.ajax({
+            //             url: '/ajax/store/product/unitcost',
+            //             method: 'get',
+            //             async: false,
+            //             data: {
+            //                 _token: '{{ csrf_token() }}',
+            //                 product: product,
+            //                 cost: newUnitCost
 
-                        }
-                    }).success(function(r){
-                        if(r == 1)
-                        {
-                            $('#qty, #deliveryprice, #btn-add, #btn-cost, #product').prop('disabled', true);
-                            $('#deliveryprice').val('');
-                            $('#qty').val('');
-                            $('#products-list').val('');
-                            window.location.reload();
-                        }
-                        else
-                        {
-                            return false;
-                        }
-                    });
-                }
+            //             }
+            //         }).success(function(r){
+            //             if(r == 1)
+            //             {
+            //                 $('#qty, #deliveryprice, #btn-add, #btn-cost, #product').prop('disabled', true);
+            //                 $('#deliveryprice').val('');
+            //                 $('#qty').val('');
+            //                 $('#products-list').val('');
+            //                 window.location.reload();
+            //             }
+            //             else
+            //             {
+            //                 return false;
+            //             }
+            //         });
+            //     }
 
+            // })
+
+            // $('#qty').change(function(){
+            //     $('#qty, #deliveryprice, #btn-add, #btn-cost').prop('disabled', true);
+
+            //     var newQty = $(this).val();
+            //     var product = $('#product').val();
+
+            //     $.ajax({
+            //         url: '/ajax/fetch/product/cost',
+            //         method: 'get',
+            //         async: false,
+            //         data: {
+            //             _token: '{{ csrf_token() }}',
+            //             product: product
+            //         }
+            //     }).success(function(r){
+            //         var price = r;
+            //         var newPrice = parseFloat(newQty) * parseFloat(price);
+
+            //         if(newPrice > 0)
+            //         {
+            //             $('#deliveryprice').val(newPrice);
+            //         }
+            //         else
+            //         {
+            //             $('#deliveryprice').val(0);
+            //         }
+
+            //         $('#qty, #deliveryprice, #btn-add, #btn-cost').prop('disabled', false);
+            //     });
+            // });
+
+            $('#qty').change(function() {
+                var delprice = parseFloat($('#deliveryunitprice').val())
+                if(delprice>0) {
+                    var newTotal = $('#deliveryunitprice').val() * $('#qty').val()
+                    $('#deliveryprice').val(parseFloat(newTotal).toFixed(2))
+                } else
+                    alert('Check delivery price!')
+                
             })
 
-            $('#qty').change(function(){
-                $('#qty, #deliveryprice, #btn-add, #btn-cost').prop('disabled', true);
+            $('#deliveryunitprice').change(function() {
+                var delprice = parseFloat($('#deliveryunitprice').val())
+                var srp = parseFloat($('#unitprice').val())
 
-                var newQty = $(this).val();
-                var product = $('#product').val();
+                if(delprice>srp)
+                    $('#unitprice').prop('class','uk-width-1-2 uk-form-danger')
+                else
+                    $('#unitprice').prop('class','uk-width-1-2')
 
-                $.ajax({
-                    url: '/ajax/fetch/product/cost',
-                    method: 'get',
-                    async: false,
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        product: product
-                    }
-                }).success(function(r){
-                    var price = r;
-                    var newPrice = parseFloat(newQty) * parseFloat(price);
+                if(delprice>0) {
+                    $('#btn-add').prop('disabled', false);
+                    $(this).prop('class','uk-width-1-2')
+                    var newCost = delprice * $('#qty').val()
+                    $('#deliveryprice').val(parseFloat(newCost).toFixed(2))
+                } else {
+                    $('#btn-add').prop('disabled', false);
+                    $(this).prop('class','uk-width-1-2 uk-form-danger')
+                }                
+            })
 
-                    if(newPrice > 0)
-                    {
-                        $('#deliveryprice').val(newPrice);
-                    }
-                    else
-                    {
-                        $('#deliveryprice').val(0);
-                    }
-
-                    $('#qty, #deliveryprice, #btn-add, #btn-cost').prop('disabled', false);
-                });
-            });
+            $('#suppliers-list').change(function() {
+                $('#supplier_id').val($(this).val())
+            })
         });
     </script>
 @stop

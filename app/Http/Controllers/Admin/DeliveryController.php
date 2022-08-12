@@ -8,6 +8,7 @@ use App\DeliverySet;
 use App\Product;
 use App\Category;
 use App\Supplier;
+use App\PriceHistory;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -114,11 +115,21 @@ class DeliveryController extends Controller
             $deliveryDetails->delivery_id = $deliveryRecord->delivery_id;
             $deliveryDetails->product_id = $delivery->product_id;
             $deliveryDetails->qty = $delivery->qty;
+            $deliveryDetails->srp = $delivery->srp;
             $deliveryDetails->unitcost = $delivery->unitcost;
             $deliveryDetails->deliverycost = $delivery->deliverycost;
             $deliveryDetails->save();
 
             $product = Product::where('product_id', $delivery->product_id)->first();
+            
+            if($delivery->srp!=$product->unitprice) {
+                $priceHistory = new PriceHistory;
+                $priceHistory->product = $product->product_id;
+                $priceHistory->price = $delivery->unitcost;
+                $priceHistory->employee_id =  Auth::user()->employee_id;
+                $priceHistory->save();
+                $product->unitprice = $delivery->unitcost;
+            }
             $product->stock = $product->stock + $delivery->qty;
             $product->update();
         }

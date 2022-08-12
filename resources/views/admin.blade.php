@@ -40,9 +40,9 @@
 
                         <ul class="uk-navbar-nav">
                             <li><a href="{{ route('salesIndex') }}"><i class="uk-icon-money"></i> Sales</a></li>
-                            <li><a href="{{ route('deliveryIndex') }}"><i class="uk-icon-car"></i> Deliveries</a></li>
+                            <li><a href="{{ route('deliveryIndex') }}"><i class="uk-icon-table"></i> Deliveries</a></li>
                             <li data-uk-dropdown="" class="uk-parent" aria-haspopup="true" aria-expanded="false">
-                                <a href="#"><i class="uk-icon-folder"></i> Items</a>
+                                <a href="#"><i class="uk-icon-cog"></i> Items</a>
                                 <div class="uk-dropdown uk-dropdown-navbar uk-dropdown-bottom" style="top: 40px; left: 0px;">
                                     <ul class="uk-nav uk-nav-navbar">
                                         <li><a href="{{ route('categoryIndex') }}"><i class="uk-icon-list-alt"></i> Categories</a></li>

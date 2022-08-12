@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Product;
+use App\Delivery;
 
 class ProductSeeder extends Seeder
 {
@@ -15,17 +16,17 @@ class ProductSeeder extends Seeder
         Product::create([
             'productcode' => '1XXX0',
             'productname' => 'Test Product 1',
-            'pattern' => 'XXXX',
+            //'pattern' => 'XXXX',
             'unitprice' => 100.00,
-            'set_price' => 100.00,
+            //'set_price' => 100.00,
             'stock' => 100,
-            'reorderlimit' => 100,
+            'reorderlimit' => 10,
             'category_id' => 1,
-            'supplier_id' => 1,
+            //'supplier_id' => 1,
             'status' => 0,
-            'unitcost' => 110.00,
-            'percentage' => 10,
-            'markup' => 10
+            //'unitcost' => 110.00,
+            //'percentage' => 10,
+            //'markup' => 10
         ]);
     }
 }

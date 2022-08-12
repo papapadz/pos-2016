@@ -13,7 +13,7 @@
 
                 {!! Form::model($deliveryArr, ['route'=>['deliveryUpdate', 'id'=>$delivery->delivery_id], 'method'=>'patch', 'class'=>'uk-form uk-form-stacked']) !!}
 
-                    @include('admin.delivery._form', ['btnCaption'=>'Update Delivery Details'])
+                    @include('admin.delivery._form', ['btnCaption'=>'Update'])
 
                 {!! Form::close() !!}
 

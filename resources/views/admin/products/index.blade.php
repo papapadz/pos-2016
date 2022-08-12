@@ -10,18 +10,22 @@
 
                     <div style="margin-top:15px;">
 
-                        <h2>Product List</h2>
-
-                        <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-text-right" style="background-color: #e5e4e4;">
-                            {!! Form::open(['method'=>'get', 'class'=>'uk-form']) !!}
-                            {!! Form::text('skey', $skey) !!}
-                            {!! Form::button(' &nbsp;Filter&nbsp;&nbsp; ', ['type'=>'submit', 'class'=>'uk-button uk-button-success']) !!}
-                            {!! Form::close() !!}
-                            <p></p>
-                            {!! Form::open(['class' => 'uk-form','method'=>'get', 'id'=>'prod-status']) !!}
-                            {!! Form::select('status', ['0'=>'Active', '1'=>'Not Active'], $status, ['id'=>'status']) !!}
-                            <a href="{{ route('productsCreate') }}" class="uk-button uk-button-primary"><i class="uk-icon-plus"></i> &nbsp;Create Product&nbsp;</a>
-                            {!! Form::close() !!}
+                        <h2>Products</h2>
+                        <div class="uk-panel uk-panel-box uk-panel-box-secondary" style="background-color: #e5e4e4; display: flex; align-items: right; justify-content: right;">
+                            <div style="margin-right: 10px; border-right:#464646">
+                                {!! Form::open(['method'=>'get', 'class'=>'uk-form']) !!}
+                                {!! Form::label('Search') !!}
+                                {!! Form::text('skey', $skey) !!}
+                                {!! Form::button('Search', ['type'=>'submit', 'class'=>'uk-button uk-button-primary']) !!}
+                                {!! Form::close() !!}
+                            </div>
+                            <div>
+                                {!! Form::open(['class' => 'uk-form','method'=>'get', 'id'=>'prod-status']) !!}
+                                {!! Form::select('status', ['0'=>'Active', '1'=>'Not Active'], $status, ['id'=>'status']) !!}
+                                |
+                                <a href="{{ route('productsCreate') }}" class="uk-button uk-button-success"><i class="uk-icon-plus"></i> &nbsp;Add&nbsp;</a>
+                                {!! Form::close() !!}
+                            </div>
                         </div>
 
                         <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-margin-small-top">
@@ -29,13 +33,10 @@
                             <table class="uk-table uk-table-hover uk-table-striped">
                                 <thead>
                                 <tr style="background-color: #464646; color: #fff;">
-                                    <th>&nbsp;</th>
                                     <th>Category</th>
-                                    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Size</th>
-                                    <th>Pattern</th>
-                                    <th style="text-align: center;">SRP</th>
-                                    <th style="text-align: right;">Unitcost</th>
-                                    <th style="text-align: center;" width="150">Stock on Hand</th>
+                                    <th>Product Name</th>
+                                    <th style="text-align: center;">Price</th>
+                                    <th style="text-align: center;" width="150">Stock</th>
                                     <th width="130" class="uk-text-center">Action</th>
                                 </tr>
                                 </thead>
@@ -46,21 +47,17 @@
                                     @foreach($products as $product)
 
                                         <tr style="{{ ($product->stock <= $product->reorderlimit) ? 'background-color: #ffaaaa;' : '' }}">
-                                            <td>&nbsp;</td>
                                             <td>{{ $product->myCategory->categoryname }}</td>
                                             <td>{{ $product->productname }}</td>
-                                            <td>{{ $product->pattern }}</td>
                                             <td style="text-align: center;">{{ number_format($product->unitprice, 2) }}</td>
-                                            <td style="text-align: right;">{{ number_format($product->unitcost, 2) }}</td>
                                             <td style="text-align: center;">{{ $product->stock }}</td>
-                                            <td class="uk-text-right">
-                                            @if($product->status == 0)
+                                            <td class="uk-text-center">
+                                            {{-- @if($product->status == 0)
                                                 <a href="{{ route('productStatus', ['id'=>$product->product_id]) }}" class="uk-button uk-button-mini"><i class="uk-icon-mail-forward"></i></a>
                                             @else
                                                  <a href="{{ route('productStatus', ['id'=>$product->product_id]) }}" class="uk-button uk-button-mini"><i class="uk-icon-mail-reply"></i></a>
-                                            @endif
-
-                                                <a href="#reorder-modal" id="{{ $product->product_id }}" data-uk-modal class="uk-button uk-button-primary uk-button-mini reorder-product"><i class="uk-icon-refresh"></i></a>
+                                            @endif --}}
+                                                {{-- <a href="#reorder-modal" id="{{ $product->product_id }}" data-uk-modal class="uk-button uk-button-primary uk-button-mini reorder-product"><i class="uk-icon-refresh"></i></a> --}}
                                                 <a href="{{ route('productsEdit', ['id'=>$product->product_id]) }}" class="uk-button uk-button-mini"><i class="uk-icon-pencil"></i></a>
                                                 <button class="uk-button uk-button-danger uk-button-mini del-rec" id="{{ $product->product_id }}"><i class="uk-icon-times"></i></button>
                                             </td>

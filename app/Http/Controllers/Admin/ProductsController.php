@@ -89,12 +89,13 @@ class ProductsController extends Controller
         $product = new Product();
         $product->productcode = $request->productcode;
         $product->productname = $request->productname;
-        $product->pattern = $request->pattern;  //new
+        //$product->pattern = $request->pattern;  //new
         $product->unitprice = $request->unitprice;  // $product->unitprice = $unitprice;
-        $product->reorderlimit = $request->reorderlimit;
+        //$product->reorderlimit = $request->reorderlimit;
         $product->category_id = $request->category_id;
-        $product->supplier_id = $request->supplier_id;
-        $product->unitcost = $request->unitcost;
+        //$product->supplier_id = $request->supplier_id;
+        //$product->unitcost = $request->unitcost;
+        $product->stock = $request->stock;
         $product->status = $request->status;
         $product->save();
 
@@ -151,11 +152,11 @@ class ProductsController extends Controller
         //$product = new Product();
         $product->productcode = $request->productcode;
         $product->productname = $request->productname;
-        $product->pattern = $request->pattern;  //new
+        //$product->pattern = $request->pattern;  //new
         $product->unitprice = $request->unitprice;  // $product->unitprice = $unitprice;
         $product->reorderlimit = $request->reorderlimit;
         $product->category_id = $request->category_id;
-        $product->supplier_id = $request->supplier_id;
+        //$product->supplier_id = $request->supplier_id;
         $product->unitcost = $request->unitcost;
         $product->update();
 

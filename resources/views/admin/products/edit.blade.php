@@ -10,13 +10,13 @@
 
                     <div style="margin-top:15px;">
 
-                        <h2>Update Product Details</h2>
+                        <h2>Product Details</h2>
 
                         <hr>
 
                         <div style="padding-left: 15px; padding-right: 15px; margin-bottom: 15px;">
                             {!! Form::model($product, ['route'=>['productsUpdate', 'id'=>$product->product_id], 'method'=>'patch', 'class'=>'uk-form uk-form-stacked']) !!}
-                            @include('admin.products._form', ['btnCaption'=>'Update Product Record'])
+                            @include('admin.products._form', ['btnCaption'=>'Update'])
                             {!! Form::close() !!}
                         </div>
 
