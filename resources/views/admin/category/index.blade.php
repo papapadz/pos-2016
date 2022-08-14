@@ -40,8 +40,8 @@
                                             <td>{{ $category->categoryname }}</td>
                                             <td>{{ $category->description }}</td>
                                             <td>
-                                                <a href="{{ route('categoryEdit', ['id'=>$category->category_id]) }}"><i class="uk-text-left uk-icon-pencil"></i></a>
-                                                <a href="{{ route('categoryDestroy', ['id'=>$category->category_id]) }}" class="uk-text-left uk-text-danger del-rec"><i class="uk-icon-times"></i></a>
+                                                <a href="{{ route('categoryEdit', ['id'=>$category->category_id]) }}" class="uk-button uk-button-mini"><i class="uk-text-left uk-icon-pencil"></i></a>
+                                                <a href="{{ route('categoryDestroy', ['id'=>$category->category_id]) }}" class="uk-button uk-button-mini uk-text-left uk-button-danger del-rec"><i class="uk-icon-times"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach

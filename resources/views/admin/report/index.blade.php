@@ -17,7 +17,7 @@
                             {!! Form::select('option', ['1'=>'Daily Report', '2'=>'Monthly Report'], $option, ['id'=>'report-option']) !!}
                             {!! Form::text('daily', $daySel, ['id'=>'daily', "data-uk-datepicker"=>"{format:'YYYY-MM-DD'}"]) !!}
                             {!! Form::select('monthly', $months, $monthSel, ['id'=>'monthly', 'disabled']) !!}
-                            {!! Form::select('year', $years, $yearSel, ['id'=>'year', 'disabled']) !!}
+                            
                             {!! Form::button('Generate', ['id'=>'btn-generate', 'type'=>'submit', 'class'=>'uk-button uk-button-primary']) !!}
                             <a href="{{ route('reportPrint', ['option'=>$option, 'day'=>$daySel, 'month'=>$monthSel]) }}" target="_blank" class="uk-button uk-button-success">Print Report</a>
                             {!! Form::close() !!}

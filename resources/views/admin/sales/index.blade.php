@@ -40,7 +40,7 @@
                                     
                                 </div>
                             </div>
-                            <div class="uk-form-row">
+                            <div class="uk-form-row" hidden>
                                 <div class="uk-form-controls">
                                     {!! Form::select('product_id', ['0'=>'----'], 0, ['class'=>'uk-width-1-1','id'=>'product', 'disabled']) !!}
                                 </div>

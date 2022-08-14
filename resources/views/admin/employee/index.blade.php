@@ -52,10 +52,10 @@
                                             <td>{{ $employee->email }}</td>
                                             <td>
                                                 @if($employee->employee_id == Auth::user()->employee_id)
-                                                    <a href="{{ route('employeeEdit', ['id'=>$employee->employee_id]) }}"><i class="uk-icon-pencil"></i></a>
+                                                    <a href="{{ route('employeeEdit', ['id'=>$employee->employee_id]) }}" class="uk-button uk-button-mini"><i class="uk-icon-pencil"></i></a>
                                                 @else
-                                                    <a href="{{ route('employeeEdit', ['id'=>$employee->employee_id]) }}"><i class="uk-icon-pencil"></i></a>
-                                                    <a href="{{ route('employeeDestroy', ['id'=>$employee->employee_id]) }}" class="uk-text-danger del-rec"><i class="uk-icon-times"></i></a>
+                                                    <a href="{{ route('employeeEdit', ['id'=>$employee->employee_id]) }}" class="uk-button uk-button-mini"><i class="uk-icon-pencil"></i></a>
+                                                    <a href="{{ route('employeeDestroy', ['id'=>$employee->employee_id]) }}" class="uk-button uk-button-mini uk-button-danger del-rec"><i class="uk-icon-times"></i></a>
                                                 @endif
                                             </td>
                                         </tr>

@@ -46,8 +46,8 @@
                                             <td>{{ $supplier->contactno }}</td>
                                             <td>{{ $supplier->address }}, {{ $supplier->city }}</td>
                                             <td>
-                                                <a href="{{ route('supplierEdit', ['id'=>$supplier->supplier_id]) }}"><i class="uk-icon-pencil"></i></a>
-                                                <a href="{{ route('supplierDestroy', ['id'=>$supplier->supplier_id]) }}" class="uk-text-danger del-rec"><i class="uk-icon-times"></i></a>
+                                                <a href="{{ route('supplierEdit', ['id'=>$supplier->supplier_id]) }}" class="uk-button uk-button-mini"><i class="uk-icon-pencil"></i></a>
+                                                <a href="{{ route('supplierDestroy', ['id'=>$supplier->supplier_id]) }}" class="uk-button uk-button-mini uk-button-danger del-rec"><i class="uk-icon-times"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
