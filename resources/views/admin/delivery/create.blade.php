@@ -3,9 +3,13 @@
 @section('content')
 
     <div style="background-color: #e2e2e2; padding: 8px;">
+        @if (Session::has('code'))
+                    @if(Session::get('code') == 1)
+                        <div class="uk-alert uk-alert-success uk-animation-slide-top">Record has been saved!</div>
+                    @endif
+                @endif
         <div style="background-color: #FFF; padding: 3px;">
             <div class="uk-grid uk-grid-collapse">
-
                 <div class="uk-width-4-10" style="padding-left: 5px;">
 
                     <div class="uk-panel uk-panel-box uk-panel-box-secondary">
@@ -97,13 +101,6 @@
                 </div>
 
                 <div class="uk-width-6-10">
-
-                    @if (Session::has('code'))
-                        @if(Session::get('code') == 1)
-                            <div class="uk-alert uk-alert-success uk-animation-slide-top">Record has been saved!</div>
-                        @endif
-                    @endif
-
                     {!! Form::open(['route'=>'deliveryStore', 'id'=>'frm-process-deliveries', 'class'=>'uk-form']) !!}
                     @if(count($deliverysets) > 0)
                     <div style="padding-left:10px;" class="uk-form-row">
@@ -382,7 +379,7 @@
                     }).success(function(r){
                         $('#deliveryprice').val(parseFloat(r).toFixed(2));
 
-                        $('#unitprice').val(r);
+                        $('#unitprice').val(parseFloat(r).toFixed(2));
                         $('#qty, #deliveryprice, #btn-cost, #product, #unitprice, #deliveryunitprice').prop('disabled', false);
                         $('#qty').val('1');
                     });

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Employee;
 use Illuminate\Http\Request;
-
+use Auth;
 use App\Http\Requests;
 use App\Http\Requests\EmployeeRequest;
 use App\Http\Requests\EmployeeEditRequest;
@@ -36,17 +36,21 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        $admin = Employee::where('position', 1)->first();
+        //$admin = Employee::where('position', 1)->first();
 
-        if(!is_null($admin))
-        {
-            $employeeType = ['2'=>'Supervisor', '3'=>'Accountant', '4'=>'Secretary'];
-        }
+        // if(!is_null($admin))
+        // {
+        //     $employeeType = ['2'=>'Supervisor', '3'=>'Accountant', '4'=>'Secretary'];
+        // }
+        // else
+        // {
+        //     $employeeType = ['1'=>'Administrator', '2'=>'Supervisor', '3'=>'Accountant', '4'=>'Secretary'];
+        // }
+        if(Auth::User()->position==1)
+            $employeeType = ['1'=>'Administrator', '2'=> 'Manager', '3'=>'Helper'];
         else
-        {
-            $employeeType = ['1'=>'Administrator', '2'=>'Supervisor', '3'=>'Accountant', '4'=>'Secretary'];
-        }
-
+            $employeeType = ['2'=> 'Manager', '3'=>'Helper'];
+            
         return view('admin.employee.create', compact('employeeType'));
     }
 

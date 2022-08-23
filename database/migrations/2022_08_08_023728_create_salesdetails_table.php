@@ -17,7 +17,7 @@ class CreateSalesdetailsTable extends Migration
             $table->integer('sales_id');
             $table->integer('product_id');
             $table->integer('qty')->default(1);
-            $table->float('ordersalesprice',10,2);
+            $table->float('unit_price',10,2);
             $table->float('sales_price',10,2);
             $table->timestamps();
         });

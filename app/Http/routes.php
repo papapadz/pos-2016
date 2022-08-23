@@ -66,7 +66,7 @@ Route::get('/',
 Route::get('/admin',
     function(){
         return view('admin.home');
-    });
+});
 
 
 
@@ -110,36 +110,36 @@ Route::get('/admin/sales/summaryform/print/{id}',
 
 
 //Credit
-Route::get('/admin/credit',
-    [
-        'as' => 'creditIndex',
-        'uses' => 'Admin\CreditController@index'
-    ]);
-Route::get('/admin/credit/create/payment/{id}',
-    [
-        'as' => 'creditCreatePayment',
-        'uses' => 'Admin\CreditController@createPayment'
-    ]);
-Route::post('/admin/credit/store/payment',
-    [
-        'as' => 'creditPaymentStore',
-        'uses' => 'Admin\CreditController@storePayment'
-    ]);
-Route::post('/admin/credit/store/payment/cheque',
-    [
-        'as' => 'paymentChequeStore',
-        'uses' => 'Admin\CreditController@storePaymentCheque'
-    ]);
-Route::get('/admin/credit/payment/history/{id}',
-    [
-        'as' => 'creditPaymentHistory',
-        'uses' => 'Admin\CreditController@paymentHistory'
-    ]);
-Route::get('/admin/credit/payment/history/view/{id}',
-    [
-        'as' => 'paymentHistoryView',
-        'uses' => 'Admin\CreditController@paymentHistoryView'
-    ]);
+// Route::get('/admin/credit',
+//     [
+//         'as' => 'creditIndex',
+//         'uses' => 'Admin\CreditController@index'
+//     ]);
+// Route::get('/admin/credit/create/payment/{id}',
+//     [
+//         'as' => 'creditCreatePayment',
+//         'uses' => 'Admin\CreditController@createPayment'
+//     ]);
+// Route::post('/admin/credit/store/payment',
+//     [
+//         'as' => 'creditPaymentStore',
+//         'uses' => 'Admin\CreditController@storePayment'
+//     ]);
+// Route::post('/admin/credit/store/payment/cheque',
+//     [
+//         'as' => 'paymentChequeStore',
+//         'uses' => 'Admin\CreditController@storePaymentCheque'
+//     ]);
+// Route::get('/admin/credit/payment/history/{id}',
+//     [
+//         'as' => 'creditPaymentHistory',
+//         'uses' => 'Admin\CreditController@paymentHistory'
+//     ]);
+// Route::get('/admin/credit/payment/history/view/{id}',
+//     [
+//         'as' => 'paymentHistoryView',
+//         'uses' => 'Admin\CreditController@paymentHistoryView'
+//     ]);
 
 
 

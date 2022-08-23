@@ -219,7 +219,7 @@ class SalesController extends Controller
             $salesDetails->sales_id = $sales->sales_id;
             $salesDetails->product_id = $order->product_id;
             $salesDetails->qty = $order->qty;
-            $salesDetails->ordersalesprice = $order->salesprice;
+            $salesDetails->unit_price = $order->myProduct->unitprice;
             $salesDetails->sales_price = $order->orderprice;
 
             $salesDetails->save();

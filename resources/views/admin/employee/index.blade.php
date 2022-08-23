@@ -23,9 +23,7 @@
                                     <th style="background-color: #464646; color: #fff;">&nbsp;</th>
                                     <th style="background-color: #464646; color: #fff;">Employee Name</th>
                                     <th style="background-color: #464646; color: #fff;">Position</th>
-                                    <th style="background-color: #464646; color: #fff;">Address</th>
                                     <th style="background-color: #464646; color: #fff;">Contact Number</th>
-                                    <th style="background-color: #464646; color: #fff;">Email Address</th>
                                     <th style="background-color: #464646; color: #fff;">&nbsp;</th>
                                 </tr>
                                 </thead>
@@ -47,9 +45,8 @@
                                                     Secretary
                                                 @endif
                                             </td>
-                                            <td>{{ $employee->address }}</td>
+                                           
                                             <td>{{ $employee->contactno }}</td>
-                                            <td>{{ $employee->email }}</td>
                                             <td>
                                                 @if($employee->employee_id == Auth::user()->employee_id)
                                                     <a href="{{ route('employeeEdit', ['id'=>$employee->employee_id]) }}" class="uk-button uk-button-mini"><i class="uk-icon-pencil"></i></a>

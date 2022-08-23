@@ -8,249 +8,174 @@
         <p>{{ Session::get('success')}}</p>
     </div>
     @endif
-    <div style="padding: 5px; background:gainsboro">
-        <div style="background-color: #FFF; padding: 3px;">
 
-            <div class="uk-grid uk-grid-collapse">
-
-                <div class="uk-width-4-10" style="padding-right: 5px;">
-
-                    <div class="uk-panel uk-panel-box uk-panel-box-secondary">
-                        {{-- <div class="uk-text-bold  uk-text-right">
-                            <a href="{{ route('productsIndex')}}" class="uk-button"><i class="uk-icon-shopping-cart"></i></a></div>
-                        <hr> --}}
-                        <div>
-
-                            {!! Form::open(['route'=>'ordersCreate', 'class'=>'uk-form']) !!}
-                            <div class="uk-form-row">
-                                <div class="uk-form-controls">
-                                    <label>Search Item</label>
-                                    {!! Form::text('key', null, ['id'=>'key', 'class'=>'uk-width-1-1', 'placeholder'=>'ex. Biscuit']) !!}
-                                </div>
-                            </div>
-                            <div class="uk-form-row">
-                                <div class="uk-form-controls">
-                                    {!! Form::select('category_id', $categories, null, ['id'=>'category', 'class'=>'uk-width-1-1']) !!}
-                                </div>
-                            </div>
-                            <div class="uk-form-row">
-                                <div class="uk-form-controls">
-                                    {!! Form::select('productList', $products, null, ['id'=>'product-list', 'class'=>'uk-width-1-1', 'multiple', 'size'=>'10']) !!}
-
-                                    
-                                </div>
-                            </div>
-                            <div class="uk-form-row" hidden>
-                                <div class="uk-form-controls">
-                                    {!! Form::select('product_id', ['0'=>'----'], 0, ['class'=>'uk-width-1-1','id'=>'product', 'disabled']) !!}
-                                </div>
-                            </div>
-                            <input type="number" value="1" name="qty" hidden>
-                            <div class="uk-form-row">
-                                <div class="uk-form-controls">
-                                    <div class="uk-grid">
-                                        <div class="uk-width-1-4" style="padding-top: 5px;"><i class="uk-icon-shopping-cart"></i> Stock</div>
-                                        <div class="uk-width-3-4" style="padding-top: 5px;">
-                                            <label id="onhand">----</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {{-- 
-                            <div class="uk-form-row">
-                                <div class="uk-form-controls">
-                                    <div class="uk-grid">
-                                        <div class="uk-width-1-4" style="padding-top: 5px;">Quantity</div>
-                                        <div class="uk-width-3-4">
-                                            {!! Form::text('qty', null, ['id'=>'qty', 'placeholder'=>'Quantity', 'disabled']) !!}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>  --}}
-                            <div class="uk-form-row" hidden>
-                                <div class="uk-form-controls">
-                                    <div class="uk-grid">
-                                        <div class="uk-width-1-4" style="padding-top: 5px;">Unit Price</div>
-                                        <div class="uk-width-3-4">
-                                            {!! Form::text('unitprice', 'null', ['id'=>'unitprice', 'placeholder'=>'Price', 'disabled']) !!}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> 
-                            <div class="uk-form-row" hidden>
-                                <div class="uk-form-controls">
-                                    <div class="uk-grid">
-                                        <div class="uk-width-1-4" style="padding-top: 5px;">Total Price</div>
-                                        <div class="uk-width-3-4">
-                                            {!! Form::text('orderprice', null, ['id'=>'orderprice', 'placeholder'=>'Price', 'disabled']) !!}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="uk-form-row">
-                                <div class="uk-form-controls">
-                                    {!! Form::button('Add Item', ['type'=>'submit', 'id'=>'btn-add', 'class'=>'uk-button uk-button-primary uk-button-large uk-width-1-1 uk-text-bold', 'disabled']) !!}
-                                </div>
-                            </div>
-                            {!! Form::close() !!}
-
-                        </div>
+    <div class="uk-grid-divider uk-child-width-1-2@m" uk-grid>
+        <div class="uk-width-1-3@m">
+                {!! Form::open(['route'=>'ordersCreate', 'class'=>'uk-form-stacked']) !!}
+                <div class="uk-margin">
+                    <div class="uk-form-controls">
+                        <label>Search Item</label>
+                        {!! Form::text('key', null, ['id'=>'key', 'class'=>'uk-width-1-1 uk-input uk-form-small', 'placeholder'=>'ex. Biscuit']) !!}
                     </div>
-
                 </div>
-
-                <div class="uk-width-6-10">
-
-                    <div class="uk-panel uk-panel-box uk-panel-box-secondary" style="background-color: #e5e4e4;display: none;">
+                <div class="uk-margin">
+                    <label>Category</label>
+                    <div class="uk-form-controls">
+                        {!! Form::select('category_id', $categories, null, ['id'=>'category', 'class'=>'uk-width-1-1 uk-select']) !!}
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <label>Item List</label>
+                    <div class="uk-form-controls">
+                        {!! Form::select('productList', $products, null, ['id'=>'product-list', 'class'=>'uk-width-1-1 uk-textarea', 'multiple', 'size'=>'10']) !!}
+                    </div>
+                    <div>
+                        <span uk-icon="cart"></span> <label id="onhand">----</label>
+                    </div>
+                </div>
+                <div class="uk-margin" hidden>
+                    <div class="uk-form-controls">
+                        {!! Form::select('product_id', ['0'=>'----'], 0, ['class'=>'uk-width-1-1','id'=>'product', 'disabled']) !!}
+                    </div>
+                </div>
+                <input type="number" value="1" name="qty" hidden>
+                
+                <div class="uk-margin" hidden>
+                    <div class="uk-form-controls">
                         <div class="uk-grid">
-                            <div class="uk-width-1-1" style="margin-left: 20px;">
-                                <div> 
-                                    <table width="100%" class="uk-form uk-width-2-10 uk-text-left">
-                                        <tr>
-                                            {!! Form::open(['route'=>'salesCreate', 'method'=>'post']) !!}
-                                            <td class="uk-width-1-1">{!! Form::text('salesdate', $selDate, ['id'=>'salesdate', "data-uk-datepicker"=>"{format:'YYYY-MM-DD'}"]) !!}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="uk-text-left">{!! Form::select('sales_type', ['1'=>'Cash', '2'=>'Credit'], 1, ['id'=>'sales_type']) !!}</td>
-                                            <td class="uk-text-left">{!! Form::select('terms', ['0'=>'terms', '1'=>'1 month', '2'=>'2 months', '3'=>'3 months', '4'=>'4 months', '5'=>'5 months'], 0, ['id'=>'terms']) !!}</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div class="uk-text-success uk-text-bold uk-text-left"> 
-                                    <a href="#customer-modal" data-uk-modal class="uk-button"><span id="customer-name">Customer</span></a>             
-                                </div>
+                            <div class="uk-width-1-4" style="padding-top: 5px;">Unit Price</div>
+                            <div class="uk-width-3-4">
+                                {!! Form::text('unitprice', 'null', ['id'=>'unitprice', 'placeholder'=>'Price', 'disabled']) !!}
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                <div class="uk-margin" hidden>
+                    <div class="uk-form-controls">
+                        <div class="uk-grid">
+                            <div class="uk-width-1-4" style="padding-top: 5px;">Total Price</div>
+                            <div class="uk-width-3-4">
+                                {!! Form::text('orderprice', null, ['id'=>'orderprice', 'placeholder'=>'Price', 'disabled']) !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="uk-margin">
+                    <div class="uk-form-controls">
+                        {!! Form::button('Add Item', ['type'=>'submit', 'id'=>'btn-add', 'class'=>'uk-button uk-button-primary uk-button-large uk-width-1-1 uk-text-bold', 'disabled']) !!}
+                    </div>
+                </div>
+                {!! Form::close() !!}
+        </div>
+        
+        <div class="uk-width-expand@m">
+            
+        {!! Form::open(['route'=>'salesCreate', 'method'=>'post']) !!}
+            <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-margin-small-top uk-margin-small-bottom">
+                <table class="uk-table uk-table-hover uk-table-justify uk-table-striped">
+                    <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>Item</th>
+                        <th style="text-align: right" width="120px;">Quantity</th>
+                        <th style="text-align: right">Unit Price</th>
+                        <th style="text-align: right">Total</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @if(count($orders) > 0)
+                        @foreach($orders as $order)
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>{{ $order->myProduct->productname }}</td>
+                                <td style="text-align: right" width="120px;">
+                                    <input type="text" value="{{ $order->qty }}" class="uk-width-3-10 order-qty" id="{{ $order->order_id }}">
+                                </td>
+                                <td style="text-align: right">{{ number_format($order->myProduct->unitprice, 2) }}</td>
+                                <td style="text-align: right">{{ number_format($order->orderprice, 2) }}</td>
+                                <td colspan="2" class="uk-text-right" width="10">
+                                    <a href="{{ route('destroyOrder', ['id'=>$order->order_id]) }}" class="uk-button uk-button-danger uk-button-small del-rec">X</a>
+                                </td>
+                            </tr>
+                        @endforeach                
+                    @else
+                        <tr>
+                            <td class="uk-text-small uk-text-danger" colspan="7"><span uk-icon="warning"></span> No items yet</td>
+                        </tr>
+                    @endif
+                    </tbody>
+                </table>
+                @if (Session::has('code'))
+                    @if(Session::get('code') == 1)
+                        <div class="uk-alert uk-alert-success uk-animation-slide-top">Transaction Complete!</div>
+                    @endif
+                @endif
+                
+                @if(count($orders)>0)
+                <div class="uk-card uk-text-right">
+                    <div class="uk-margin">
+                        <div class="uk-flex-right" uk-grid>
+                            <div class="uk-width-1-2@m"><strong>Total: </strong></div>
+                            <div><strong>{{ number_format($grandTotal, 2) }}</strong></div>
+                        </div>
+                    </div>
 
-
+                    <div class="uk-margin">
+                        <div class="uk-flex-right" uk-grid>
+                            <div class="uk-width-1-2@m"><i>Discount:</i></div>
+                            <div>
+                                {!! Form::text('fixedAmtDiscount', null, ['id'=>'fixedAmtDiscount', 'class' => 'uk-input uk-form-small']) !!}
                             </div>
                         </div>
                     </div>
 
-                    <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-margin-small-top uk-margin-small-bottom" style="min-height: 250px; background-color: #fafafa;">
-                        <table class="uk-table uk-table-hover uk-table-condensed">
-                            <thead>
-                            <tr>
-                                <th>&nbsp;</th>
-                                
-                                <th>Item</th>
-                                <th style="text-align: right" width="120px;">Quantity</th>
-                                <th>&nbsp;</th>
-                                <th style="text-align: right">Unit Price</th>
-                                
-                                <th style="text-align: right">Total</th>
-                                <th>&nbsp;</th>
-                                <th>&nbsp;</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @if(count($orders) > 0)
-                                @foreach($orders as $order)
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                        <td>{{ $order->myProduct->productname }}</td>
-                                        <td style="text-align: right" width="120px;">
-                                            <input type="text" value="{{ $order->qty }}" class="uk-width-3-10 order-qty" id="{{ $order->order_id }}">
-                                        </td>
-                                        <th>&nbsp;</th>
-                                        <td style="text-align: right">{{ number_format($order->myProduct->unitprice, 2) }}</td>
-                                        
-                                        <td style="text-align: right">{{ number_format($order->orderprice, 2) }}</td>
-                                        <td class="uk-text-right" width="10">
-                                            <a href="{{ route('destroyOrder', ['id'=>$order->order_id]) }}" class="uk-button uk-button-danger uk-button-mini del-rec"><i class="uk-icon-times"></i></a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                <tr>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                {{-- <tr style="background-color: #F0F0F0;">
-                                    <td>&nbsp;</td>
-                                    <td colspan="5" class="uk-text-right"><i>VATable Sales</i></td>
-                                    <td style="text-align: right"><i>{{ number_format($vatSales, 2) }}</i></td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr style="background-color: #F0F0F0;">
-                                    <td>&nbsp;</td>
-                                    <td colspan="5" class="uk-text-right"><i>VAT</i></td>
-                                    <td style="text-align: right"><i>{{ number_format($vat, 2) }}</i></td>
-                                    <td>&nbsp;</td>
-                                </tr> --}}
-                                <tr style="background-color: #F0F0F0;">
-                                    <td>&nbsp;</td>
-                                    <td colspan="5" class="uk-text-right"><strong>Total</strong></td>
-                                    <td style="text-align: right"><strong>{{ number_format($grandTotal, 2) }}</strong></td>
-                                    <td>&nbsp;</td>
-                                </tr>
-
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td colspan="5" class="uk-text-right"><i>Discount</i></td>
-                                    <td class="uk-width-1-10 uk-text-right">
-                                        
-                                        {!! Form::text('fixedAmtDiscount', null, ['id'=>'fixedAmtDiscount', 'class'=>'uk-width-1-8']) !!}
-                                    </td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                    
-                                <tr style="background-color: #F0F0F0;">
-                                    <td>&nbsp;</td>
-                                    <td colspan="5" class="uk-text-right"><strong>Total Amount Due</strong></td>
-                                    <td style="text-align: right"><strong>{{ number_format($dprice, 2) }}</strong></td> 
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr style="background-color: #F0F0F0;" id="tdad-panel">
-                                    <td>&nbsp;</td>
-                                    <td colspan="5" class="uk-text-right"><i><strong>Discounted Amount Due</strong></i></td>
-                                    <td style="text-align: right"><i><strong id='tdad'>----</strong></i></td> 
-                                    <td>&nbsp;</td>
-                                </tr>
-                            @else
-                                <tr>
-                                    <td class="uk-text-small uk-text-danger" colspan="8"><i class="uk-icon-info"></i> No items yet</td>
-                                </tr>
-                            @endif
-                            </tbody>
-                        </table>
-                        @if (Session::has('code'))
-                            @if(Session::get('code') == 1)
-                                <div class="uk-alert uk-alert-success uk-animation-slide-top">Transaction Complete!</div>
-                            @endif
-                        @endif
+                    <div class="uk-margin">
+                        <div class="uk-flex-right" uk-grid>
+                            <div class="uk-width-1-2@m"><strong>Total Amount Due: </strong></div>
+                            <div><strong>{{ number_format($dprice, 2) }}</strong></div>
+                        </div>
                     </div>
 
-                    <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-margin-bottom uk-text-right">
-                        {!! Form::hidden('amtToPay', ($grandTotal), ['id'=>'amt-to-pay', 'readonly']) !!}
-                        {!! Form::hidden('cust_id', 1, ['id'=>'cust_id', 'readonly']) !!}
-                        {!! Form::hidden('discounted', null, ['id'=>'discounted']) !!}
-                        {!! Form::hidden('discountedsales', null, ['id'=>'discountedsales']) !!}
-                        {!! Form::hidden('discountAmt', null, ['id'=>'discountAmt']) !!}
-                        
-
-                        @if(count($orders) > 0)
-                            <table width="100%" class="uk-form">
-                                
-                                <tr class="forcash">
-                                    <td style="padding-right: 10px;">Amount Tendered</td>
-                                    <td class="uk-width-2-10">{!! Form::text('payment', null, ['id'=>'payment', 'class'=>'uk-width-1-1']) !!}</td>
-                                </tr>
-                                <tr class="forcash">
-                                    <td style="padding-right: 10px;">Change<i class="uk-text-small"><strong>(Php)</strong></i></td>
-                                    <td class="uk-text-left"><span id="sales-change" class="uk-text-bold">{{ number_format(0, 2) }}</span></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" class="uk-text-right">
-                                        <hr>
-                                        <button id="btn-charge" class="uk-button uk-button-primary" disabled>Process Invoice</button>
-                                    </td>
-                                </tr>
-                            </table>
-                        @endif
-                        {!! Form::close() !!}
+                    <div class="uk-margin">
+                        <div class="uk-flex-right" uk-grid>
+                            <div class="uk-width-1-2@m"><strong>Discounted Amount Due: </strong></div>
+                            <div><i><strong id='tdad'>----</strong></i></div>
+                        </div>
                     </div>
 
+                    <hr class="uk-divider-icon">
+
+                    <div class="uk-margin forcash">
+                        <div class="uk-flex-right" uk-grid>
+                            <div class="uk-width-1-2@m"><strong>Amount Tendered: </strong></div>
+                            <div>{!! Form::text('payment', null, ['id'=>'payment', 'class'=>'uk-width-1-1 uk-input uk-form-small']) !!}</div>
+                        </div>
+                    </div>
+
+                    <div class="uk-margin forcash">
+                        <div class="uk-flex-right" uk-grid>
+                            <div class="uk-width-1-2@m"><strong>Change<i class="uk-text-small">(Php)</i></strong></div>
+                            <div><span id="sales-change" class="uk-text-bold">{{ number_format(0, 2) }}</span></div>
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <button id="btn-charge" class="uk-button uk-button-primary" disabled>Submit</button>
+                    </div>
+                    {!! Form::select('sales_type', ['1'=>'Cash', '2'=>'Credit'], 1, ['id'=>'sales_type', 'hidden']) !!}
+                    {!! Form::select('terms', ['0'=>'terms', '1'=>'1 month', '2'=>'2 months', '3'=>'3 months', '4'=>'4 months', '5'=>'5 months'], 0, ['id'=>'terms', 'hidden']) !!}
+                    {!! Form::hidden('amtToPay', ($grandTotal), ['id'=>'amt-to-pay', 'readonly']) !!}
+                    {!! Form::hidden('cust_id', 1, ['id'=>'cust_id', 'readonly']) !!}
+                    {!! Form::hidden('discounted', null, ['id'=>'discounted']) !!}
+                    {!! Form::hidden('discountedsales', null, ['id'=>'discountedsales']) !!}
+                    {!! Form::hidden('discountAmt', null, ['id'=>'discountAmt']) !!}
                 </div>
+                @endif
             </div>
-
+        {!! Form::close() !!}
         </div>
     </div>
 

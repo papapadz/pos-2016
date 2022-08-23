@@ -2,12 +2,9 @@
 
 @section('content')
 
-<div class="uk-slidenav-position" data-uk-slider>
-    <div style="background-color: #e2e2e2; padding: 8px;">
-        <img style="max-width: 100%" src="{{ asset('img/banner.png') }}"></li>
-    </div>
+<div class="uk-cover-container uk-height-large">
+    <img src="{{ asset('img/banner.png') }}" alt="" uk-cover>
 </div>
-
 
 @stop
 
