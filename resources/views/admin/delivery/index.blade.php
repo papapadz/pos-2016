@@ -2,233 +2,70 @@
 
 @section('content')
 
-    <div style="background-color: #e2e2e2; padding: 8px;">
-        <div style="background-color: #FFF; padding: 3px;">
-            <div class="uk-grid">
-                <div class="uk-width-1-1">
-        
-                    <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-text-right uk-margin-small-top">
-                        {!! Form::open(['method'=>'get', 'class'=>'uk-form']) !!}
-                        Date
-                        {!! Form::text('deliverydate', $selDate, ["data-uk-datepicker"=>"{format:'YYYY-MM-DD'}"]) !!}
-                        {!! Form::select('supplier_id', [''=>'--Suppliers--'] + $suppliers, $selSupplier) !!}
-                        {!! Form::button('Filter', ['type'=>'submit', 'class'=>'uk-button uk-button-primary']) !!}
-                        |
-                        <a class="uk-button uk-button-success" href="{{ url('admin/delivery/create') }}">Add</a>
-                        {!! Form::close() !!}
-                    </div>
-        
-                    <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-margin-small-top">
-                        <table class="uk-table uk-table-hover uk-table-striped">
-                            <thead>
-                                <tr style="background-color: #464646; color: #fff;">
-                                    <th width="50">&nbsp;</th>
-                                    <th width="200">Date of Delivery</th>
-                                    <th width="200">Date Received</th>
-                                    <th width="200">Order Number</th>
-                                    <th>Supplier</th>
-                                    <th style="text-align: center">Total Cost</th>
-                                    <th>&nbsp;</th>
-                                </tr>
-                            </thead>
-        
-                            @if(count($deliveries) > 0)
-                                <tbody>
-                                @foreach($deliveries as $delivery)
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                        <td><a href="{{ route('deliveryDetailsShow', $delivery->delivery_id) }}">{{ substr($delivery->deliverydate, 0, 10) }}</a></td>
-                                        <td>{{ substr($delivery->date_received, 0, 10) }}</td>
-                                        <td>{{ $delivery->order_number }}</td>
-                                        <td>{{ $delivery->mySupplier->companyname }}</td>
-                                        <td style="text-align: center">{{ number_format($delivery->totalcost, 2) }}</td>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="8"><i>{{ count($deliveries) }} - Delivery record found</i></td>
-                                    </tr>
-                                </tfoot>
-                            @else
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="8"><i>No records found</i></td>
-                                    </tr>
-                                </tfoot>
-                            @endif
-        
-                        </table>
-                    </div>
-                    <div>
-                        @include('paginator', ['paginator' => $deliveries])
-                    </div>
-        
-        
-                </div>
-            </div>
-            
-            {{-- <div class="uk-grid uk-grid-collapse">
+<div class="uk-grid">
+    <div class="uk-width-1-1">
 
-                <div class="uk-width-4-10" style="padding-left: 5px;">
-
-                    <div class="uk-panel uk-panel-box uk-panel-box-secondary" style="background-color: #4E5255; color: #fff;">
-                        <div class="uk-text-bold">Delivery Management</div>
-                        <hr>
-                        <div>
-
-                            {!! Form::open(['route'=>'deliverySetStore', 'class'=>'uk-form']) !!}
-                            <div class="uk-form-row">
-                                <div class="uk-form-controls uk-text-right">
-                                    {!! Form::text('searchProducts', null, ['id'=>'search-products', 'class'=>'uk-width-1-1', 'placeholder'=>'Searh key']) !!}
-                                </div>
-                            </div>
-                            <div class="uk-form-row">
-                                <div class="uk-form-controls">
-                                    {!! Form::select('category_id', $categories, null, ['id'=>'category', 'class'=>'uk-width-1-1']) !!}
-                                </div>
-                            </div>
-                            <div class="uk-form-row">
-                                <div class="uk-form-controls">
-                                    {!! Form::select('products-list', $products, null, ['id'=>'products-list', 'class'=>'uk-width-1-1', 'multiple', 'size'=>'10']) !!}
-                                </div>
-                            </div>
-                            <div class="uk-form-row">
-                                <div class="uk-form-controls">
-                                    {!! Form::select('product_id', ['0'=>'----'], null, ['id'=>'product', 'class'=>'uk-width-1-1', 'disabled']) !!}
-                                </div>
-                            </div>
-                            <div class="uk-form-row">
-                                <div class="uk-form-controls">
-                                    <div class="uk-grid">
-                                        <div class="uk-width-1-4" style="padding-top: 5px;">Quantity</div>
-                                        <div class="uk-width-3-4" style="padding-top: 5px;">
-                                            {!! Form::text('qty', null, ['id'=>'qty', 'class'=>'uk-width-1-2', 'placeholder'=>'Quantity', 'disabled']) !!}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="uk-form-row">
-                                <div class="uk-form-controls">
-                                    <div class="uk-grid">
-                                        <div class="uk-width-1-4" style="padding-top: 5px;">Unit Cost</div>
-                                        <div class="uk-width-3-4" style="padding-top: 5px;">
-                                            {!! Form::text('deliveryprice', null, ['id'=>'deliveryprice', 'class'=>'uk-width-1-2', 'placeholder'=>'Unit Cost', 'disabled']) !!}
-                                            {!! Form::button('Update Cost', ['data-uk-modal'=>"{target:'#update-cost-modal'}", 'id'=>'btn-cost', 'class'=>'uk-button uk-button-primary', 'disabled']) !!}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="uk-form-row">
-                                <div class="uk-form-controls">
-                                    {!! Form::button('Add Item Delivery', ['type'=>'submit', 'id'=>'btn-add', 'class'=>'uk-button uk-button-primary uk-width-1-1 uk-button-large uk-text-bold', 'disabled']) !!}
-                                </div>
-                            </div>
-                            {!! Form::close() !!}
-
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="uk-width-6-10">
-
-                    <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-text-right" style="background-color: #e5e4e4;">
-                        <div class="uk-grid">
-                            <div class="uk-width-3-4">
-                                <div class="uk-text-success uk-text-bold uk-text-left" style="margin-left: 20px;">
-                                    
-                                    {!! Form::open(['route'=>'deliveryStore', 'id'=>'frm-process-deliveries', 'class'=>'uk-form']) !!}
-                                    {!! Form::text('deliverydate', date('Y-m-d'), ['class'=>'uk-width-1-4', 'id'=>'deliverydate', "data-uk-datepicker"=>"{format:'YYYY-MM-DD'}"]) !!}
-                                    {!! Form::text('order_number', null, ['placeholder'=>'Order Number', 'class'=>'uk-width-1-3']) !!}
-                                    
-                                </div>
-                                <div class="uk-text-success uk-text-bold uk-text-left" style="margin-left: 20px;">
-                                    <a href="#supplier-modal" data-uk-modal class="uk-button"><span id="supplier-name">Supplier</span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    @if (Session::has('code'))
-                        @if(Session::get('code') == 1)
-                            <div class="uk-alert uk-alert-success uk-animation-slide-top">Delivery Transaction Complete!</div>
-                        @endif
-                    @endif
-
-                    <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-margin-small-top uk-margin-small-bottom" style="min-height: 250px; background-color: #fafafa;">
-                        <table class="uk-table uk-table-hover uk-table-condensed">
-                            <thead>
-                            <tr style="background-color: #4E5255; color: #fff;">
-                                <th>&nbsp;</th>
-                                <th>Category</th>
-                                <th>Size</th>
-                                <th>Quantity</th>
-                                <th style="text-align: right">Unitcost</th>
-                                <th style="text-align: right" width="70">Subtotal <i class="uk-icon-rub uk-text-small"></i></th>
-                                <th>&nbsp;</th>
-                                <th>&nbsp;</th>
-                            </tr>
-                            </thead>
-
-
-                                @if(count($deliverysets) > 0)
-                                    <tbody>
-                                        @foreach($deliverysets as $deliveryset)
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>{{ $deliveryset->myProduct->myCategory->categoryname }}</td>
-                                                <td>{{ $deliveryset->myProduct->productname }}</td>
-                                                <td>{{ $deliveryset->qty }}</td>
-                                                <td style="text-align: right">{{ number_format($deliveryset->unitcost, 2) }}</td>
-                                                <td style="text-align: right">{{ number_format($deliveryset->deliverycost, 2) }}</td>
-                                                <td>&nbsp;</td>
-                                                <td width="10">
-                                                    <a href="{{ route('destroyDelivery-set', ['id'=>$deliveryset->deliveryset_id]) }}" class="uk-button uk-button-danger uk-button-mini del-rec"><i class="uk-icon-times"></i></a>
-                                                </td>
-                                            </tr>
-
-                                        @endforeach
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                            </tr>
-                                            <tr style="background-color: #F0F0F0;">
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td colspan="2" class="uk-text-right"><strong>Total Amount</strong></td>
-                                                <td style="text-align: right">{{ number_format($totDeliveryCost, 2) }}</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                            </tr>
-                                        @else
-                                            <tr style="background-color: #F0F0F0;">
-                                                <td colspan="8"><i class="uk-text-small">Ready...</i></td>
-                                            </tr>
-                                    </tbody>
-                                @endif
-                        </table>
-                    </div>
-
-                    <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-margin-bottom uk-text-right">
-                        {!! Form::open(['route'=>'deliveryStore', 'id'=>'frm-process-deliveries', 'class'=>'uk-form']) !!}
-                        {!! Form::hidden('supplier_id', null, ['id'=>'supplier_id', 'readonly']) !!}
-                        @if(count($deliverysets) > 0)
-                            <div class="uk-text-right">
-                                {!! Form::text('date_received', date('Y-m-d'), ['class'=>'uk-width-1-4', 'id'=>'date_received', "data-uk-datepicker"=>"{format:'YYYY-MM-DD'}"]) !!}
-                                {!! Form::button('Process Deliveries', ['id'=>'btn-process-deliveries', 'class'=>'uk-button uk-button-primary']) !!}
-                            </div>
-                        @endif
-                        {!! Form::close() !!}
-                    </div>
-
-                </div>
-            </div> --}}
-
+        <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-text-right uk-margin-small-top">
+            {!! Form::open(['method'=>'get', 'class'=>'uk-form']) !!}
+            Date
+            {!! Form::text('deliverydate', $selDate, ['id' => 'datefilter']) !!}
+            {!! Form::select('supplier_id', [''=>'--Suppliers--'] + $suppliers, $selSupplier) !!}
+            {!! Form::button('Filter', ['type'=>'submit', 'class'=>'uk-button uk-button-primary uk-button-small']) !!}
+            |
+            <a class="uk-button uk-button-primary uk-button-small" href="{{ url('admin/delivery/create') }}" uk-icon="icon: plus">Add</a>
+            {!! Form::close() !!}
         </div>
+
+        <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-margin-small-top">
+            <table class="uk-table uk-table-hover uk-table-striped">
+                <thead>
+                    <tr style="background-color: #464646; color: #fff;">
+                        <th width="50">&nbsp;</th>
+                        <th width="200">Date of Delivery</th>
+                        <th width="200">Date Received</th>
+                        <th width="200">Order Number</th>
+                        <th>Supplier</th>
+                        <th style="text-align: center">Total Cost</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+
+                @if(count($deliveries) > 0)
+                    <tbody>
+                    @foreach($deliveries as $delivery)
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td><a href="{{ route('deliveryDetailsShow', $delivery->delivery_id) }}">{{ substr($delivery->deliverydate, 0, 10) }}</a></td>
+                            <td>{{ substr($delivery->date_received, 0, 10) }}</td>
+                            <td>{{ $delivery->order_number }}</td>
+                            <td>{{ $delivery->mySupplier->companyname }}</td>
+                            <td style="text-align: center">{{ number_format($delivery->totalcost, 2) }}</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="8"><i>{{ count($deliveries) }} - Entry found</i></td>
+                        </tr>
+                    </tfoot>
+                @else
+                    <tfoot>
+                        <tr>
+                            <td colspan="8"><i>No records found</i></td>
+                        </tr>
+                    </tfoot>
+                @endif
+
+            </table>
+        </div>
+        <div>
+            @include('paginator', ['paginator' => $deliveries])
+        </div>
+
+
     </div>
+</div>
 
     <div class="uk-modal" id="supplier-modal">
         <div class="uk-modal-dialog">
@@ -282,17 +119,15 @@
 @section('location') Delivery @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/components/datepicker.gradient.min.css">
-    <link rel="stylesheet" href="/css/components/form-select.gradient.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 @stop
 
 @section('js')
-    <script type="text/javascript" src="/js/components/datepicker.min.js"></script>
-    <script type="text/javascript" src="/js/components/form-select.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
    <script type="text/javascript">
         $(function(){
             var selectedSupplier = $('#supplier_id').val();
-
+            $( "#datefilter" ).datepicker();
             $.ajax({
                 url: '/ajax/fetch/key/supplier',
                 method: 'get',

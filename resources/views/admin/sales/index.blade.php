@@ -73,7 +73,7 @@
             
         {!! Form::open(['route'=>'salesCreate', 'method'=>'post']) !!}
             <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-margin-small-top uk-margin-small-bottom">
-                <table class="uk-table uk-table-hover uk-table-justify uk-table-striped">
+                <table class="uk-table uk-table-hover uk-table-justify uk-table-striped" style="background-color: #464646; color: #fff;">
                     <thead>
                     <tr>
                         <th>&nbsp;</th>
