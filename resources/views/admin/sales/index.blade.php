@@ -1,14 +1,6 @@
 @extends('admin')
 
 @section('content')
-
-    @if(Session::has('success'))
-    <div class="uk-alert-success" uk-alert>
-        <a class="uk-alert-close" uk-close></a>
-        <p>{{ Session::get('success')}}</p>
-    </div>
-    @endif
-
     <div class="uk-grid-divider uk-child-width-1-2@m" uk-grid>
         <div class="uk-width-1-3@m">
                 {!! Form::open(['route'=>'ordersCreate', 'class'=>'uk-form-stacked']) !!}

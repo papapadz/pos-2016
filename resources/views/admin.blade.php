@@ -4,16 +4,24 @@
     <title>E-Inventory System - @yield('location')</title>
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.3/dist/css/uikit.min.css" />
-
+    <!-- datepicker -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    
     <script src="{{ asset('jquery.js') }}"></script>
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.3/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.3/dist/js/uikit-icons.min.js"></script>
+    <!-- Date Picker -->
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <style>
         #banner {
             background-image: url("{{asset('img/banner-sales.jpg')}}");
             padding: 8px;
             height: 100px;
+        },
+        .lime {
+            background: limegreen; 
+            color: white;
         }
     </style>
     @yield('css')
@@ -83,6 +91,12 @@
         </nav>
     </div>
     <div class="uk-card uk-card-default uk-card-body">
+        @if(Session::has('success'))
+        <div class="uk-alert-success" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <p>{{ Session::get('success')}}</p>
+        </div>
+        @endif
         @yield('content')
     </div>
 

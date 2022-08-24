@@ -10,9 +10,9 @@
             Date
             {!! Form::text('deliverydate', $selDate, ['id' => 'datefilter']) !!}
             {!! Form::select('supplier_id', [''=>'--Suppliers--'] + $suppliers, $selSupplier) !!}
-            {!! Form::button('Filter', ['type'=>'submit', 'class'=>'uk-button uk-button-primary uk-button-small']) !!}
+            {!! Form::button('Filter ', ['type'=>'submit', 'class'=>'uk-button uk-button-primary uk-button-small','uk-icon="icon: search"']) !!}
             |
-            <a class="uk-button uk-button-primary uk-button-small" href="{{ url('admin/delivery/create') }}" uk-icon="icon: plus">Add</a>
+            <a class="uk-button uk-button-small" style="background: limegreen; color: white;" href="{{ url('admin/delivery/create') }}" uk-icon="icon: plus-circle">New </a>
             {!! Form::close() !!}
         </div>
 
@@ -21,9 +21,8 @@
                 <thead>
                     <tr style="background-color: #464646; color: #fff;">
                         <th width="50">&nbsp;</th>
-                        <th width="200">Date of Delivery</th>
-                        <th width="200">Date Received</th>
                         <th width="200">Order Number</th>
+                        <th>Date of Delivery</th>
                         <th>Supplier</th>
                         <th style="text-align: center">Total Cost</th>
                         <th>&nbsp;</th>
@@ -35,11 +34,10 @@
                     @foreach($deliveries as $delivery)
                         <tr>
                             <td>&nbsp;</td>
-                            <td><a href="{{ route('deliveryDetailsShow', $delivery->delivery_id) }}">{{ substr($delivery->deliverydate, 0, 10) }}</a></td>
-                            <td>{{ substr($delivery->date_received, 0, 10) }}</td>
-                            <td>{{ $delivery->order_number }}</td>
+                            <td><a href="{{ route('deliveryDetailsShow', $delivery->delivery_id) }}">{{ $delivery->order_number }}</a></td>
+                            <td>{{ substr($delivery->deliverydate, 0, 10) }}</td>
                             <td>{{ $delivery->mySupplier->companyname }}</td>
-                            <td style="text-align: center">{{ number_format($delivery->totalcost, 2) }}</td>
+                            <td style="text-align: right">{{ number_format($delivery->totalcost, 2) }}</td>
                             <td>&nbsp;</td>
                         </tr>
                     @endforeach
@@ -119,15 +117,14 @@
 @section('location') Delivery @stop
 
 @section('css')
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    
 @stop
 
 @section('js')
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
    <script type="text/javascript">
         $(function(){
             var selectedSupplier = $('#supplier_id').val();
-            $( "#datefilter" ).datepicker();
+            $( "#datefilter" ).datepicker({ dateFormat: 'yy-mm-dd' });
             $.ajax({
                 url: '/ajax/fetch/key/supplier',
                 method: 'get',
