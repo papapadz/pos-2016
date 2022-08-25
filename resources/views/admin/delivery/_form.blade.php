@@ -1,7 +1,7 @@
 <div class="uk-form-row">
     <label for="form-s-it" class="uk-form-label">Delivery Date</label>
     <div class="uk-form-controls">
-        {!! Form::text('deliverydate', null, ["data-uk-datepicker"=>"{format:'YYYY-MM-DD'}"]) !!}
+        <input id="datefilter" name="deliverydate" value={{ Carbon\Carbon::now()->toDateString() }}>
     </div>
 </div>
 <div class="uk-form-row">

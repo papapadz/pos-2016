@@ -10,7 +10,8 @@
             <div class="uk-width-1-2 uk-text-right">
                 {!! Form::open(['method'=>'get', 'class'=>'uk-form']) !!}
                 Date
-                {!! Form::text('deliverydate', $selDate, ['id' => 'datefilter']) !!}
+                {{-- {!! Form::text('deliverydate', $selDate, ['id' => 'datefilter']) !!} --}}
+                <input id="datefilter" name="deliverydate" value={{ Carbon\Carbon::now()->toDateString() }}>
                 {!! Form::select('supplier_id', [''=>'--Suppliers--'] + $suppliers, $selSupplier) !!}
                 {!! Form::button('Filter ', ['type'=>'submit', 'class'=>'uk-button uk-button-primary uk-button-small','uk-icon="icon: search"']) !!}
                 |

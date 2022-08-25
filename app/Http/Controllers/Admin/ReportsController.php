@@ -85,7 +85,7 @@ class ReportsController extends Controller
 
         $sumSales = 0;
         $sumCredit =0;
-
+        
         foreach($reports as $report)
         {
              $sumSales += $report->totalsales;
@@ -93,7 +93,6 @@ class ReportsController extends Controller
         }
 
         //$sumCash = $sumSales - $sumCredit;
-
         return view('admin.report.index', compact('dateToFormat', 'years', 'yearSel', 'months', 'monthSel', 'day', 'daySel', 'reports', 'sumSales', 'option'));
     }
 

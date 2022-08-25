@@ -228,7 +228,7 @@
    <script type="text/javascript">
         $(function(){
             var selectedSupplier = $('#supplier_id').val();
-            $( "#deliverydate" ).datepicker();
+            $( "#deliverydate" ).datepicker({ dateFormat: 'yy-mm-dd' });
             $.ajax({
                 url: '/ajax/fetch/key/supplier',
                 method: 'get',

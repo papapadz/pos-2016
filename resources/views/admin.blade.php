@@ -41,29 +41,34 @@
 
     </div>
     <div class="uk-container">
-        <div class="uk-card uk-card-body uk-card-default uk-card-small">
-            <nav class="uk-navbar-container uk-margin" uk-navbar style="background-color: transparent;">
+        <div>
+            <nav class="uk-navbar-container" uk-navbar style="background-color:rgb(196, 248, 232); padding-left: 3rem; padding-right: 3rem; box-shadow: 0 3px 10px rgb(0 0 0 / 0.1)">
                 <div class="uk-navbar-left">
                     <ul class="uk-navbar-nav">
                         <li @if(Request::is('*/sales')) class="uk-active" @endif><a href="{{ route('salesIndex') }}" uk-icon="icon: tag"> Sales</a></li>
-                        <li @if(Request::is('*/delivery') || Request::is('*/delivery-details/show/*')) class="uk-active" @endif><a href="{{ route('deliveryIndex') }}" uk-icon="icon: bag"> Deliveries</a></li>
+                        @if(Auth::User()->position==1 || Auth::User()->position==2)
+                            <li @if(Request::is('*/delivery') || Request::is('*/delivery-details/show/*')) class="uk-active" @endif><a href="{{ route('deliveryIndex') }}" uk-icon="icon: bag"> Deliveries</a></li>
+                        @endif
+                        @if(Auth::User()->position==1 || Auth::User()->position==2)
                         <li @if(Request::is('*/category') || Request::is('*/supplier') || Request::is('*/products') || Request::is('*/employee')) class="uk-active" @endif>
-                            <a href="#" uk-icon="icon: list"></i> Items</a>
+                            <a href="#"></i>Items <span uk-navbar-parent-icon></span></a>
                             <div class="uk-navbar-dropdown">
                                 <ul class="uk-nav uk-navbar-dropdown-nav">
-                                    <li><a href="{{ route('categoryIndex') }}"><i class="uk-icon-list-alt"></i> Categories</a></li>
-                                    <li><a href="{{ route('supplierIndex') }}"><i class="uk-icon-refresh"></i> Suppliers</a></li>
-                                    <li><a href="{{ route('productsIndex') }}"><i class="uk-icon-shopping-cart"></i> Products</a></li>
-                                    <li><a href="{{ route('employeeIndex') }}"><i class="uk-icon-user"></i> Employees</a></li>
+                                    <li><a href="{{ route('categoryIndex') }}" uk-icon="icon: thumbnails">CATEGORIES </a></li>
+                                    <li><a href="{{ route('supplierIndex') }}" uk-icon="icon: cart">SUPPLIERS </a></li>
+                                    <li><a href="{{ route('productsIndex') }}" uk-icon="icon: bag">PRODUCTS </a></li>
+                                    @if(Auth::User()->position==1)
+                                    <li><a href="{{ route('employeeIndex') }}" uk-icon="icon: users">EMPLOYEES </a></li>
+                                    @endif
                                 </ul>
                             </div>
                         </li>
                         <li @if(Request::is('*/report') || Request::is('*/inventory/report')) class="uk-active" @endif>
-                            <a href="#" uk-icon="icon: copy"></i> Reports</a>
+                            <a href="#"></i>Reports <span uk-navbar-parent-icon></span></a>
                             <div class="uk-navbar-dropdown">
                                 <ul class="uk-nav uk-navbar-dropdown-nav">
-                                    <li><a href="{{ route('reportIndex') }}"><i class="uk-icon-line-chart"></i> Sales Reports</a></li>
-                                    <li><a href="{{ route('reportInventory') }}"><i class="uk-icon-cubes"></i> Inventory Reports</a></li>
+                                    <li><a href="{{ route('reportIndex') }}" uk-icon="icon: hashtag">SALES </a></li>
+                                    <li><a href="{{ route('reportInventory') }}" uk-icon="icon: album">INVENTORY </a></li>
                                     {{-- <li><a href="{{ route('reportReorderIndex') }}"><i class="uk-icon-history"></i> Reorder Report</a></li>
                                     <li><a href="{{ route('reportDeliveryIndex') }}"><i class="uk-icon-truck"></i> Delivery Reports</a></li>
                                     <li><a href="{{ route('reportStatIndex') }}"><i class="uk-icon-bar-chart"></i> Statistical Reports</a></li>
@@ -72,17 +77,18 @@
                                 </ul>
                             </div>
                         </li>
+                        @endif
                     </ul>
 
                 </div>
                 <div class="uk-navbar-right">
                     <ul class="uk-navbar-nav">
                         <li>
-                            <a href="#" uk-icon="icon: user">Hi, {{ Auth::user()->employeename }} </a>
+                            <a href="#">Hi, {{ Auth::user()->employeename }} <span uk-navbar-parent-icon></span></a>
                             <div class="uk-navbar-dropdown">
                                 <ul class="uk-nav uk-navbar-dropdown-nav">
-                                    <li><a href="{{ route('employeeEdit',['id' => Auth::user()->employee_id]) }}">My Profile</a></li>
-                                    <li><a href="/auth/logout" class="uk-text-danger">Logout</a></li>
+                                    <li><a href="{{ route('employeeEdit',['id' => Auth::user()->employee_id]) }}" uk-icon="icon: user">My Profile </a></li>
+                                    <li><a href="/auth/logout" class="uk-text-danger" uk-icon="icon: sign-out">Logout </a></li>
                                 </ul>
                             </div>
                         </li>

@@ -6,7 +6,8 @@
     <div class="uk-width-1-2 uk-text-right">
         {!! Form::open(['route'=>'reportIndex', 'method'=>'get', 'class'=>'uk-form']) !!}
         {!! Form::select('option', ['1'=>'Daily Report', '2'=>'Monthly Report'], $option, ['id'=>'report-option']) !!}
-        {!! Form::text('daily', $daySel, ['id'=>'daily']) !!}
+        {{-- {!! Form::text('daily', $daySel, ['id'=>'daily']) !!} --}}
+        <input name="daily" id="daily" value="{{ Carbon\Carbon::now()->toDateString() }}">
         {!! Form::select('monthly', $months, $monthSel, ['id'=>'monthly', 'disabled']) !!}
         {!! Form::button('Search ', ['id'=>'btn-generate', 'type'=>'submit', 'class'=>'uk-button uk-button-primary uk-button-small', 'uk-icon' => 'icon: search']) !!}
         {{-- <a href="{{ route('reportPrint', ['option'=>$option, 'day'=>$daySel, 'month'=>$monthSel]) }}" target="_blank" class="uk-button uk-button-success">Print Report</a> --}}
@@ -32,16 +33,17 @@
 
                                 {{--*/ $total = 0; /*--}}
                                 {{--*/ $cash = 0; /*--}}
-
+                                <div style="display: none">{{ $discount = 0 }}</div>
                                 @if(count($reports) > 0)
                                     @foreach($reports as $report)
+                                    <div style="display: none">{{ $discount += $report->fixedAmtDiscount }}</div>
                                         <tr>
                                             <td>&nbsp;</td>
                                             <td><a href="{{ route('salesSummary', $report->sales_id) }}">{{ $report->invoicenumber }}</td>
                                             <td>{{ Carbon\Carbon::parse($report->salesdate)->toDateString() }}</td>
-                                            <td style="text-align: right;">{{ number_format($report->totalsales-$report->discount, 2) }}</td>
-                                            <td style="text-align: right;">{{ number_format($report->discount, 2) }}</td>
                                             <td style="text-align: right;">{{ number_format($report->totalsales, 2) }}</td>
+                                            <td style="text-align: right;">{{ number_format($report->fixedAmtDiscount, 2) }}</td>
+                                            <td style="text-align: right;">{{ number_format($report->totalsales-$report->fixedAmtDiscount, 2) }}</td>
                                             <td>&nbsp;</td>
                                         </tr>
                                     @endforeach
@@ -54,9 +56,19 @@
                             </table>
                             <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-text-right">
                                 <table width="100%">
-                                    <tr class="uk-text-large">
-                                        <td colspan="3" class="uk-text-right"><strong>Total Sales:</strong></td>
+                                    <tr class="uk-text">
+                                        <td colspan="3" class="uk-text-right"><strong>Gross Sales:</strong></td>
                                         <td width="135" style="text-align: right;"><strong>{{ number_format($sumSales, 2) }}</strong></td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr class="uk-text">
+                                        <td colspan="3" class="uk-text-right"><strong>Discounts:</strong></td>
+                                        <td width="135" style="text-align: right;"><strong>{{ number_format($discount, 2) }}</strong></td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr class="uk-text-large">
+                                        <td colspan="3" class="uk-text-right"><strong>Net Sales:</strong></td>
+                                        <td width="135" style="text-align: right;"><strong>{{ number_format($sumSales-$discount, 2) }}</strong></td>
                                         <td>&nbsp;</td>
                                     </tr>
                                 </table>

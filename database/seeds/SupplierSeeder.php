@@ -14,11 +14,9 @@ class SupplierSeeder extends Seeder
     {
         Supplier::create([
             'companyname' => 'Test Company 1',
-            'lastname' => 'Test',
-            'firstname' => 'Test',
+            'owner_name' => 'Test, Test',
             'contactno' => '123456789',
             'address' => 'Test Address',
-            'city' => 'Test',
             'tin' => '123456789',
         ]);
     }
