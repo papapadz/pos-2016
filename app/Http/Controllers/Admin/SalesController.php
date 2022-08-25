@@ -67,8 +67,8 @@ class SalesController extends Controller
         $categories = ['0'=>'Category'] + Category::orderby('categoryname', 'asc')->lists('categoryname', 'category_id')->all();
         $customers = Customer::orderby('companyname', 'asc')->get()->lists('CustomerName', 'cust_id')->all();
 
-        $products = Product::orderby('productname', 'asc')->groupby('productname')->lists('productname', 'product_id')->all();
-        
+        $products = Product::orderby('productname', 'asc')->groupby('productname')->lists('productname', 'product_id')->where('status',1)->where('stock','>',0)->all();
+        //$products = [];
         return view('admin.sales.index', compact('selDate', 'orders', 'categories', 'customers', 'products', 'vatSales', 'vat', 'grandTotal', 'discount', 'dvalue', 'dprice', 'markUpArr'));
     }
 

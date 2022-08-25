@@ -92,9 +92,9 @@ class ReportsController extends Controller
              $sumCredit += $report->myPayment->where('sales_id', $report->sales_id)->latest('payment_id')->first()->balancedue;
         }
 
-        $sumCash = $sumSales - $sumCredit;
+        //$sumCash = $sumSales - $sumCredit;
 
-        return view('admin.report.index', compact('dateToFormat', 'years', 'yearSel', 'months', 'monthSel', 'day', 'daySel', 'reports', 'sumSales', 'sumCredit', 'sumCash', 'option'));
+        return view('admin.report.index', compact('dateToFormat', 'years', 'yearSel', 'months', 'monthSel', 'day', 'daySel', 'reports', 'sumSales', 'option'));
     }
 
     public function printReport($option, $day, $month)
@@ -152,11 +152,11 @@ class ReportsController extends Controller
         {
             $reports = Product::where('category_id', $catSel)->orderby('productname', 'asc')->get();
         }
-
+        
         $totalInventoryValue = 0;
         foreach($reports as $report)
         {
-            $totalInventoryValue += $report->stock * $report->unitcost;
+            $totalInventoryValue += $report->stock * $report->unitprice;
         }
 
         $categories = ['0'=>'--Select Category--'] + Category::orderby('categoryname', 'asc')->lists('categoryname', 'category_id')->all();

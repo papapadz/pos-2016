@@ -67,7 +67,9 @@
     
 </div>
 <hr>
-<div>
+<div class="uk-form-row">
+    <div class="uk-form-controls uk-text-right">
     {!! Form::button($btnCaption, ['type'=>'submit', 'class'=>'uk-button uk-button-primary']) !!}
     <a href="{{ route('employeeIndex') }}" class="uk-button uk-button-danger">Cancel</a>
+    </div>
 </div>

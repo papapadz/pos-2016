@@ -65,16 +65,16 @@
             
         {!! Form::open(['route'=>'salesCreate', 'method'=>'post']) !!}
             <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-margin-small-top uk-margin-small-bottom">
-                <table class="uk-table uk-table-hover uk-table-justify uk-table-striped" style="background-color: #464646; color: #fff;">
-                    <thead>
+                <table class="uk-table uk-table-hover uk-table-justify uk-table-striped">
+                    <thead style="background-color: #464646; color: #fff;">
                     <tr>
-                        <th>&nbsp;</th>
-                        <th>Item</th>
-                        <th style="text-align: right" width="120px;">Quantity</th>
-                        <th style="text-align: right">Unit Price</th>
-                        <th style="text-align: right">Total</th>
-                        <th>&nbsp;</th>
-                        <th>&nbsp;</th>
+                        <th style="background-color: #464646; color: #fff;">&nbsp;</th>
+                        <th style="background-color: #464646; color: #fff;">Item</th>
+                        <th style="text-align: right;background-color: #464646; color: #fff;" width="120px;">Quantity</th>
+                        <th style="text-align: right;background-color: #464646; color: #fff;">Unit Price</th>
+                        <th style="text-align: right;background-color: #464646; color: #fff;">Total</th>
+                        <th style="background-color: #464646; color: #fff;">&nbsp;</th>
+                        <th style="background-color: #464646; color: #fff;">&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -88,7 +88,7 @@
                                 </td>
                                 <td style="text-align: right">{{ number_format($order->myProduct->unitprice, 2) }}</td>
                                 <td style="text-align: right">{{ number_format($order->orderprice, 2) }}</td>
-                                <td colspan="2" class="uk-text-right" width="10">
+                                <td colspan="2" class="uk-text-center" width="10">
                                     <a href="{{ route('destroyOrder', ['id'=>$order->order_id]) }}" class="uk-button uk-button-danger uk-button-small del-rec">X</a>
                                 </td>
                             </tr>

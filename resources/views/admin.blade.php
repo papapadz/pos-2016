@@ -22,14 +22,13 @@
         .lime {
             background: limegreen; 
             color: white;
-        }
+        },
     </style>
     @yield('css')
 </head>
 <body>
-
 <div class="uk-container uk-container-center">
-    <div id="banner">
+    <div id="banner" class="uk-card uk-card-default uk-card-body">
         <div class="uk-grid">
             <div class="uk-width-1-2" style="display: inline;">
                 <img src="{{ asset('img/logo.png') }}" alt="" width="80" style="margin-left: 30px;"><span style="font-style: strong; font-size:32px">My E-Inventory</span>
@@ -41,54 +40,56 @@
         </div>
 
     </div>
-    <div class="uk-container" style="margin-left:30px; margin-right: 30px">
-        <nav class="uk-navbar-container uk-margin" uk-navbar style="background-color: transparent;">
-            <div class="uk-navbar-left">
-                <ul class="uk-navbar-nav">
-                    <li><a href="{{ route('salesIndex') }}" uk-icon="icon: tag"> Sales</a></li>
-                    <li><a href="{{ route('deliveryIndex') }}" uk-icon="icon: bag"> Deliveries</a></li>
-                    <li>
-                        <a href="#" uk-icon="icon: list"></i> Items</a>
-                        <div class="uk-navbar-dropdown">
-                            <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li><a href="{{ route('categoryIndex') }}"><i class="uk-icon-list-alt"></i> Categories</a></li>
-                                <li><a href="{{ route('supplierIndex') }}"><i class="uk-icon-refresh"></i> Suppliers</a></li>
-                                <li><a href="{{ route('productsIndex') }}"><i class="uk-icon-shopping-cart"></i> Products</a></li>
-                                <li><a href="{{ route('employeeIndex') }}"><i class="uk-icon-user"></i> Employees</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="#" uk-icon="icon: copy"></i> Reports</a>
-                        <div class="uk-navbar-dropdown">
-                            <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li><a href="{{ route('reportIndex') }}"><i class="uk-icon-line-chart"></i> Sales Reports</a></li>
-                                <li><a href="{{ route('reportInventory') }}"><i class="uk-icon-cubes"></i> Inventory Reports</a></li>
-                                <li><a href="{{ route('reportReorderIndex') }}"><i class="uk-icon-history"></i> Reorder Report</a></li>
-                                <li><a href="{{ route('reportDeliveryIndex') }}"><i class="uk-icon-truck"></i> Delivery Reports</a></li>
-                                <li><a href="{{ route('reportStatIndex') }}"><i class="uk-icon-bar-chart"></i> Statistical Reports</a></li>
-                                <li><a href="{{ route('reportPaymentIndex') }}"><i class="uk-icon-money"></i> Report of Payments</a></li>
-                                <li><a href="{{ route('reportIncomeStatementIndex') }}"><i class="uk-icon-list"></i> Income Statement</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
+    <div class="uk-container">
+        <div class="uk-card uk-card-body uk-card-default uk-card-small">
+            <nav class="uk-navbar-container uk-margin" uk-navbar style="background-color: transparent;">
+                <div class="uk-navbar-left">
+                    <ul class="uk-navbar-nav">
+                        <li @if(Request::is('*/sales')) class="uk-active" @endif><a href="{{ route('salesIndex') }}" uk-icon="icon: tag"> Sales</a></li>
+                        <li @if(Request::is('*/delivery') || Request::is('*/delivery-details/show/*')) class="uk-active" @endif><a href="{{ route('deliveryIndex') }}" uk-icon="icon: bag"> Deliveries</a></li>
+                        <li @if(Request::is('*/category') || Request::is('*/supplier') || Request::is('*/products') || Request::is('*/employee')) class="uk-active" @endif>
+                            <a href="#" uk-icon="icon: list"></i> Items</a>
+                            <div class="uk-navbar-dropdown">
+                                <ul class="uk-nav uk-navbar-dropdown-nav">
+                                    <li><a href="{{ route('categoryIndex') }}"><i class="uk-icon-list-alt"></i> Categories</a></li>
+                                    <li><a href="{{ route('supplierIndex') }}"><i class="uk-icon-refresh"></i> Suppliers</a></li>
+                                    <li><a href="{{ route('productsIndex') }}"><i class="uk-icon-shopping-cart"></i> Products</a></li>
+                                    <li><a href="{{ route('employeeIndex') }}"><i class="uk-icon-user"></i> Employees</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li @if(Request::is('*/report') || Request::is('*/inventory/report')) class="uk-active" @endif>
+                            <a href="#" uk-icon="icon: copy"></i> Reports</a>
+                            <div class="uk-navbar-dropdown">
+                                <ul class="uk-nav uk-navbar-dropdown-nav">
+                                    <li><a href="{{ route('reportIndex') }}"><i class="uk-icon-line-chart"></i> Sales Reports</a></li>
+                                    <li><a href="{{ route('reportInventory') }}"><i class="uk-icon-cubes"></i> Inventory Reports</a></li>
+                                    {{-- <li><a href="{{ route('reportReorderIndex') }}"><i class="uk-icon-history"></i> Reorder Report</a></li>
+                                    <li><a href="{{ route('reportDeliveryIndex') }}"><i class="uk-icon-truck"></i> Delivery Reports</a></li>
+                                    <li><a href="{{ route('reportStatIndex') }}"><i class="uk-icon-bar-chart"></i> Statistical Reports</a></li>
+                                    <li><a href="{{ route('reportPaymentIndex') }}"><i class="uk-icon-money"></i> Report of Payments</a></li>
+                                    <li><a href="{{ route('reportIncomeStatementIndex') }}"><i class="uk-icon-list"></i> Income Statement</a></li> --}}
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
 
-            </div>
-            <div class="uk-navbar-right">
-                <ul class="uk-navbar-nav">
-                    <li>
-                        <a href="#">Hi, {{ Auth::user()->employeename }}</a>
-                        <div class="uk-navbar-dropdown">
-                            <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li><a href="{{ route('employeeIndex') }}"><i class="uk-icon-user"></i> My Profile</a></li>
-                                <li><a href="/auth/logout" class="uk-text-danger">Logout <i class="uk-icon-sign-out"></i></a></li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+                </div>
+                <div class="uk-navbar-right">
+                    <ul class="uk-navbar-nav">
+                        <li>
+                            <a href="#" uk-icon="icon: user">Hi, {{ Auth::user()->employeename }} </a>
+                            <div class="uk-navbar-dropdown">
+                                <ul class="uk-nav uk-navbar-dropdown-nav">
+                                    <li><a href="{{ route('employeeEdit',['id' => Auth::user()->employee_id]) }}">My Profile</a></li>
+                                    <li><a href="/auth/logout" class="uk-text-danger">Logout</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
     </div>
     <div class="uk-card uk-card-default uk-card-body">
         @if(Session::has('success'))

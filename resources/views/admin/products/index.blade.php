@@ -27,12 +27,12 @@
 
                 <table class="uk-table uk-table-hover uk-table-striped">
                     <thead>
-                    <tr style="background-color: #464646; color: #fff;">
-                        <th>Category</th>
-                        <th>Product Name</th>
-                        <th style="text-align: center;">Price</th>
-                        <th style="text-align: center;" width="150">Stock</th>
-                        <th width="130" class="uk-text-center">Action</th>
+                    <tr>
+                        <th style="background-color: #464646; color: #fff;">Category</th>
+                        <th style="background-color: #464646; color: #fff;">Product Name</th>
+                        <th style="background-color: #464646; color: #fff; text-align: center;">Price</th>
+                        <th style="background-color: #464646; color: #fff; text-align: center;" width="150">Stock</th>
+                        <th style="background-color: #464646; color: #fff;" width="130" class="uk-text-center">Action</th>
                     </tr>
                     </thead>
 
@@ -53,7 +53,7 @@
                                      <a href="{{ route('productStatus', ['id'=>$product->product_id]) }}" class="uk-button uk-button-mini"><i class="uk-icon-mail-reply"></i></a>
                                 @endif --}}
                                     {{-- <a href="#reorder-modal" id="{{ $product->product_id }}" data-uk-modal class="uk-button uk-button-primary uk-button-mini reorder-product"><i class="uk-icon-refresh"></i></a> --}}
-                                    <a href="{{ route('productsEdit', ['id'=>$product->product_id]) }}" class="uk-button uk-button-mini"><i class="uk-icon-pencil"></i></a>
+                                    <a href="{{ route('productsEdit', ['id'=>$product->product_id]) }}" class="uk-button uk-button-primary uk-button-small" uk-icon="icon: pencil"></a>
                                     <button class="uk-button uk-button-danger uk-button-small del-rec" id="{{ $product->product_id }}" uk-icon="icon: close"></button>
                                 </td>
                             </tr>

@@ -5,7 +5,7 @@
     <div class="uk-vertical-align-middle" style="width:600px;">
 
         <form class="uk-panel uk-panel-box uk-panel-box-primary uk-panel-box-primary-hover uk-form" style="background: grey" method="post" action="/auth/login">
-            <h1 style="color:#ddd;">Point of Sale System</h1>
+            <h1 style="color:#ddd;">My E-Inventory</h1>
             {!! csrf_field() !!}
             <div class="uk-form-row">
                  <div class="uk-form-icon"><i class="uk-icon-user"></i>

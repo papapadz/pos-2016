@@ -10,7 +10,7 @@
                 <div class="uk-width-1-2 uk-text-right">
                     {!! Form::open(['method'=>'get', 'class'=>'uk-form']) !!}
                     {!! Form::text('skey', $skey, ['placeholder' => 'Supplier']) !!}
-                    {!! Form::button('Search ', ['type'=>'submit', 'class'=>'uk-button uk-button-primary uk-button-small', 'uk-icon="icon: search"']) !!}
+                    {!! Form::button('Search ', ['type'=>'submit', 'class'=>'uk-button uk-button-primary uk-button-small', 'uk-icon' => 'icon: search']) !!}
                     <a class="uk-button uk-button-small" style="background: limegreen; color: white;" href="{{ route('supplierCreate') }}" uk-icon="icon: plus-circle">New </a>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                         <th style="background-color: #464646; color: #fff;">Name</th>
                         <th style="background-color: #464646; color: #fff;">Contact</th>
                         <th style="background-color: #464646; color: #fff;">Address</th>
-                        <th style="background-color: #464646; color: #fff;">&nbsp;</th>
+                        <th style="background-color: #464646; color: #fff;">Action</th>
                     </tr>
                     </thead>
 
@@ -35,11 +35,11 @@
                             <tr>
                                 <td>&nbsp;</td>
                                 <td>{{ $supplier->companyname }}</td>
-                                <td>{{ strtoupper($supplier->lastname) }}, {{ strtoupper($supplier->firstname) }}</td>
+                                <td>{{ $supplier->owner_name }}</td>
                                 <td>{{ $supplier->contactno }}</td>
-                                <td>{{ $supplier->address }}, {{ $supplier->city }}</td>
+                                <td>{{ $supplier->address }}</td>
                                 <td>
-                                    <a href="{{ route('supplierEdit', ['id'=>$supplier->supplier_id]) }}" class="uk-button uk-button-mini"><i class="uk-icon-pencil"></i></a>
+                                    <a href="{{ route('supplierEdit', ['id'=>$supplier->supplier_id]) }}" class="uk-button uk-button-small uk-button-primary" uk-icon="icon: pencil"></a>
                                     <a href="{{ route('supplierDestroy', ['id'=>$supplier->supplier_id]) }}" class="uk-button uk-button-small uk-button-danger del-rec" uk-icon="icon: close"></a>
                                 </td>
                             </tr>

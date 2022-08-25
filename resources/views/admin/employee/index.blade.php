@@ -19,7 +19,7 @@
                         <th style="background-color: #464646; color: #fff;">Employee Name</th>
                         <th style="background-color: #464646; color: #fff;">Position</th>
                         <th style="background-color: #464646; color: #fff;">Contact Number</th>
-                        <th style="background-color: #464646; color: #fff;">&nbsp;</th>
+                        <th style="background-color: #464646; color: #fff;">Action</th>
                     </tr>
                     </thead>
 
@@ -56,7 +56,7 @@
 
                         <tfoot>
                         <tr>
-                            <td colspan="6"><i>{{ count($employees) }} - Employee record found</i></td>
+                            <td colspan="6"><i>{{ count($employees) }} - Record found</i></td>
                         </tr>
                         </tfoot>
                     @endif

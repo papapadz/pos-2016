@@ -23,7 +23,7 @@
                         <th style="background-color: #464646; color: #fff;">&nbsp;</th>
                         <th style="background-color: #464646; color: #fff;">Category</th>
                         <th style="background-color: #464646; color: #fff;">Description</th>
-                        <th style="background-color: #464646; color: #fff;">&nbsp;</th>
+                        <th style="background-color: #464646; color: #fff;">Action</th>
                     </tr>
                     </thead>
 
@@ -35,8 +35,8 @@
                                 <td>{{ $category->categoryname }}</td>
                                 <td>{{ $category->description }}</td>
                                 <td>
-                                    <a href="{{ route('categoryEdit', ['id'=>$category->category_id]) }}" class="uk-button uk-button-mini"><i class="uk-text-left uk-icon-pencil"></i></a>
-                                    <a href="{{ route('categoryDestroy', ['id'=>$category->category_id]) }}" class="uk-button uk-button-small uk-text-left uk-button-danger del-rec" uk-icon="icon: close"></a>
+                                    <a href="{{ route('categoryEdit', ['id'=>$category->category_id]) }}" class="uk-button uk-button-small uk-button-primary" uk-icon="icon: pencil"></a>
+                                    <a href="{{ route('categoryDestroy', ['id'=>$category->category_id]) }}" class="uk-button uk-button-small uk-button-danger del-rec" uk-icon="icon: close"></a>
                                 </td>
                             </tr>
                         @endforeach

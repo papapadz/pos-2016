@@ -5,27 +5,30 @@
 <div class="uk-grid">
     <div class="uk-width-1-1">
 
-        <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-text-right uk-margin-small-top">
-            {!! Form::open(['method'=>'get', 'class'=>'uk-form']) !!}
-            Date
-            {!! Form::text('deliverydate', $selDate, ['id' => 'datefilter']) !!}
-            {!! Form::select('supplier_id', [''=>'--Suppliers--'] + $suppliers, $selSupplier) !!}
-            {!! Form::button('Filter ', ['type'=>'submit', 'class'=>'uk-button uk-button-primary uk-button-small','uk-icon="icon: search"']) !!}
-            |
-            <a class="uk-button uk-button-small" style="background: limegreen; color: white;" href="{{ url('admin/delivery/create') }}" uk-icon="icon: plus-circle">New </a>
-            {!! Form::close() !!}
+        <div uk-grid>
+            <div class="uk-width-1-2"><h2>Deliveries</h2></div>
+            <div class="uk-width-1-2 uk-text-right">
+                {!! Form::open(['method'=>'get', 'class'=>'uk-form']) !!}
+                Date
+                {!! Form::text('deliverydate', $selDate, ['id' => 'datefilter']) !!}
+                {!! Form::select('supplier_id', [''=>'--Suppliers--'] + $suppliers, $selSupplier) !!}
+                {!! Form::button('Filter ', ['type'=>'submit', 'class'=>'uk-button uk-button-primary uk-button-small','uk-icon="icon: search"']) !!}
+                |
+                <a class="uk-button uk-button-small" style="background: limegreen; color: white;" href="{{ url('admin/delivery/create') }}" uk-icon="icon: plus-circle">New </a>
+                {!! Form::close() !!}
+            </div>
         </div>
 
         <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-margin-small-top">
             <table class="uk-table uk-table-hover uk-table-striped">
                 <thead>
-                    <tr style="background-color: #464646; color: #fff;">
-                        <th width="50">&nbsp;</th>
-                        <th width="200">Order Number</th>
-                        <th>Date of Delivery</th>
-                        <th>Supplier</th>
-                        <th style="text-align: center">Total Cost</th>
-                        <th>&nbsp;</th>
+                    <tr>
+                        <th style="background-color: #464646; color: #fff;" width="50">&nbsp;</th>
+                        <th style="background-color: #464646; color: #fff;" width="200">Order Number</th>
+                        <th style="background-color: #464646; color: #fff;">Date of Delivery</th>
+                        <th style="background-color: #464646; color: #fff;">Supplier</th>
+                        <th style="text-align: center;background-color: #464646; color: #fff;">Total Cost</th>
+                        <th style="background-color: #464646; color: #fff;">&nbsp;</th>
                     </tr>
                 </thead>
 
@@ -117,7 +120,7 @@
 @section('location') Delivery @stop
 
 @section('css')
-    
+
 @stop
 
 @section('js')

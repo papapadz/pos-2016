@@ -1,29 +1,17 @@
-<div class="uk-form-row">
-    <div class="uk-form-controls">
-        <div class="uk-grid">
-            <div class="uk-width-1-6">Status</div>
-            <div>{!! Form::select('status', ['0'=>'Active', '1'=>'Not Active'], null,) !!}</div>
-        </div>
-    </div>
+<div>
+    <div class="uk-width-1-6">Status</div>
+    <div>{!! Form::select('status', ['0'=>'Active', '1'=>'Not Active'], null, ['class' => 'uk-select']) !!}</div>
 </div>
-<div class="uk-form-row">
-    <div class="uk-form-controls">
-        <div class="uk-grid">
-            <div class="uk-width-1-6">Category</div>
-            <div>{!! Form::select('category_id', $categories, null) !!}</div>
-        </div>
-    </div>
+<div>
+    <div class="uk-width-1-6">Category</div>
+    <div>{!! Form::select('category_id', $categories, null, ['class' => 'uk-select']) !!}</div>
 </div>
-<div class="uk-form-row">
-    <div class="uk-form-controls">
-        <div class="uk-grid">
-            <div class="uk-width-1-6">Product Name</div>
+<div>
+    <div class="uk-width-1-6">Product Name</div>
             <div>
-                {!! Form::text('productname', null) !!}
+                {!! Form::text('productname', null, ['placeholder'=>'Product Name', 'class' => 'uk-input']) !!}
                 @if($errors->has('productname')) <span class="uk-form-help-inline uk-text-danger"><i><small>{{ $errors->first('productname') }}</small></i></span> @endif
             </div>
-        </div>
-    </div>
 </div>
 {{-- <div class="uk-form-row">
     <div class="uk-form-controls">
@@ -31,34 +19,22 @@
         @if($errors->has('pattern')) <span class="uk-form-help-inline uk-text-danger"><i><small>{{ $errors->first('pattern') }}</small></i></span> @endif
     </div>
 </div> --}}
-<div class="uk-form-row">
-    <div class="uk-form-controls">
-        <div class="uk-grid">
-            <div class="uk-width-1-6">Product Code</div>
-            <div>
-                {!! Form::text('productcode', null, ['placeholder'=>'Product Code']) !!}
-                @if($errors->has('productcode')) <span class="uk-form-help-inline uk-text-danger"><i><small>{{ $errors->first('productcode') }}</small></i></span> @endif
-            </div>
-        </div>
+<div>
+    <div class="uk-width-1-6">Product Code</div>
+    <div>
+        {!! Form::text('productcode', null, ['placeholder'=>'Product Code', 'class' => 'uk-input']) !!}
+        @if($errors->has('productcode')) <span class="uk-form-help-inline uk-text-danger"><i><small>{{ $errors->first('productcode') }}</small></i></span> @endif
     </div>
 </div>
-<div class="uk-form-row">
-    <div class="uk-form-controls">
-        <div class="uk-grid">
-            <div class="uk-width-1-6">Unit Price (PHP)</div>
+<div>
+    <div class="uk-width-1-6">Unit Price (PHP)</div>
             <div>
-                {!! Form::text('unitprice', null, ['placeholder'=>'Unit Price']) !!}
+                {!! Form::text('unitprice', null, ['placeholder'=>'Unit Price', 'class' => 'uk-input']) !!}
             </div>
-        </div>
-    </div>
 </div>
-<div class="uk-form-row">
-    <div class="uk-form-controls">
-        <div class="uk-grid">
-            <div class="uk-width-1-6">Stock</div>
-            <div>{!! Form::text('stock', null) !!}</div>
-        </div>
-    </div>
+<div>
+    <div class="uk-width-1-6">Stock</div>
+            <div>{!! Form::text('stock', null, ['placeholder'=>'0-9999', 'class' => 'uk-input']) !!}</div>
 </div>
 {{-- <div class="uk-form-row">
     <div class="uk-form-controls">
@@ -84,7 +60,8 @@
 <hr>
 
 <div class="uk-form-row">
-    <div class="uk-form-controls uk-text-left">
-        {!! Form::button($btnCaption, ['type'=>'submit', 'class'=>'uk-button uk-button-success']) !!}
+    <div class="uk-form-controls uk-text-right">
+        {!! Form::button($btnCaption, ['type'=>'submit', 'class'=>'uk-button uk-button-primary']) !!}
+        <a href="{{ route('productsIndex') }}" class="uk-button uk-button-danger">Cancel</a>
     </div>
 </div>
