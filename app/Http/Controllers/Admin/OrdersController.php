@@ -48,9 +48,9 @@ class OrdersController extends Controller
         #$order = Orders::where('employee_id', Auth::user()->employee_id)->where('product_id', $product->product_id)->where('category_id', $category->category_id)->first();
         
         if(!is_null($order))
-        {dd($order);
+        {
             $order->qty = $order->qty + $request->qty;
-            $order->salesprice = $order->unitprice;
+            //$order->salesprice = $order->unitprice;
             $order->orderprice = $order->orderprice + $request->orderprice;
             #$order->stock = $request->stock + $order->stock;
             $order->update();
@@ -62,7 +62,7 @@ class OrdersController extends Controller
             $order->employee_id = Auth::user()->employee_id;
             $order->category_id = $product->category_id;
             $order->qty = $request->qty;
-            $order->salesprice = $request->unitprice;
+            //$order->salesprice = $request->unitprice;
             $order->orderprice = $request->orderprice;
             $order->save();
         }

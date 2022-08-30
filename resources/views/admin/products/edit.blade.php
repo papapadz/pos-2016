@@ -1,33 +1,13 @@
 @extends('admin')
 
 @section('content')
-
-    <div style="background-color: #e2e2e2; padding: 8px;">
-        <div style="background-color: #FFF; padding: 3px;">
-
-            <div class="uk-grid">
-                <div class="uk-width-1-1">
-
-                    <div style="margin-top:15px;">
-
-                        <h2>Update Product Details</h2>
-
-                        <hr>
-
-                        <div style="padding-left: 15px; padding-right: 15px; margin-bottom: 15px;">
-                            {!! Form::model($product, ['route'=>['productsUpdate', 'id'=>$product->product_id], 'method'=>'patch', 'class'=>'uk-form uk-form-stacked']) !!}
-                            @include('admin.products._form', ['btnCaption'=>'Update Product Record'])
+<div uk-grid>
+    <div class="uk-width-1-2"><h2>Update Product Record</h2></div>
+</div>
+<hr>
+{!! Form::model($product, ['route'=>['productsUpdate', 'id'=>$product->product_id], 'method'=>'patch', 'class'=>'uk-form uk-form-stacked']) !!}
+                            @include('admin.products._form', ['btnCaption'=>'Update'])
                             {!! Form::close() !!}
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-
 @stop
 
 @section('location') Supplier @stop

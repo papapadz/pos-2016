@@ -8,11 +8,13 @@ use App\DeliverySet;
 use App\Product;
 use App\Category;
 use App\Supplier;
+use App\PriceHistory;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class DeliveryController extends Controller
 {
@@ -70,8 +72,13 @@ class DeliveryController extends Controller
 
         $suppliers = ['0'=>'Select Supplier'] + Supplier::orderby('companyname', 'asc')->lists('companyname', 'supplier_id')->all();
         $products = ['0'=>'Select Product'];
+        $categories = ['0'=>'Category'] + Category::orderby('categoryname', 'asc')->lists('categoryname', 'category_id')->all();
+        $deliverysets = DeliverySet::where('employee_id', Auth::user()->employee_id)->get();
+        $totDeliveryCost = $deliverysets->sum('deliverycost');
 
-        return view('admin.delivery.create', compact('suppliers', 'products'));
+        //dd($deliverysets);
+
+        return view('admin.delivery.create', compact('suppliers', 'products','categories','deliverysets','totDeliveryCost'));
     }
 
     /**
@@ -82,15 +89,24 @@ class DeliveryController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->order_number==null)
+            $orderNumber = Carbon::now()->timestamp;
+        else
+            $orderNumber = $request->order_number;
+
+        if($request->has('date_received'))
+            $dateReceived = $request->date_received;
+        else
+            $dateReceived = Carbon::now();
 
         $deliverySet = DeliverySet::where('employee_id', Auth::user()->employee_id)->get();
 
         $deliveryRecord = new Delivery();
         $deliveryRecord->supplier_id = $request->supplier_id;
-        $deliveryRecord->order_number = $request->order_number;
+        $deliveryRecord->order_number = $orderNumber;
         $deliveryRecord->totalcost = $deliverySet->sum('deliverycost');
         $deliveryRecord->deliverydate = $request->deliverydate;
-        $deliveryRecord->date_received = $request->date_received;
+        $deliveryRecord->date_received = $dateReceived;
         $deliveryRecord->save();
 
         foreach($deliverySet as $delivery)
@@ -99,11 +115,21 @@ class DeliveryController extends Controller
             $deliveryDetails->delivery_id = $deliveryRecord->delivery_id;
             $deliveryDetails->product_id = $delivery->product_id;
             $deliveryDetails->qty = $delivery->qty;
+            $deliveryDetails->srp = $delivery->srp;
             $deliveryDetails->unitcost = $delivery->unitcost;
             $deliveryDetails->deliverycost = $delivery->deliverycost;
             $deliveryDetails->save();
 
             $product = Product::where('product_id', $delivery->product_id)->first();
+            
+            if($delivery->srp!=$product->unitprice) {
+                $priceHistory = new PriceHistory;
+                $priceHistory->product = $product->product_id;
+                $priceHistory->price = $delivery->unitcost;
+                $priceHistory->employee_id =  Auth::user()->employee_id;
+                $priceHistory->save();
+                $product->unitprice = $delivery->unitcost;
+            }
             $product->stock = $product->stock + $delivery->qty;
             $product->update();
         }

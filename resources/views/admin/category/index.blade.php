@@ -1,81 +1,72 @@
 @extends('admin')
 
 @section('content')
+<div class="uk-grid">
+    <div class="uk-width-1-1">
 
-    <div style="background-color: #e2e2e2; padding: 8px;">
-        <div style="background-color: #FFF; padding: 3px;">
-
-            <div class="uk-grid">
-                <div class="uk-width-1-1">
-
-                    <div style="margin-top:15px;">
-
-                        <h2>Category List</h2>
-
-                        <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-text-right" style="background-color: #e5e4e4;">
-                            {!! Form::open(['method'=>'get', 'class'=>'uk-form']) !!}
-                            {!! Form::text('skey', $skey) !!}
-                            {!! Form::button('Filter', ['type'=>'submit', 'class'=>'uk-button uk-button-success']) !!}
-
-                            <a href="{{ route('categoryCreate') }}" class="uk-button uk-button-primary"><i class="uk-icon-plus"></i> Create Category</a>
-                        </div>
-
-                        <div class="uk-panel uk-panel-box uk-panel-box-secondary">
-
-                            <table class="uk-table uk-table-hover uk-table-striped">
-                                <thead>
-                                <tr>
-                                    <th style="background-color: #464646; color: #fff;">&nbsp;</th>
-                                    <th style="background-color: #464646; color: #fff;">Category Name</th>
-                                    <th style="background-color: #464646; color: #fff;">Description</th>
-                                    <th style="background-color: #464646; color: #fff;" width="65">&nbsp;</th>
-                                </tr>
-                                </thead>
-
-                                @if(count($categories) > 0)
-                                    <tbody>
-                                    @foreach($categories as $category)
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td>{{ $category->categoryname }}</td>
-                                            <td>{{ $category->description }}</td>
-                                            <td>
-                                                <a href="{{ route('categoryEdit', ['id'=>$category->category_id]) }}"><i class="uk-text-left uk-icon-pencil"></i></a>
-                                                <a href="{{ route('categoryDestroy', ['id'=>$category->category_id]) }}" class="uk-text-left uk-text-danger del-rec"><i class="uk-icon-times"></i></a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-
-                                    <tfoot>
-                                    <tr>
-                                        <td colspan="8"><i>{{ count($categories) }} - Category record found</i></td>
-                                    </tr>
-                                    </tfoot>
-                                @else
-                                    <tfoot>
-                                    <tr>
-                                        <td colspan="8"><i>No records found</i></td>
-                                    </tr>
-                                    </tfoot>
-                                @endif
-
-                            </table>
-
-                            <div>
-                                @include('paginator', ['paginator' => $categories])
-                            </div>
-
-                        </div>
-
-                    </div>
-
+        <div style="margin-top:15px;">
+            <div uk-grid>
+                <div class="uk-width-1-2"><h2>Category List</h2></div>
+                <div class="uk-width-1-2 uk-text-right">
+                    {!! Form::open(['method'=>'get', 'class'=>'uk-form']) !!}
+                    {!! Form::text('skey', $skey, ['placeholder' => 'Category']) !!}
+                    {!! Form::button('Filter ', ['type'=>'submit', 'class'=>'uk-button uk-button-primary uk-button-small', 'uk-icon="icon: search"']) !!}
+                    <a class="uk-button uk-button-small" style="background: limegreen; color: white;" href="{{ route('categoryCreate') }}" uk-icon="icon: plus-circle">New </a>
                 </div>
             </div>
 
-        </div>
-    </div>
+            <div class="uk-panel uk-panel-box uk-panel-box-secondary">
 
+                <table class="uk-table uk-table-hover uk-table-striped">
+                    <thead>
+                    <tr>
+                        <th style="background-color: #464646; color: #fff;">&nbsp;</th>
+                        <th style="background-color: #464646; color: #fff;">Category</th>
+                        <th style="background-color: #464646; color: #fff;">Description</th>
+                        <th style="background-color: #464646; color: #fff;">Action</th>
+                    </tr>
+                    </thead>
+
+                    @if(count($categories) > 0)
+                        <tbody>
+                        @foreach($categories as $category)
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>{{ $category->categoryname }}</td>
+                                <td>{{ $category->description }}</td>
+                                <td>
+                                    <a href="{{ route('categoryEdit', ['id'=>$category->category_id]) }}" class="uk-button uk-button-small uk-button-primary" uk-icon="icon: pencil"></a>
+                                    <a href="{{ route('categoryDestroy', ['id'=>$category->category_id]) }}" class="uk-button uk-button-small uk-button-danger del-rec" uk-icon="icon: close"></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+
+                        <tfoot>
+                        <tr>
+                            <td colspan="8"><i>{{ count($categories) }} - Record found</i></td>
+                        </tr>
+                        </tfoot>
+                    @else
+                        <tfoot>
+                        <tr>
+                            <td colspan="8"><i>No records found</i></td>
+                        </tr>
+                        </tfoot>
+                    @endif
+
+                </table>
+
+                <div>
+                    @include('paginator', ['paginator' => $categories])
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
 @stop
 
 @section('location') Category @stop

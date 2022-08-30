@@ -3,13 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Customer extends Model
 {
+    use SoftDeletes;
+    
     protected $table = 'customer';
     protected $primaryKey = 'cust_id';
     protected $fillable = ['companyname', 'lastname', 'firstname', 'contactno', 'tin_no', 'address', 'city', 'cust_type', 'bound'];
-    public $timestamps = false;
 
     public function getCustomerNameAttribute()
     {

@@ -25,11 +25,10 @@ class SupplierRequest extends Request
     {
         return [
             'companyname' => 'required',
-            'lastname' => 'required',
-            'firstname' => 'required',
+            'owner_name' => 'required',
             'address' => 'required',
             'contactno' => 'required',
-            'city' => 'required'
+            'tin' => 'required'
 
         ];
     }

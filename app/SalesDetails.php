@@ -9,7 +9,6 @@ class SalesDetails extends Model
     protected $table = 'salesdetails';
     protected $primaryKey = 'salesdetails_id';
     protected $fillable = ['sales_id', 'product_id', 'qty', 'ordersalesprice', 'sales_price'];
-    public $timestamps = false;
 
     public function myProduct()
     {

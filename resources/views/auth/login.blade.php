@@ -2,10 +2,10 @@
 
 @section('content')
 
-    <div class="uk-vertical-align-middle" style="width:400px;">
+    <div class="uk-vertical-align-middle" style="width:600px;">
 
-        <h1 style="color:#ddd;">Point of Sale System</h1>
-        <form class="uk-panel uk-panel-box uk-panel-box-primary uk-panel-box-primary-hover uk-form" method="post" action="/auth/login">
+        <form class="uk-panel uk-panel-box uk-panel-box-primary uk-panel-box-primary-hover uk-form" style="background: grey" method="post" action="/auth/login">
+            <h1 style="color:#ddd;">My E-Inventory</h1>
             {!! csrf_field() !!}
             <div class="uk-form-row">
                  <div class="uk-form-icon"><i class="uk-icon-user"></i>
@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="uk-form-row">
-                <button type="submit" class="uk-width-1-2 uk-button uk-button-primary uk-button-large">Login</button>
+                <button type="submit" class="uk-width-1-2 uk-button uk-button-success uk-button-large">Login</button>
             </div>
         </form>
 

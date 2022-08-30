@@ -67,8 +67,8 @@ class SalesController extends Controller
         $categories = ['0'=>'Category'] + Category::orderby('categoryname', 'asc')->lists('categoryname', 'category_id')->all();
         $customers = Customer::orderby('companyname', 'asc')->get()->lists('CustomerName', 'cust_id')->all();
 
-        $products = Product::orderby('productname', 'asc')->groupby('productname')->lists('productname', 'product_id')->all();
-
+        $products = Product::orderby('productname', 'asc')->groupby('productname')->lists('productname', 'product_id')->where('status',1)->where('stock','>',0)->all();
+        //$products = [];
         return view('admin.sales.index', compact('selDate', 'orders', 'categories', 'customers', 'products', 'vatSales', 'vat', 'grandTotal', 'discount', 'dvalue', 'dprice', 'markUpArr'));
     }
 
@@ -219,7 +219,7 @@ class SalesController extends Controller
             $salesDetails->sales_id = $sales->sales_id;
             $salesDetails->product_id = $order->product_id;
             $salesDetails->qty = $order->qty;
-            $salesDetails->ordersalesprice = $order->salesprice;
+            $salesDetails->unit_price = $order->myProduct->unitprice;
             $salesDetails->sales_price = $order->orderprice;
 
             $salesDetails->save();
@@ -233,8 +233,8 @@ class SalesController extends Controller
         Orders::truncate();
 
         #return redirect()->back()->with(['code'=>'1']);
-        return redirect()->route('salesSummary', ['id'=>$sales->sales_id]);
-
+        //return redirect()->route('salesSummary', ['id'=>$sales->sales_id]);
+        return redirect()->back()->with('success','Transaction Successful!');
     }
 
     public function summary($id)

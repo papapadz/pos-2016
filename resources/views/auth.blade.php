@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="uk-height-1-1 uk-notouch">
 <head>
-    <title>Point of Sale System</title>
+    <title>E-Inventory System</title>
     <link rel="stylesheet" href="/css/uikit.gradient.css" />
     <script src="/jquery.js"></script>
     <script src="/js/uikit.min.js"></script>

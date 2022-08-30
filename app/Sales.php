@@ -3,13 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Sales extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'sales';
     protected $primaryKey = 'sales_id';
     protected $fillable = ['cust_id', 'invoicenumber', 'fixedAmtDiscount', 'sales_type', 'status', 'sales_date', 'terms'];
-    public $timestamps = false;
 
     public function myDetails()
     {

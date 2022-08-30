@@ -55,7 +55,8 @@ class DeliverySetController extends Controller
             $newDeliverySet->employee_id = Auth::user()->employee_id;
             $newDeliverySet->product_id = $request->product_id;
             $newDeliverySet->qty = $request->qty;
-            $newDeliverySet->unitcost = $product->unitcost;
+            $newDeliverySet->srp = $request->unitprice;
+            $newDeliverySet->unitcost = $request->deliveryunitprice;
             $newDeliverySet->deliverycost = $request->deliveryprice;
             $newDeliverySet->save();
         }

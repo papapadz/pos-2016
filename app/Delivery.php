@@ -9,7 +9,6 @@ class Delivery extends Model
     protected $table = 'delivery';
     protected $fillable = ['supplier_id', 'order_number', 'deliverydate', 'date_received'];
     protected $primaryKey = 'delivery_id';
-    public $timestamps = false;
 
     public function myDetails()
     {

@@ -1,131 +1,115 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>POS System - @yield('location')</title>
-    <link rel="stylesheet" href="{{ asset('css/uikit.gradient.css') }}" />
-   <!-- {!! Html::style('/css/uikit.gradient.css')!!}-->
+    <title>E-Inventory System - @yield('location')</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.3/dist/css/uikit.min.css" />
+    <!-- datepicker -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    
     <script src="{{ asset('jquery.js') }}"></script>
-    <script src="{{ asset('js/uikit.min.js') }}"></script>
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.3/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.3/dist/js/uikit-icons.min.js"></script>
+    <!-- Date Picker -->
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <style>
-        html{
-            background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.dreamstime.com%2Fstock-illustration-bee-hive-background-yellow-texture-image95147943&psig=AOvVaw2Q75ym3E4optsi5E1Hwj6B&ust=1599125784123000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKDzovSVyusCFQAAAAAdAAAAABAT');
-        }
+        #banner {
+            background-image: url("{{asset('img/banner-sales.jpg')}}");
+            padding: 8px;
+            height: 100px;
+        },
+        .lime {
+            background: limegreen; 
+            color: white;
+        },
     </style>
     @yield('css')
 </head>
 <body>
-
-<nav class="uk-navbar uk-navbar-attached" style="display: none;">
-
-    <a href="/" class="uk-navbar-brand">Point of Sale</a>
-
-    <div class="uk-navbar-content uk-navbar-flip  uk-hidden-small">
-        Welcome <strong>{{ Auth::user()->employeename }}</strong>!
-        <a href="/auth/logout" class="uk-button uk-button-primary"><i class="uk-icon-sign-out"></i> Logout</a>
-    </div>
-
-</nav>
-
 <div class="uk-container uk-container-center">
-
-    <div style="padding: 8px; background-color: ffa200; color: #fff1f0;">
-
+    <div id="banner" class="uk-card uk-card-default uk-card-body">
         <div class="uk-grid">
             <div class="uk-width-1-2" style="display: inline;">
-                <img src="/img/green-icon.png" alt="" width="50" style="margin-left: 30px;">
+                <img src="{{ asset('img/logo.png') }}" alt="" width="80" style="margin-left: 30px;"><span style="font-style: strong; font-size:32px">My E-Inventory</span>
             </div>
             <div class="uk-width-1-2" style="padding-top: 4px;">
-                <div style="color: #fff1f0; font-size: x-large;" class="uk-text-right" id="clock"></div>
-                <div style="color: #fff1f0;" class="uk-text-right uk-text-small"><i>{{ strtoupper(date('d F Y')) }}</i></div>
+                <div style="font-size: x-large;" class="uk-text-right" id="clock"></div>
+                <div class="uk-text-right uk-text-small"><i>{{ strtoupper(date('d F Y')) }}</i></div>
             </div>
         </div>
 
     </div>
-
-    <div style="border-top: solid 1px #c1c1c1; border-bottom: solid 1px ffa200; background-color: #a9a9a9; color: #fff1f0; ">
-        <div class="uk-grid">
-            <div class="uk-width-1-1">
-                <div style="padding: 5px;">
-
-                    <nav class="uk-navbar">
-
-                        <ul class="uk-navbar-nav">
-                            <li data-uk-dropdown="" class="uk-parent" aria-haspopup="true" aria-expanded="false">
-                                <a href=""><i class="uk-icon-exchange"></i> Transactions</a>
-
-                                <div class="uk-dropdown uk-dropdown-navbar uk-dropdown-bottom" style="top: 40px; left: 0px;">
-                                    <ul class="uk-nav uk-nav-navbar">
-                                        <li><a href="{{ route('salesIndex') }}"><i class="uk-icon-money"></i> Sales</a></li>
-                                        
-                                        
-                                        <li><a href="{{ route('expensesIndex') }}"><i class="uk-icon-list"></i> Expenses</a></li>
-                                        <li><a href="{{ route('deliveryIndex') }}"><i class="uk-icon-car"></i> Deliveries</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li data-uk-dropdown="" class="uk-parent" aria-haspopup="true" aria-expanded="false">
-                                <a href=""><i class="uk-icon-folder"></i> Files</a>
-
-                                <div class="uk-dropdown uk-dropdown-navbar uk-dropdown-bottom" style="top: 40px; left: 0px;">
-                                    <ul class="uk-nav uk-nav-navbar">
-                                        <li><a href="{{ route('customerIndex') }}"><i class="uk-icon-users"></i> Customers</a></li>
-                                        <li><a href="{{ route('supplierIndex') }}"><i class="uk-icon-refresh"></i> Suppliers</a></li>
-                                        <li><a href="{{ route('productsIndex') }}"><i class="uk-icon-shopping-cart"></i> Products</a></li>
-                                        <li><a href="{{ route('categoryIndex') }}"><i class="uk-icon-list-alt"></i> Categories</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li data-uk-dropdown="" class="uk-parent" aria-haspopup="true" aria-expanded="false">
-                                <a href="#"><i class="uk-icon-bars"></i> Reports</a>
-                                <div class="uk-dropdown uk-dropdown-navbar uk-dropdown-bottom" style="top: 40px; left: 0px;">
-                                    <ul class="uk-nav uk-nav-navbar">
-                                        <li><a href="{{ route('reportIndex') }}"><i class="uk-icon-line-chart"></i> Sales Reports</a></li>
-                                        <li><a href="{{ route('reportInventory') }}"><i class="uk-icon-cubes"></i> Inventory Reports</a></li>
-                                        <li><a href="{{ route('reportReorderIndex') }}"><i class="uk-icon-history"></i> Reorder Report</a></li>
-                                        <li><a href="{{ route('reportDeliveryIndex') }}"><i class="uk-icon-truck"></i> Delivery Reports</a></li>
-                                        <li><a href="{{ route('reportStatIndex') }}"><i class="uk-icon-bar-chart"></i> Statistical Reports</a></li>
-                                        <li><a href="{{ route('reportPaymentIndex') }}"><i class="uk-icon-money"></i> Report of Payments</a></li>
-                                        <li><a href="{{ route('reportIncomeStatementIndex') }}"><i class="uk-icon-list"></i> Income Statement</a></li>  
-                                    </ul>
-                                </div>
-                            </li> 
-
-                           <li data-uk-dropdown="" class="uk-parent" aria-haspopup="true" aria-expanded="false">
-                                <a href="#"><i class="uk-icon-credit-card"></i> Credits</a>
-                                <div class="uk-dropdown uk-dropdown-navbar uk-dropdown-bottom" style="top: 40px; left: 0px;">
-                                    <ul class="uk-nav uk-nav-navbar">
-                                        <li><a href="{{ route('creditIndex') }}"><i class="uk-icon-credit-card"></i> Agents</a></li>
-                                        <li><a href="{{ route('reportAgentIndex') }}"><i class="uk-icon-history"></i> Main Office</a></li>
-                                        <li><a href="{{ route('reportWeeklyPaymentIndex') }}"><i class="uk-icon-history"></i> Ilocos Sur</a></li>
-                                        <li><a href="{{ route('reportCustAgentIndex') }}"><i class="uk-icon-money"></i> Cagayan</a></li> 
-                                    </ul>
-                                </div>
-                            </li>
-
-
-                           <li><a href="{{ route('employeeIndex') }}"><i class="uk-icon-user"></i> Employees</a></li>
-                        </ul>
-                        <div class="uk-navbar-content uk-navbar-flip  uk-hidden-small">
-                            <div class="uk-button-group">
-                                <a href="#" class="uk-button uk-button-success">{{ Auth::user()->employeename }}</a>
-                                <a class="uk-button uk-button-danger" href="/auth/logout">Logout <i class="uk-icon-sign-out"></i></a>
+    <div class="uk-container">
+        <div>
+            <nav class="uk-navbar-container" uk-navbar style="background-color:rgb(196, 248, 232); padding-left: 3rem; padding-right: 3rem; box-shadow: 0 3px 10px rgb(0 0 0 / 0.1)">
+                <div class="uk-navbar-left">
+                    <ul class="uk-navbar-nav">
+                        <li @if(Request::is('*/sales')) class="uk-active" @endif><a href="{{ route('salesIndex') }}" uk-icon="icon: tag"> Sales</a></li>
+                        @if(Auth::User()->position==1 || Auth::User()->position==2)
+                            <li @if(Request::is('*/delivery') || Request::is('*/delivery-details/show/*')) class="uk-active" @endif><a href="{{ route('deliveryIndex') }}" uk-icon="icon: bag"> Deliveries</a></li>
+                        @endif
+                        @if(Auth::User()->position==1 || Auth::User()->position==2)
+                        <li @if(Request::is('*/category') || Request::is('*/supplier') || Request::is('*/products') || Request::is('*/employee')) class="uk-active" @endif>
+                            <a href="#"></i>Items <span uk-navbar-parent-icon></span></a>
+                            <div class="uk-navbar-dropdown">
+                                <ul class="uk-nav uk-navbar-dropdown-nav">
+                                    <li><a href="{{ route('categoryIndex') }}" uk-icon="icon: thumbnails">CATEGORIES </a></li>
+                                    <li><a href="{{ route('supplierIndex') }}" uk-icon="icon: cart">SUPPLIERS </a></li>
+                                    <li><a href="{{ route('productsIndex') }}" uk-icon="icon: bag">PRODUCTS </a></li>
+                                    @if(Auth::User()->position==1)
+                                    <li><a href="{{ route('employeeIndex') }}" uk-icon="icon: users">EMPLOYEES </a></li>
+                                    @endif
+                                </ul>
                             </div>
-                        </div>
+                        </li>
+                        <li @if(Request::is('*/report') || Request::is('*/inventory/report')) class="uk-active" @endif>
+                            <a href="#"></i>Reports <span uk-navbar-parent-icon></span></a>
+                            <div class="uk-navbar-dropdown">
+                                <ul class="uk-nav uk-navbar-dropdown-nav">
+                                    <li><a href="{{ route('reportIndex') }}" uk-icon="icon: hashtag">SALES </a></li>
+                                    <li><a href="{{ route('reportInventory') }}" uk-icon="icon: album">INVENTORY </a></li>
+                                    {{-- <li><a href="{{ route('reportReorderIndex') }}"><i class="uk-icon-history"></i> Reorder Report</a></li>
+                                    <li><a href="{{ route('reportDeliveryIndex') }}"><i class="uk-icon-truck"></i> Delivery Reports</a></li>
+                                    <li><a href="{{ route('reportStatIndex') }}"><i class="uk-icon-bar-chart"></i> Statistical Reports</a></li>
+                                    <li><a href="{{ route('reportPaymentIndex') }}"><i class="uk-icon-money"></i> Report of Payments</a></li>
+                                    <li><a href="{{ route('reportIncomeStatementIndex') }}"><i class="uk-icon-list"></i> Income Statement</a></li> --}}
+                                </ul>
+                            </div>
+                        </li>
+                        @endif
+                    </ul>
 
-                    </nav>
                 </div>
-            </div>
+                <div class="uk-navbar-right">
+                    <ul class="uk-navbar-nav">
+                        <li>
+                            <a href="#">Hi, {{ Auth::user()->employeename }} <span uk-navbar-parent-icon></span></a>
+                            <div class="uk-navbar-dropdown">
+                                <ul class="uk-nav uk-navbar-dropdown-nav">
+                                    <li><a href="{{ route('employeeEdit',['id' => Auth::user()->employee_id]) }}" uk-icon="icon: user">My Profile </a></li>
+                                    <li><a href="/auth/logout" class="uk-text-danger" uk-icon="icon: sign-out">Logout </a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </div>
     </div>
-
-    <div style="border-top: solid 1px #c1c1c1;">
+    <div class="uk-card uk-card-default uk-card-body">
+        @if(Session::has('success'))
+        <div class="uk-alert-success" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <p>{{ Session::get('success')}}</p>
+        </div>
+        @endif
         @yield('content')
     </div>
 
+
     <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-margin-bottom uk-margin-small-top" style="background-color: transparent;">
         <div class="uk-text-bold">Point Of Sale System</div>
-        {{-- <div class="uk-text-small">for C.A. Chabby Enterprises</div>
-        <div class="uk-text-small">Designed & developed by maehem</div> --}}
         <div class="uk-text-small">All Rights Reserved. &copy; Copyright {{ date('Y') }} Binary Bee IT Solutions and Services</div>
     </div>
 </div>

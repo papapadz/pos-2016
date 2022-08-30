@@ -2,101 +2,90 @@
 
 @section('content')
 
-    <div style="background-color: #e2e2e2; padding: 8px;">
-        <div style="background-color: #FFF; padding: 3px;">
+<div class="uk-grid">
+    <div class="uk-width-1-1">
 
-            <div class="uk-grid">
-                <div class="uk-width-1-1">
-
-                    <div style="margin-top:15px;">
-
-                        <h2>Product List</h2>
-
-                        <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-text-right" style="background-color: #e5e4e4;">
-                            {!! Form::open(['method'=>'get', 'class'=>'uk-form']) !!}
-                            {!! Form::text('skey', $skey) !!}
-                            {!! Form::button(' &nbsp;Filter&nbsp;&nbsp; ', ['type'=>'submit', 'class'=>'uk-button uk-button-success']) !!}
-                            {!! Form::close() !!}
-                            <p></p>
-                            {!! Form::open(['class' => 'uk-form','method'=>'get', 'id'=>'prod-status']) !!}
-                            {!! Form::select('status', ['0'=>'Active', '1'=>'Not Active'], $status, ['id'=>'status']) !!}
-                            <a href="{{ route('productsCreate') }}" class="uk-button uk-button-primary"><i class="uk-icon-plus"></i> &nbsp;Create Product&nbsp;</a>
-                            {!! Form::close() !!}
-                        </div>
-
-                        <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-margin-small-top">
-
-                            <table class="uk-table uk-table-hover uk-table-striped">
-                                <thead>
-                                <tr style="background-color: #464646; color: #fff;">
-                                    <th>&nbsp;</th>
-                                    <th>Category</th>
-                                    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Size</th>
-                                    <th>Pattern</th>
-                                    <th style="text-align: center;">SRP</th>
-                                    <th style="text-align: right;">Unitcost</th>
-                                    <th style="text-align: center;" width="150">Stock on Hand</th>
-                                    <th width="130" class="uk-text-center">Action</th>
-                                </tr>
-                                </thead>
-
-                                @if(count($products) > 0)
-                                    <tbody>
-
-                                    @foreach($products as $product)
-
-                                        <tr style="{{ ($product->stock <= $product->reorderlimit) ? 'background-color: #ffaaaa;' : '' }}">
-                                            <td>&nbsp;</td>
-                                            <td>{{ $product->myCategory->categoryname }}</td>
-                                            <td>{{ $product->productname }}</td>
-                                            <td>{{ $product->pattern }}</td>
-                                            <td style="text-align: center;">{{ number_format($product->unitprice, 2) }}</td>
-                                            <td style="text-align: right;">{{ number_format($product->unitcost, 2) }}</td>
-                                            <td style="text-align: center;">{{ $product->stock }}</td>
-                                            <td class="uk-text-right">
-                                            @if($product->status == 0)
-                                                <a href="{{ route('productStatus', ['id'=>$product->product_id]) }}" class="uk-button uk-button-mini"><i class="uk-icon-mail-forward"></i></a>
-                                            @else
-                                                 <a href="{{ route('productStatus', ['id'=>$product->product_id]) }}" class="uk-button uk-button-mini"><i class="uk-icon-mail-reply"></i></a>
-                                            @endif
-
-                                                <a href="#reorder-modal" id="{{ $product->product_id }}" data-uk-modal class="uk-button uk-button-primary uk-button-mini reorder-product"><i class="uk-icon-refresh"></i></a>
-                                                <a href="{{ route('productsEdit', ['id'=>$product->product_id]) }}" class="uk-button uk-button-mini"><i class="uk-icon-pencil"></i></a>
-                                                <button class="uk-button uk-button-danger uk-button-mini del-rec" id="{{ $product->product_id }}"><i class="uk-icon-times"></i></button>
-                                            </td>
-                                        </tr>
-
-                                    @endforeach
-
-                                    </tbody>
-
-                                    <tfoot>
-                                    <tr>
-                                        <td colspan="7"><i>{{ count($products) }} - Product record/s found</i></td>
-                                    </tr>
-                                    </tfoot>
-                                @else
-                                    <tfoot>
-                                    <tr>
-                                        <td colspan="7"><i>No products record found.</i></td>
-                                    </tr>
-                                    </tfoot>
-                                @endif
-
-                            </table>
-
-                            <div>
-                                @include('paginator', ['paginator' => $products])
-                            </div>
-
-                        </div>
-                    </div>
-
+        <div style="margin-top:15px;">
+            <div uk-grid>
+                <div class="uk-width-1-2"><h2>Product List</h2></div>
+                <div class="uk-width-1-2 uk-text-right">
+                    {!! Form::open(['method'=>'get', 'class'=>'uk-form']) !!}
+                    {!! Form::label('Search') !!}
+                    {!! Form::text('skey', $skey, ['placeholder' => 'Supplier']) !!}
+                    {!! Form::select('status', ['0'=>'Active', '1'=>'Not Active'], $status, ['id'=>'status']) !!}
+                    
+                    {!! Form::button('Search ', ['type'=>'submit', 'class'=>'uk-button uk-button-primary uk-button-small', 'uk-icon="icon: search"']) !!}
+                    
+                    {!! Form::open(['class' => 'uk-form','method'=>'get', 'id'=>'prod-status']) !!}
+                    |
+                    <a class="uk-button uk-button-small" style="background: limegreen; color: white;" href="{{ route('productsCreate') }}" uk-icon="icon: plus-circle">New </a>
+                    {!! Form::close() !!}
                 </div>
             </div>
 
+            <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-margin-small-top">
+
+                <table class="uk-table uk-table-hover uk-table-striped">
+                    <thead>
+                    <tr>
+                        <th style="background-color: #464646; color: #fff;">Category</th>
+                        <th style="background-color: #464646; color: #fff;">Product Name</th>
+                        <th style="background-color: #464646; color: #fff; text-align: center;">Price</th>
+                        <th style="background-color: #464646; color: #fff; text-align: center;" width="150">Stock</th>
+                        <th style="background-color: #464646; color: #fff;" width="130" class="uk-text-center">Action</th>
+                    </tr>
+                    </thead>
+
+                    @if(count($products) > 0)
+                        <tbody>
+
+                        @foreach($products as $product)
+
+                            <tr style="{{ ($product->stock <= $product->reorderlimit) ? 'background-color: #ffaaaa;' : '' }}">
+                                <td>{{ $product->myCategory->categoryname }}</td>
+                                <td>{{ $product->productname }}</td>
+                                <td style="text-align: center;">{{ number_format($product->unitprice, 2) }}</td>
+                                <td style="text-align: center;">{{ $product->stock }}</td>
+                                <td class="uk-text-center">
+                                {{-- @if($product->status == 0)
+                                    <a href="{{ route('productStatus', ['id'=>$product->product_id]) }}" class="uk-button uk-button-mini"><i class="uk-icon-mail-forward"></i></a>
+                                @else
+                                     <a href="{{ route('productStatus', ['id'=>$product->product_id]) }}" class="uk-button uk-button-mini"><i class="uk-icon-mail-reply"></i></a>
+                                @endif --}}
+                                    {{-- <a href="#reorder-modal" id="{{ $product->product_id }}" data-uk-modal class="uk-button uk-button-primary uk-button-mini reorder-product"><i class="uk-icon-refresh"></i></a> --}}
+                                    <a href="{{ route('productsEdit', ['id'=>$product->product_id]) }}" class="uk-button uk-button-primary uk-button-small" uk-icon="icon: pencil"></a>
+                                    <button class="uk-button uk-button-danger uk-button-small del-rec" id="{{ $product->product_id }}" uk-icon="icon: close"></button>
+                                </td>
+                            </tr>
+
+                        @endforeach
+
+                        </tbody>
+
+                        <tfoot>
+                        <tr>
+                            <td colspan="7"><i>{{ count($products) }} - Record found</i></td>
+                        </tr>
+                        </tfoot>
+                    @else
+                        <tfoot>
+                        <tr>
+                            <td colspan="7"><i>No record found.</i></td>
+                        </tr>
+                        </tfoot>
+                    @endif
+
+                </table>
+
+                <div>
+                    @include('paginator', ['paginator' => $products])
+                </div>
+
+            </div>
         </div>
+
     </div>
+</div>
 
 
     <!-- This is the modal -->

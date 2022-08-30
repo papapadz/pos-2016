@@ -1,33 +1,11 @@
 @extends('admin')
 
 @section('content')
-
-    <div style="background-color: #e2e2e2; padding: 8px;">
-        <div style="background-color: #FFF; padding: 3px;">
-
-            <div class="uk-grid">
-                <div class="uk-width-1-1">
-
-                    <div style="margin-top:15px;">
-
-                        <h2>New Supplier Details</h2>
-
-                        <hr>
-
-                        <div style="padding-left: 15px; padding-right: 15px; margin-bottom: 15px;">
-                            {!! Form::open(['route'=>'supplierStore', 'method'=>'post', 'class'=>'uk-form uk-form-stacked']) !!}
-                            @include('admin.supplier._form', ['btnCaption'=>'Create Supplier Record'])
-                            {!! Form::close() !!}
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-
+<h2>New Supplier Record</h2>
+<hr>
+{!! Form::open(['route'=>'supplierStore', 'method'=>'post', 'class'=>'uk-form uk-form-stacked']) !!}
+@include('admin.supplier._form', ['btnCaption'=>'Add New Record'])
+{!! Form::close() !!}
 @stop
 
 @section('location') Supplier @stop

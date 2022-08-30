@@ -8,8 +8,7 @@ class DeliveryDetails extends Model
 {
     protected $table = 'deliverydetails';
     protected $primaryKey = 'deliverydetails_id';
-    protected $fillable = ['delivery_id', 'product_id', 'qty', 'unitcost'];
-    public $timestamps = false;
+    protected $fillable = ['delivery_id', 'product_id', 'qty', 'srp','unitcost'];
 
     public function myProduct()
     {

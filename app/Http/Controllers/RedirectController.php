@@ -14,26 +14,27 @@ class RedirectController extends Controller
     {
         if(Auth::check())
         {
-            if(Auth::user()->position == 1)
-            {
-                // Admin
-                return redirect('/admin');
-            }
-            elseif(Auth::user()->position == 2)
-            {
-                // Supervisor
-                return redirect('/supervisor');
-            }
-            elseif(Auth::user()->position == 3)
-            {
-                // Accountant
-                return redirect('/accountant');
-            }
-            elseif(Auth::user()->position == 4)
-            {
-                // Secretary
-                return redirect('/secretary');
-            }
+            return redirect('/admin');
+            // if(Auth::user()->position == 1)
+            // {
+            //     // Admin
+            //     return redirect('/admin');
+            // }
+            // elseif(Auth::user()->position == 2)
+            // {
+            //     // Supervisor
+            //     return redirect('/supervisor');
+            // }
+            // elseif(Auth::user()->position == 3)
+            // {
+            //     // Accountant
+            //     return redirect('/accountant');
+            // }
+            // elseif(Auth::user()->position == 4)
+            // {
+            //     // Secretary
+            //     return redirect('/secretary');
+            // }
         }
         else
         {
