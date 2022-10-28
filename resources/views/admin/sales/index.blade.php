@@ -198,13 +198,13 @@
 @section('location') Sales @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/components/datepicker.gradient.min.css">
-    <link rel="stylesheet" href="/css/components/form-select.gradient.min.css">
+    <link rel="stylesheet" href="{{ asset('/css/components/datepicker.gradient.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/components/form-select.gradient.min.css') }}">
 @stop
 
 @section('js')
-    <script type="text/javascript" src="/js/components/datepicker.min.js"></script>
-    <script type="text/javascript" src="/js/components/form-select.min.js"></script>
+    <script type="text/javascript" src="{{ asset('/js/components/datepicker.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/components/form-select.min.js') }}"></script>
     <script type="text/javascript">
 
         $(function(){
@@ -214,7 +214,7 @@
             var customer = $('#cust_id').val();
 
             $.ajax({
-                url: '/ajax/fetch/get/customer/details',
+                url: '{{ url("/ajax/fetch/get/customer/details") }}',
                 method: 'get',
                 async: false,
                 data: {
@@ -249,7 +249,7 @@
             $('#category').change(function(){
                 var category = $(this).val();
                 $.ajax({
-                    url: '/ajax/fetch/category/products',
+                    url: '{{ url("/ajax/fetch/category/products") }}',
                     method: 'get',
                     async: false,
                     data: {
@@ -275,7 +275,7 @@
                 var product = $(this).val();
 
                 $.ajax({
-                    url: '/ajax/check/product/stock',
+                    url: '{{ url("/ajax/check/product/stock") }}',
                     method: 'get',
                     async: false,
                     data: {
@@ -294,7 +294,7 @@
                                 //$('#btn-add').prop('disabled', false);
 
                                 $.ajax({
-                                    url: '/ajax/fetch/product/price',
+                                    url: '{{ url("/ajax/fetch/product/price") }}',
                                     method: 'get',
                                     async: false,
                                     data: {
@@ -309,7 +309,7 @@
                                 });
 
                                 $.ajax({
-                                    url: '/ajax/fetch/product/onhand',
+                                    url: '{{ url("/ajax/fetch/product/onhand") }}',
                                     method: 'get',
                                     async: false,
                                     data: {
@@ -346,7 +346,7 @@
                             $('#markup').prop('disabled', false).val(0);
 
                             $.ajax({
-                                url: '/ajax/fetch/product/price',
+                                url: '{{ url("/ajax/fetch/product/price") }}',
                                 method: 'get',
                                 async: false,
                                 data: {
@@ -361,7 +361,7 @@
                             });
 
                             $.ajax({
-                                url: '/ajax/fetch/product/onhand',
+                                url: '{{ url("/ajax/fetch/product/onhand") }}',
                                 method: 'get',
                                 async: false,
                                 data: {
@@ -399,7 +399,7 @@
                 var productlist = $('#product-list option:selected').text();
 
                 $.ajax({
-                    url: '/ajax/fetch/sales/products',
+                    url: '{{ url("/ajax/fetch/sales/products") }}',
                     method: 'get',
                     async: false,
                     data: {
@@ -415,7 +415,7 @@
                     var product = $('#product').val();
 
                     $.ajax({
-                        url: '/ajax/check/product/stock',
+                        url: '{{ url("/ajax/check/product/stock") }}',
                         method: 'get',
                         async: false,
                         data: {
@@ -436,7 +436,7 @@
                                     $('#markup').prop('disabled', false).val(0);
 
                                     $.ajax({
-                                        url: '/ajax/fetch/product/price',
+                                        url: '{{ url("/ajax/fetch/product/price") }}',
                                         method: 'get',
                                         async: false,
                                         data: {
@@ -451,7 +451,7 @@
                                     });
 
                                     $.ajax({
-                                        url: '/ajax/fetch/product/onhand',
+                                        url: '{{ url("/ajax/fetch/product/onhand") }}',
                                         method: 'get',
                                         async: false,
                                         data: {
@@ -490,7 +490,7 @@
                                 $('#markup').prop('disabled', false).val(0);
 
                                 $.ajax({
-                                    url: '/ajax/fetch/product/price',
+                                    url: '{{ url("/ajax/fetch/product/price") }}',
                                     method: 'get',
                                     async: false,
                                     data: {
@@ -505,7 +505,7 @@
                                 });
 
                                 $.ajax({
-                                    url: '/ajax/fetch/product/onhand',
+                                    url: '{{ url("/ajax/fetch/product/onhand") }}',
                                     method: 'get',
                                     async: false,
                                     data: {
@@ -546,7 +546,7 @@
 
                 if(code == 13) {
                     $.ajax({
-                        url: '/ajax/update/order/qty',
+                        url: '{{ url("/ajax/update/order/qty") }}',
                         method: 'get',
                         async: false,
                         data: {
@@ -568,7 +568,7 @@
                     $('#category').val(0).prop('disabled', false);
 
                     $.ajax({
-                        url: '/ajax/fetch/key/products',
+                        url: '{{ url("/ajax/fetch/key/products") }}',
                         method: 'get',
                         async: false,
                         data: {
@@ -649,7 +649,7 @@
                 if(keyLen > 3)
                 {
                     $.ajax({
-                        url: '/ajax/fetch/key/customers',
+                        url: '{{ url("/ajax/fetch/key/customers") }}',
                         method: 'get',
                         async: false,
                         data: {
@@ -689,7 +689,7 @@
                 }
 
                 $.ajax({
-                    url: '/ajax/fetch/get/customer/details',
+                    url: '{{ url("/ajax/fetch/get/customer/details") }}',
                     method: 'get',
                     async: false,
                     data: {
@@ -740,7 +740,7 @@
 
                     $('#cust_id').val(1);
                     $.ajax({
-                        url: '/ajax/fetch/get/customer/details',
+                        url: '{{ url("/ajax/fetch/get/customer/details") }}',
                         method: 'get',
                         async: false,
                         data: {
@@ -772,7 +772,7 @@
                 var price = 0;
 
                 $.ajax({
-                    url: '/ajax/fetch/product/price',
+                    url: '{{ url("/ajax/fetch/product/price") }}',
                     method: 'get',
                     async: false,
                     data: {
@@ -787,7 +787,7 @@
                 });
 
                 $.ajax({
-                    url: '/ajax/check/product/stock',
+                    url: '{{ url("/ajax/check/product/stock") }}',
                     method: 'get',
                     async: false,
                     data: {
@@ -833,7 +833,7 @@
                 var customer = $(this).val();
 
                 $.ajax({
-                    url: '/ajax/check/customer/credit',
+                    url: '{{ url("/ajax/check/customer/credit") }}',
                     method: 'get',
                     async: false,
                     data: {
@@ -844,7 +844,7 @@
                     if(r == 0)
                     {
                         $.ajax({
-                            url: '/ajax/fetch/customer/credit',
+                            url: '{{ url("/ajax/fetch/customer/credit") }}',
                             method: 'get',
                             async: 'false',
                             data: {

@@ -130,7 +130,7 @@
             var selectedSupplier = $('#supplier_id').val();
             $( "#datefilter" ).datepicker({ dateFormat: 'yy-mm-dd' });
             $.ajax({
-                url: '/ajax/fetch/key/supplier',
+                url: '{{ url("/ajax/fetch/key/supplier") }}',
                 method: 'get',
                 async: false,
                 data: {
@@ -157,7 +157,7 @@
                     else
                     {
                         $.ajax({
-                            url: '/admin/products/destroy',
+                            url: '{{ url("/admin/products/destroy") }}',
                             method: 'get',
                             async: false,
                             data: {
@@ -181,7 +181,7 @@
             $('#supplier').change(function(){
                 var supplier = $(this).val();
                 $.ajax({
-                    url: '/ajax/fetch/products',
+                    url: '{{ url("/ajax/fetch/products") }}',
                     method: 'get',
                     async: false,
                     data: {
@@ -199,7 +199,7 @@
             $('#category').change(function(){
                 var category = $(this).val();
                 $.ajax({
-                    url: '/ajax/fetch/category/products',
+                    url: '{{ url("/ajax/fetch/category/products") }}',
                     method: 'get',
                     async: false,
                     data: {
@@ -222,7 +222,7 @@
                 var product = $('#product').val();
 
                 $.ajax({
-                    url: '/ajax/fetch/product/cost',
+                    url: '{{ url("/ajax/fetch/product/cost") }}',
                     method: 'get',
                     async: false,
                     data: {
@@ -244,7 +244,7 @@
 
                 // get product list
                 $.ajax({
-                    url: '/ajax/fetch/delivery/products',
+                    url: '{{ url("/ajax/fetch/delivery/products") }}',
                     method: 'get',
                     async: false,
                     data: {
@@ -257,7 +257,7 @@
                     var product = $('#product').val();
 
                     $.ajax({
-                        url: '/ajax/fetch/product/cost',
+                        url: '{{ url("/ajax/fetch/product/cost") }}',
                         method: 'get',
                         async: false,
                         data: {
@@ -276,7 +276,7 @@
             $('#search-products').keyup(function(){
                 var key = $(this).val();
                $.ajax({
-                    url: '/ajax/fetch/key/products',
+                    url: '{{ url("/ajax/fetch/key/products") }}',
                    method: 'get',
                     asunc: false,
                    data: {
@@ -296,7 +296,7 @@
                 $('#supplier_id').val(selectedSupplier);
 
                 $.ajax({
-                    url: '/ajax/fetch/key/supplier',
+                    url: '{{ url("/ajax/fetch/key/supplier") }}',
                     method: 'get',
                     async: false,
                     data: {
@@ -330,7 +330,7 @@
                 {
                     // update
                     $.ajax({
-                        url: '/ajax/update/product/unitcost',
+                        url: '{{ url("/ajax/update/product/unitcost") }}',
                         method: 'get',
                         async: false,
                         data: {
@@ -357,7 +357,7 @@
                 {
                     // create new
                     $.ajax({
-                        url: '/ajax/store/product/unitcost',
+                        url: '{{ url("/ajax/store/product/unitcost") }}',
                         method: 'get',
                         async: false,
                         data: {
@@ -391,7 +391,7 @@
                 var product = $('#product').val();
 
                 $.ajax({
-                    url: '/ajax/fetch/product/cost',
+                    url: '{{ url("/ajax/fetch/product/cost") }}',
                     method: 'get',
                     async: false,
                     data: {

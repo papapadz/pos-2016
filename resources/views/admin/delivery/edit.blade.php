@@ -38,7 +38,7 @@
                 var supplier = $(this).val();
 
                 $.ajax({
-                    url: '/ajax/fetch/products',
+                    url: '{{ url("/ajax/fetch/products") }}',
                     method: 'get',
                     async: false,
                     data: {
