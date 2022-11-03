@@ -88,7 +88,7 @@
                      else
                     {
                         $.ajax({
-                            url: '/admin/supplier/destroy/{id}',
+                            url: '{{ url("/admin/supplier/destroy/{id}") }}',
                             method: 'get',
                             async: false,
                             data: {

@@ -103,7 +103,7 @@
 @section('location') Customer @stop
 
 @section('js')
-    <script src="/js/components/autocomplete.js"></script>
+    <script src=" {{ asset('/js/components/autocomplete.js') }}"></script>
     <script type="text/javascript">
         $(function(){
 

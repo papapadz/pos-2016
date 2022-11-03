@@ -5,7 +5,7 @@
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.3/dist/css/uikit.min.css" />
     <!-- datepicker -->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     
     <script src="{{ asset('jquery.js') }}"></script>
     <!-- UIkit JS -->
@@ -31,7 +31,9 @@
     <div id="banner" class="uk-card uk-card-default uk-card-body">
         <div class="uk-grid">
             <div class="uk-width-1-2" style="display: inline;">
-                <img src="{{ asset('img/logo.png') }}" alt="" width="80" style="margin-left: 30px;"><span style="font-style: strong; font-size:32px">My E-Inventory</span>
+                <img src="{{ asset('img/logo.png') }}" alt="" width="80" style="margin-left: 30px;"><span style="font-style: strong; font-size:32px">
+                    {{ Config::get('license.name') }}
+                </span>
             </div>
             <div class="uk-width-1-2" style="padding-top: 4px;">
                 <div style="font-size: x-large;" class="uk-text-right" id="clock"></div>
@@ -88,7 +90,7 @@
                             <div class="uk-navbar-dropdown">
                                 <ul class="uk-nav uk-navbar-dropdown-nav">
                                     <li><a href="{{ route('employeeEdit',['id' => Auth::user()->employee_id]) }}" uk-icon="icon: user">My Profile </a></li>
-                                    <li><a href="/auth/logout" class="uk-text-danger" uk-icon="icon: sign-out">Logout </a></li>
+                                    <li><a href="{{ url('auth/logout') }}" class="uk-text-danger" uk-icon="icon: sign-out">Logout </a></li>
                                 </ul>
                             </div>
                         </li>
