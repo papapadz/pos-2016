@@ -3,8 +3,17 @@
 @section('content')
     <div class="uk-grid-divider uk-child-width-1-2@m" uk-grid>
         <div class="uk-width-1-3@m">
-                {!! Form::open(['route'=>'ordersCreate', 'class'=>'uk-form-stacked']) !!}
-                <div class="uk-margin">
+                {!! Form::open(['route'=>'ordersCreate', 'class'=>'uk-form-stacked', 'id'=>'salesForm']) !!}
+                    <button id="toggleBtn" type="button" class="uk-button uk-button-small">Search</button>
+                
+                <div class="uk-margin" id="divBarcode">
+                    <div class="uk-form-controls">
+                        <label>Scan Item</label>
+                        {!! Form::text('barcode', null, ['id'=>'barcode', 'class'=>'uk-width-1-1 uk-input uk-form-small','autofocus']) !!}
+                    </div>
+                </div>
+                <div class="uk-margin" id="divSearchProduct" style="display: none">
+                <div>
                     <div class="uk-form-controls">
                         <label>Search Item</label>
                         {!! Form::text('key', null, ['id'=>'key', 'class'=>'uk-width-1-1 uk-input uk-form-small', 'placeholder'=>'ex. Biscuit']) !!}
@@ -57,6 +66,7 @@
                     <div class="uk-form-controls">
                         {!! Form::button('Add Item', ['type'=>'submit', 'id'=>'btn-add', 'class'=>'uk-button uk-button-primary uk-button-large uk-width-1-1 uk-text-bold', 'disabled']) !!}
                     </div>
+                </div>
                 </div>
                 {!! Form::close() !!}
         </div>
@@ -938,6 +948,42 @@
                 }
             });
             
+            $('#barcode').on('change', function() {
+                $('#category').val(0).prop('disabled', false);
+
+                    $.ajax({
+                        url: '{{ route("product.fetch.id") }}',
+                        method: 'get',
+                        async: false,
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            code: $(this).val()
+                        }
+                    }).success(function(response){
+                        if(response['status']==1) {
+                            $('#product').empty().html(
+                            '<option selected value="'+response['data']['product_id']+'">'+response['data']['productname']+' - '+response['data']['unitprice'].toFixed(2)+'</option>'
+                            ).prop('disabled', false);
+                            $('#orderprice').prop('disabled', false)
+                            $('#orderprice').val(response['data']['unitprice'])
+                            $('form#salesForm').submit();
+                        } else
+                            alert(response['message'])
+                    });
+            })
+
+            $('#toggleBtn').on('click', function() {
+                if($('#divBarcode').is(':hidden')) {
+                    $('#divBarcode').show()
+                    $('#divSearchProduct').hide()
+                    $(this).text("Search")
+                }
+                else {
+                    $('#divSearchProduct').show()
+                    $('#divBarcode').hide()
+                    $(this).text("Barcode")
+                }
+            })
         })
     </script>
 @stop

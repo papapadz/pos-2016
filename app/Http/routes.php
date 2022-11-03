@@ -48,7 +48,7 @@ Route::get('/admin/check/expenses/update/{id}', 'ExpensesController@update');
 Route::get('/admin/check/expenses/delete/{id}', 'ExpensesController@delete');
 Route::get('/admin/check/credit/store', 'CreditController@storePaymentCheque');
 Route::get('/admin/credit/payment/history/view/{id}', 'CreditController@paymentHistoryView');
-
+Route::get('/admin/fetch/code/product', 'AjaxController@getProductByCode')->name('product.fetch.id');
 
 
 // Redirect

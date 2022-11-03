@@ -258,4 +258,23 @@ class AjaxController extends Controller
 
         return number_format($totalBalance, 2);
     }
+
+    public function getProductByCode(Request $request)
+    {
+        $product = Product::where('productcode', $request->code)->where('status', 0)->first();
+        
+        if($product)
+            return array(
+                'status' => 1,
+                'data' => $product
+            );
+        else
+            return array(
+                'status' => 0,
+                'message'=> 'No product found'
+            );
+        #$products = Product::where('productname', 'like', '%'.$request->key.'%')->where('status', 0)->get();
+
+        
+    }
 }
