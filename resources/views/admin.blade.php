@@ -31,7 +31,9 @@
     <div id="banner" class="uk-card uk-card-default uk-card-body">
         <div class="uk-grid">
             <div class="uk-width-1-2" style="display: inline;">
-                <img src="{{ asset('img/logo.png') }}" alt="" width="80" style="margin-left: 30px;"><span style="font-style: strong; font-size:32px">My E-Inventory</span>
+                <img src="{{ asset('img/logo.png') }}" alt="" width="80" style="margin-left: 30px;"><span style="font-style: strong; font-size:32px">
+                    {{ Config::get('license.name') }}
+                </span>
             </div>
             <div class="uk-width-1-2" style="padding-top: 4px;">
                 <div style="font-size: x-large;" class="uk-text-right" id="clock"></div>
