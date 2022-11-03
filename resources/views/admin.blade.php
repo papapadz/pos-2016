@@ -88,7 +88,7 @@
                             <div class="uk-navbar-dropdown">
                                 <ul class="uk-nav uk-navbar-dropdown-nav">
                                     <li><a href="{{ route('employeeEdit',['id' => Auth::user()->employee_id]) }}" uk-icon="icon: user">My Profile </a></li>
-                                    <li><a href="/auth/logout" class="uk-text-danger" uk-icon="icon: sign-out">Logout </a></li>
+                                    <li><a href="{{ url('auth/logout') }}" class="uk-text-danger" uk-icon="icon: sign-out">Logout </a></li>
                                 </ul>
                             </div>
                         </li>
