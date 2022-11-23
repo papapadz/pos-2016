@@ -20,14 +20,13 @@
     </div>
 </div> --}}
 <div>
-    <div class="uk-width-1-6">Product Code</div>
-    <div>
-        {!! Form::text('productcode', null, ['placeholder'=>'Product Code', 'class' => 'uk-input']) !!}
-        @if($errors->has('productcode')) <span class="uk-form-help-inline uk-text-danger"><i><small>{{ $errors->first('productcode') }}</small></i></span> @endif
-    </div>
+    <div class="uk-width-1-12">Unit Cost - Market Value (PHP)</div>
+            <div>
+                {!! Form::text('unitcost', null, ['placeholder'=>'Unit Cost', 'class' => 'uk-input']) !!}
+            </div>
 </div>
 <div>
-    <div class="uk-width-1-6">Unit Price (PHP)</div>
+    <div class="uk-width-1-12">Unit Price - Selling Price (PHP)</div>
             <div>
                 {!! Form::text('unitprice', null, ['placeholder'=>'Unit Price', 'class' => 'uk-input']) !!}
             </div>
@@ -35,6 +34,13 @@
 <div>
     <div class="uk-width-1-6">Stock</div>
             <div>{!! Form::text('stock', null, ['placeholder'=>'0-9999', 'class' => 'uk-input']) !!}</div>
+</div>
+<div>
+    <div class="uk-width-1-6">Product Code</div>
+    <div>
+        {!! Form::text('productcode', null, ['placeholder'=>'Product Code', 'class' => 'uk-input']) !!}
+        @if($errors->has('productcode')) <span class="uk-form-help-inline uk-text-danger"><i><small>{{ $errors->first('productcode') }}</small></i></span> @endif
+    </div>
 </div>
 {{-- <div class="uk-form-row">
     <div class="uk-form-controls">

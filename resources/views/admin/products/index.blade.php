@@ -30,13 +30,13 @@
                     <tr>
                         <th style="background-color: #464646; color: #fff;">Category</th>
                         <th style="background-color: #464646; color: #fff;">Product Name</th>
-                        <th style="background-color: #464646; color: #fff; text-align: center;">Price</th>
+                        <th style="background-color: #464646; color: #fff; text-align: center;">Unit Cost</th>
+                        <th style="background-color: #464646; color: #fff; text-align: center;">Unit Price</th>
                         <th style="background-color: #464646; color: #fff; text-align: center;" width="150">Stock</th>
                         <th style="background-color: #464646; color: #fff;" width="130" class="uk-text-center">Action</th>
                     </tr>
                     </thead>
 
-                    @if(count($products) > 0)
                         <tbody>
 
                         @foreach($products as $product)
@@ -44,6 +44,7 @@
                             <tr style="{{ ($product->stock <= $product->reorderlimit) ? 'background-color: #ffaaaa;' : '' }}">
                                 <td>{{ $product->myCategory->categoryname }}</td>
                                 <td>{{ $product->productname }}</td>
+                                <td style="text-align: center;">{{ number_format($product->unitcost, 2) }}</td>
                                 <td style="text-align: center;">{{ number_format($product->unitprice, 2) }}</td>
                                 <td style="text-align: center;">{{ $product->stock }}</td>
                                 <td class="uk-text-center">
@@ -62,24 +63,9 @@
 
                         </tbody>
 
-                        <tfoot>
-                        <tr>
-                            <td colspan="7"><i>{{ count($products) }} - Record found</i></td>
-                        </tr>
-                        </tfoot>
-                    @else
-                        <tfoot>
-                        <tr>
-                            <td colspan="7"><i>No record found.</i></td>
-                        </tr>
-                        </tfoot>
-                    @endif
+                        
 
                 </table>
-
-                <div>
-                    @include('paginator', ['paginator' => $products])
-                </div>
 
             </div>
         </div>
@@ -135,7 +121,9 @@
 @section('js')
     <script type="text/javascript" src="{{ asset('/js/components/datepicker.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/components/form-select.min.js') }}"></script>
-
+    <script>
+        $('table.uk-table').DataTable()
+    </script>
   <script type="text/javascript">
         $(function(){
             $('.del-rec').click(function(){

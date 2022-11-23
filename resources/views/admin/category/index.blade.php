@@ -20,18 +20,16 @@
                 <table class="uk-table uk-table-hover uk-table-striped">
                     <thead>
                     <tr>
-                        <th style="background-color: #464646; color: #fff;">&nbsp;</th>
                         <th style="background-color: #464646; color: #fff;">Category</th>
                         <th style="background-color: #464646; color: #fff;">Description</th>
                         <th style="background-color: #464646; color: #fff;">Action</th>
                     </tr>
                     </thead>
 
-                    @if(count($categories) > 0)
+                    
                         <tbody>
                         @foreach($categories as $category)
                             <tr>
-                                <td>&nbsp;</td>
                                 <td>{{ $category->categoryname }}</td>
                                 <td>{{ $category->description }}</td>
                                 <td>
@@ -40,27 +38,9 @@
                                 </td>
                             </tr>
                         @endforeach
+                            
                         </tbody>
-
-                        <tfoot>
-                        <tr>
-                            <td colspan="8"><i>{{ count($categories) }} - Record found</i></td>
-                        </tr>
-                        </tfoot>
-                    @else
-                        <tfoot>
-                        <tr>
-                            <td colspan="8"><i>No records found</i></td>
-                        </tr>
-                        </tfoot>
-                    @endif
-
                 </table>
-
-                <div>
-                    @include('paginator', ['paginator' => $categories])
-                </div>
-
             </div>
 
         </div>
@@ -72,6 +52,9 @@
 @section('location') Category @stop
 
 @section('js')
+<script>
+    $('table.uk-table').DataTable()
+</script>
     <script type="text/javascript">
         $(function(){
             $('.del-rec').click(function(){

@@ -20,7 +20,6 @@
                 <table class="uk-table uk-table-hover uk-table-striped">
                     <thead>
                     <tr>
-                        <th style="background-color: #464646; color: #fff;">&nbsp;</th>
                         <th style="background-color: #464646; color: #fff;">Company</th>
                         <th style="background-color: #464646; color: #fff;">Name</th>
                         <th style="background-color: #464646; color: #fff;">Contact</th>
@@ -29,11 +28,9 @@
                     </tr>
                     </thead>
 
-                    @if(count($suppliers) > 0)
                         <tbody>
                         @foreach($suppliers as $supplier)
                             <tr>
-                                <td>&nbsp;</td>
                                 <td>{{ $supplier->companyname }}</td>
                                 <td>{{ $supplier->owner_name }}</td>
                                 <td>{{ $supplier->contactno }}</td>
@@ -45,20 +42,9 @@
                             </tr>
                         @endforeach
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="6">
-                                    <i>{{ count($suppliers) }} - Record found</i>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    @endif
-
+                        
                 </table>
 
-                <div>
-                    @include('paginator', ['paginator' => $suppliers])
-                </div>
 
             </div>
         </div>
@@ -70,6 +56,9 @@
 @section('location') Supplier @stop
 
 @section('js')
+<script>
+    $('table.uk-table').DataTable()
+</script>
     <script type="text/javascript">
         $(function(){
             $('.del-rec').click(function(){

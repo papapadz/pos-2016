@@ -9,6 +9,7 @@
         {{-- {!! Form::text('daily', $daySel, ['id'=>'daily']) !!} --}}
         <input name="daily" id="daily" value="{{ Carbon\Carbon::now()->toDateString() }}">
         {!! Form::select('monthly', $months, $monthSel, ['id'=>'monthly', 'disabled']) !!}
+        {!! Form::select('year', $years, $yearSel, ['id'=>'year', 'disabled']) !!}
         {!! Form::button('Search ', ['id'=>'btn-generate', 'type'=>'submit', 'class'=>'uk-button uk-button-primary uk-button-small', 'uk-icon' => 'icon: search']) !!}
         {{-- <a href="{{ route('reportPrint', ['option'=>$option, 'day'=>$daySel, 'month'=>$monthSel]) }}" target="_blank" class="uk-button uk-button-success">Print Report</a> --}}
         {!! Form::close() !!}
@@ -20,13 +21,11 @@
                             <table class="uk-table uk-table-hover uk-table-striped">
                                 <thead>
                                 <tr>
-                                    <th style="background-color: #464646; color: #fff;">&nbsp;</th>
                                     <th style="background-color: #464646; color: #fff;">ID</th>
                                     <th style="background-color: #464646; color: #fff;">Date</th>
                                     <th style="background-color: #464646; color: #fff; text-align: right;">Gross Amount</th>
                                     <th style="background-color: #464646; color: #fff; text-align: right;">Discount</th>
                                     <th style="background-color: #464646; color: #fff; text-align: right;">Net Amount</th>
-                                    <th style="background-color: #464646; color: #fff;">&nbsp;</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -34,24 +33,17 @@
                                 {{--*/ $total = 0; /*--}}
                                 {{--*/ $cash = 0; /*--}}
                                 <div style="display: none">{{ $discount = 0 }}</div>
-                                @if(count($reports) > 0)
                                     @foreach($reports as $report)
                                     <div style="display: none">{{ $discount += $report->fixedAmtDiscount }}</div>
                                         <tr>
-                                            <td>&nbsp;</td>
                                             <td><a href="{{ route('salesSummary', $report->sales_id) }}">{{ $report->invoicenumber }}</td>
                                             <td>{{ Carbon\Carbon::parse($report->salesdate)->toDateString() }}</td>
                                             <td style="text-align: right;">{{ number_format($report->totalsales, 2) }}</td>
                                             <td style="text-align: right;">{{ number_format($report->fixedAmtDiscount, 2) }}</td>
                                             <td style="text-align: right;">{{ number_format($report->totalsales-$report->fixedAmtDiscount, 2) }}</td>
-                                            <td>&nbsp;</td>
                                         </tr>
                                     @endforeach
-                                @else
-                                    <tr>
-                                        <td colspan="8">No record found</td>
-                                    </tr>
-                                @endif
+                                
                                 </tbody>
                             </table>
                             <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-text-right">
@@ -85,7 +77,9 @@
 @stop
 
 @section('js')
-
+<script>
+    $('table.uk-table').DataTable()
+</script>
     <script>
         $(function(){
             var option = $('#report-option').val();

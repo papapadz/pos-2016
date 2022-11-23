@@ -24,48 +24,26 @@
             <table class="uk-table uk-table-hover uk-table-striped">
                 <thead>
                     <tr>
-                        <th style="background-color: #464646; color: #fff;" width="50">&nbsp;</th>
                         <th style="background-color: #464646; color: #fff;" width="200">Order Number</th>
                         <th style="background-color: #464646; color: #fff;">Date of Delivery</th>
                         <th style="background-color: #464646; color: #fff;">Supplier</th>
                         <th style="text-align: center;background-color: #464646; color: #fff;">Total Cost</th>
-                        <th style="background-color: #464646; color: #fff;">&nbsp;</th>
                     </tr>
                 </thead>
 
-                @if(count($deliveries) > 0)
+                
                     <tbody>
                     @foreach($deliveries as $delivery)
                         <tr>
-                            <td>&nbsp;</td>
                             <td><a href="{{ route('deliveryDetailsShow', $delivery->delivery_id) }}">{{ $delivery->order_number }}</a></td>
                             <td>{{ substr($delivery->deliverydate, 0, 10) }}</td>
                             <td>{{ $delivery->mySupplier->companyname }}</td>
                             <td style="text-align: right">{{ number_format($delivery->totalcost, 2) }}</td>
-                            <td>&nbsp;</td>
                         </tr>
                     @endforeach
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="8"><i>{{ count($deliveries) }} - Entry found</i></td>
-                        </tr>
-                    </tfoot>
-                @else
-                    <tfoot>
-                        <tr>
-                            <td colspan="8"><i>No records found</i></td>
-                        </tr>
-                    </tfoot>
-                @endif
-
             </table>
         </div>
-        <div>
-            @include('paginator', ['paginator' => $deliveries])
-        </div>
-
-
     </div>
 </div>
 
@@ -125,6 +103,9 @@
 @stop
 
 @section('js')
+<script>
+    $('table.uk-table').DataTable()
+</script>
    <script type="text/javascript">
         $(function(){
             var selectedSupplier = $('#supplier_id').val();

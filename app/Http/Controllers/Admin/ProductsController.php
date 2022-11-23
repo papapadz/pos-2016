@@ -94,7 +94,7 @@ class ProductsController extends Controller
         //$product->reorderlimit = $request->reorderlimit;
         $product->category_id = $request->category_id;
         //$product->supplier_id = $request->supplier_id;
-        //$product->unitcost = $request->unitcost;
+        $product->unitcost = $request->unitcost;
         $product->stock = $request->stock;
         $product->status = $request->status;
         $product->save();
@@ -157,7 +157,7 @@ class ProductsController extends Controller
         //$product->reorderlimit = $request->reorderlimit;
         $product->category_id = $request->category_id;
         //$product->supplier_id = $request->supplier_id;
-        //$product->unitcost = $request->unitcost;
+        $product->unitcost = $request->unitcost;
         $product->update();
 
         return redirect()->route('productsIndex');

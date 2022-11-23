@@ -16,14 +16,14 @@
         <table class="uk-table uk-table-hover uk-table-striped">
             <thead>
             <tr>
-                <th style="background-color: #464646; color: #fff;">&nbsp;</th>
                 <th style="background-color: #464646; color: #fff;">Category</th>
                 <th style="background-color: #464646; color: #fff;">Item</th>
                 <th style="background-color: #464646; color: #fff;">Code</th>
                 <th style="background-color: #464646; color: #fff; text-align: center;">Stock on Hand</th>
                 <th style="background-color: #464646; color: #fff; text-align: right;">Unit Cost</th>
-                <th style="background-color: #464646; color: #fff; text-align: right;">Total Value</th>
-                <th style="background-color: #464646; color: #fff;">&nbsp;</th>
+                <th style="background-color: #464646; color: #fff; text-align: right;">Unit Price</th>
+                <th style="background-color: #464646; color: #fff; text-align: right;">Total Cost</th>
+                <th style="background-color: #464646; color: #fff; text-align: right;">Total Price</th>
             </tr>
             </thead>
             <tbody>
@@ -31,14 +31,14 @@
             @if(count($reports) > 0)
                 @foreach($reports as $report)
                     <tr>
-                        <td>&nbsp;</td>
                         <td>{{ $report->myCategory->categoryname }}</td>
                         <td>{{ $report->productname }}</td>
                         <td>{{ $report->productcode }}</td>
                         <td style="text-align: center;">{{ $report->stock }}</td>
+                        <td style="text-align: right;">{{ number_format($report->unitcost, 2) }}</td>
                         <td style="text-align: right;">{{ number_format($report->unitprice, 2) }}</td>
-                        <td style="text-align: right;">{{ number_format((($report->stock * $report->unitprice) < 0) ? 0 : ($report->stock * $report->unitprice), 2) }}</td>
-                        <td>&nbsp;</td>
+                        <td style="text-align: right;"><b>{{ number_format((($report->stock * $report->unitcost) < 0) ? 0 : ($report->stock * $report->unitcost), 2) }}</b></td>
+                        <td style="text-align: right;"><b>{{ number_format((($report->stock * $report->unitprice) < 0) ? 0 : ($report->stock * $report->unitprice), 2) }}</b></td>
                     </tr>
 
                 @endforeach
@@ -48,8 +48,18 @@
         <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-text-right">
             <table width="100%">
                 <tr class="uk-text-large">
-                    <td colspan="3" class="uk-text-right"><strong>Total Value:</strong></td>
-                    <td width="150" style="text-align: right;"><strong>{{ number_format($totalInventoryValue, 2) }}</strong></td>
+                    <td colspan="3" class="uk-text-right"><strong>Total Inventory Count:</strong></td>
+                    <td width="150" style="text-align: right;"><strong>{{ number_format($totalInventoryCount) }}</strong></td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr class="uk-text-large">
+                    <td colspan="3" class="uk-text-right"><strong>Total Inventory Cost:</strong></td>
+                    <td width="150" style="text-align: right;"><strong>{{ number_format($totalInventoryValueCost, 2) }}</strong></td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr class="uk-text-large">
+                    <td colspan="3" class="uk-text-right"><strong>Total Inventory Price:</strong></td>
+                    <td width="150" style="text-align: right;"><strong>{{ number_format($totalInventoryValuePrice, 2) }}</strong></td>
                     <td>&nbsp;</td>
                 </tr>
             </table>
@@ -67,6 +77,10 @@
 @section('js')
     <script type="text/javascript" src="{{ asset('/js/components/datepicker.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/components/form-select.min.js') }}"></script>
+
+    <script>
+        $('table.uk-table').DataTable()
+    </script>
 
     <script>
         $(function(){

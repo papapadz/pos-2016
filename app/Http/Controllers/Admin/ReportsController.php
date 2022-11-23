@@ -53,9 +53,10 @@ class ReportsController extends Controller
 
         $yearSel = ($request->year == '') ? date('Y') : $request->year;
         $endYear = date('Y');
-        $startYear = $endYear - 10;
+        $startYear = $endYear - 2;
         $years = [];
-
+        $day = null;
+        
             while($startYear <= $endYear)
             {
                 $years[$startYear] = $startYear;
@@ -152,15 +153,19 @@ class ReportsController extends Controller
             $reports = Product::where('category_id', $catSel)->orderby('productname', 'asc')->get();
         }
         
-        $totalInventoryValue = 0;
+        $totalInventoryValueCost = 0;
+        $totalInventoryValuePrice = 0;
+        $totalInventoryCount = 0;
         foreach($reports as $report)
         {
-            $totalInventoryValue += $report->stock * $report->unitprice;
+            $totalInventoryValueCost += $report->stock * $report->unitcost;
+            $totalInventoryValuePrice += $report->stock * $report->unitprice;
+            $totalInventoryCount += $report->stock;
         }
 
         $categories = ['0'=>'--Select Category--'] + Category::orderby('categoryname', 'asc')->lists('categoryname', 'category_id')->all();
 
-        return view('admin.report.inventory', compact('dateToFormat', 'catSel', 'reports', 'categories', 'totalInventoryValue'));
+        return view('admin.report.inventory', compact('dateToFormat', 'catSel', 'reports', 'categories', 'totalInventoryValueCost','totalInventoryValuePrice','totalInventoryCount'));
     }
 
     public function printInventoryReport($category)
