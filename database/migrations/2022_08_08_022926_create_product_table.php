@@ -24,7 +24,7 @@ class CreateProductTable extends Migration
             $table->integer('category_id');
             //$table->integer('supplier_id');
             $table->integer('status');
-            $table->float('unitcost',10,2);
+            //$table->float('unitcost',10,2);
             //$table->float('percentage',5,2);
             //$table->float('markup',10,2);
             $table->timestamps();
