@@ -72,14 +72,22 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('/css/components/datepicker.gradient.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/components/form-select.gradient.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/datatable/button/css/buttons.dataTables.min.css') }}">
 @stop
 
 @section('js')
     <script type="text/javascript" src="{{ asset('/js/components/datepicker.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/components/form-select.min.js') }}"></script>
-
+    <script type="text/javascript" src="{{ asset('/assets/datatable/button/js/dataTables.buttons.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/datatable/button/js/buttons.print.min.js') }}"></script>
     <script>
-        $('table.uk-table').DataTable()
+        var ukTable = $('table.uk-table').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'print'
+            ]
+        })
+        
     </script>
 
     <script>
